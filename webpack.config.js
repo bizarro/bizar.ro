@@ -3,6 +3,7 @@ const webpack = require('webpack')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CnameWebpackPlugin = require('cname-webpack-plugin')
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'dev'
 
@@ -40,6 +41,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: '404.html',
       template: path.join(__dirname, '404.pug')
+    }),
+
+    new CnameWebpackPlugin({
+      domain: 'bizar.ro'
     }),
 
     new CopyWebpackPlugin([
