@@ -6,7 +6,7 @@
     "build": "webpack -p --progress --config webpack.config.build.js",
     "development": "cross-env NODE_ENV=dev webpack-dev-server --progress --config webpack.config.development.js",
     "lint": "eslint *.js",
-    "deploy": "cross-env git subtree push --prefix public origin master"
+    "deploy": "cross-env git subtree push --prefix public origin gh-pages"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
