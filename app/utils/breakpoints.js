@@ -1,0 +1,3 @@
+export const BREAKPOINT_PHONE = 767
+export const BREAKPOINT_TABLET = 768
+export const BREAKPOINT_DESKTOP = 1152
