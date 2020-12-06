@@ -1,0 +1,36 @@
+.menu {
+  @extend %cover;
+
+  opacity: 0;
+  position: fixed;
+  visibility: hidden;
+  z-index: z('menu');
+}
+
+.menu__background {
+  @extend %cover;
+
+  background: $color-black;
+}
+
+.menu__list {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.menu__item {
+  overflow: hidden;
+
+  &:not(:first-child) {
+    margin-top: 1rem;
+  }
+}
+
+.menu__link {
+  display: block;
+  font: 10rem $font-ampersand;
+  text-align: center;
+  text-transform: uppercase;
+}

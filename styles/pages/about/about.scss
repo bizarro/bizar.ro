@@ -1,0 +1,12 @@
+.about {
+  @extend %page;
+
+  padding: 15rem 0;
+  text-align: center;
+}
+
+.about__wrapper {
+  display: inline-block;
+  text-align: left;
+  width: 176.7rem;
+}

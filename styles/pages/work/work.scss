@@ -1,0 +1,117 @@
+.work {
+  @extend %cover;
+
+  overflow: hidden;
+
+  @include media('<=phone') {
+    &:before,
+    &:after {
+      content: '';
+      height: 20rem;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      width: 100%;
+      z-index: z('content-overlay');
+    }
+
+    &:before {
+      background: linear-gradient(0, rgba($color-black, 0) 0%, $color-black 90%);
+      top: 0;
+    }
+
+    &:after {
+      background: linear-gradient(180deg, rgba($color-black, 0) 0%, $color-black 90%);
+      bottom: 0;
+    }
+  }
+}
+
+.work__titles {
+  @extend %cover;
+
+  opacity: 0.5;
+  overflow: hidden;
+
+  @include media('<=phone') {
+    bottom: 3.75rem;
+    height: 6.3rem;
+    left: auto;
+    right: 1.65rem;
+    top: auto;
+    transform: none;
+    width: auto;
+    z-index: 2;
+  }
+}
+
+.work__title {
+  display: block;
+  font: 26.5rem/1 $font-ampersand;
+  left: 50%;
+  opacity: 0;
+  perspective: 1000px;
+  position: absolute;
+  text-transform: uppercase;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+  visibility: hidden;
+  white-space: nowrap;
+
+  span {
+    display: inline-block;
+  }
+
+  @include media('<=phone') {
+    font-size: 6.3rem;
+  }
+}
+
+.work__list {
+  left: 76.85rem - 4rem;
+  padding-left: 4rem;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+
+  @include media('<=phone') {
+    left: 6rem - 4rem;
+  }
+}
+
+.work__item {
+  margin-top: 1.5rem;
+}
+
+.work__link {
+  display: block;
+  opacity: 0;
+  position: relative;
+  visibility: hidden;
+}
+
+.work__link__number {
+  bottom: 0.2rem;
+  font-size: 1.2rem;
+  margin-right: 0.8rem;
+  position: absolute;
+  right: 100%;
+}
+
+.work__link__text {
+  display: inline-block;
+  font-size: 2.4rem;
+  position: relative;
+
+  &:after {
+    @extend %link__line;
+    @extend %link__line--hidden;
+  }
+
+  .work__item:hover & {
+    &:after {
+      @extend %link__line--visible;
+    }
+  }
+}

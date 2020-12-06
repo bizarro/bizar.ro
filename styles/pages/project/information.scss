@@ -1,0 +1,180 @@
+.project__title {
+  font: 17rem/0.8 $font-ampersand;
+  position: relative;
+  text-transform: uppercase;
+
+  @include media('<=phone') {
+    font-size: 6.8rem;
+    text-align: center;
+  }
+}
+
+.project__information {
+  display: flex;
+  height: 45rem;
+  margin-top: 6rem;
+  position: relative;
+
+  @include media('<=phone') {
+    flex-direction: column;
+    height: auto;
+    margin-top: 2rem;
+  }
+}
+
+.project__information__column {
+  &:first-child {
+    width: calc(100% - 64rem);
+  }
+
+  &:last-child {
+    width: 64rem;
+  }
+
+  @include media('<=phone') {
+    &:first-child,
+    &:last-child {
+      width: 100%;
+    }
+
+    &:last-child {
+      border-color: currentColor;
+      border-style: solid;
+      border-width: 1px 0 1px 0;
+      margin-top: 5rem;
+    }
+  }
+}
+
+.project__information__price {
+  display: none;
+
+  @include media('<=phone') {
+    display: block;
+  }
+}
+
+.project__information__price__title {
+  font-size: 1.8rem;
+}
+
+.project__information__price__description {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.project__information__link {
+  display: inline-block;
+  font-size: 2.5rem;
+  margin-left: 11.5rem;
+  margin-top: 9rem;
+  text-transform: uppercase;
+
+  @include media('<=phone') {
+    font-size: 1.8rem;
+    margin-left: 0;
+    margin-top: 1.5rem;
+  }
+}
+
+.project__information__toggle {
+  display: none;
+
+  @include media('<=phone') {
+    display: flex;
+    font-size: 1.4rem;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+    text-transform: uppercase;
+    width: 100%;
+  }
+}
+
+.project__information__toggle__icon {
+  height: 1.4rem;
+  position: relative;
+  transition: transform 0.4s ease;
+  width: 1.4rem;
+
+  &:after,
+  &:before {
+    background: $color-white;
+    content: '';
+    display: block;
+    height: 1px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    width: 1.4rem;
+  }
+
+  &:after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  &:before {
+    transform: translate(-50%, -50%);
+  }
+
+  .project__information--active & {
+    transform: rotate(45deg);
+  }
+}
+
+.project__information__content {
+  a {
+    @extend %link;
+  }
+
+  @include media('<=phone') {
+    height: 0;
+    overflow: hidden;
+  }
+}
+
+.project__information__content__wrapper {
+  @include media('<=phone') {
+    padding: 1.5rem 0;
+  }
+}
+
+.project__information__item {
+  display: flex;
+
+  &:not(:first-child) {
+    margin-top: 1rem;
+  }
+
+  @include media('<=phone') {
+    // padding-left: 1.5rem;
+
+    &:not(:first-child) {
+      margin-top: 1.5rem;
+    }
+  }
+}
+
+.project__information__title {
+  @extend %description__medium;
+
+  width: 32rem;
+
+  @include media('<=phone') {
+    width: 13.2rem;
+  }
+}
+
+.project__information__description {
+  @extend %description__medium;
+
+  width: 32rem;
+
+  p:not(:first-child) {
+    margin-top: 1rem;
+  }
+
+  @include media('<=phone') {
+    font-size: 1.6rem;
+    width: calc(100% - 13.2rem);
+  }
+}

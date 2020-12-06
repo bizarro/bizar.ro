@@ -1,0 +1,19 @@
+.project__media {
+  height: 88.3rem;
+  // margin: 0 auto -28.5rem;
+  margin: 0 auto -57.5rem;
+  position: relative;
+  width: 105.8rem;
+
+  @include media('<=phone') {
+    height: 36.7rem;
+    margin-bottom: -3rem;
+    width: 32rem;
+  }
+}
+
+.project__media__image {
+  @extend %cover;
+
+  object-fit: cover;
+}

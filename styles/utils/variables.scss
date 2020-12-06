@@ -1,0 +1,23 @@
+$color-black: #000;
+$color-cod-gray: #0a0a0a;
+$color-mine-shaft: #333;
+$color-white: #fff;
+
+$color-iron: #d3d5d5;
+$color-pine-tree: #0b1209;
+
+$font-ampersand: 'Ampersand', sans-serif;
+$font-neue-machina: 'Peclet', sans-serif;
+
+$ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+
+$z-indexes: (
+  'wheel',
+  'preloader',
+  'cursor',
+  'navigation',
+  'menu',
+  'content-overlay',
+  'content',
+  'canvas'
+);

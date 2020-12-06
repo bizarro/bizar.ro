@@ -1,0 +1,15 @@
+.project {
+  @extend %page;
+
+  padding: 15rem 0 85vh;
+}
+
+.project__wrapper {
+  @extend %wrapper;
+}
+
+.project__link {
+  opacity: 0;
+  position: absolute;
+  visibility: hidden;
+}

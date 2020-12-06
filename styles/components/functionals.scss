@@ -1,0 +1,21 @@
+.unsupported {
+  align-items: center;
+  background: $color-black;
+  color: $color-white;
+  cursor: default;
+  display: flex;
+  font-size: 5rem;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  padding: 5rem;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+
+  @include media('<=phone') {
+    padding: 1rem;
+  }
+}

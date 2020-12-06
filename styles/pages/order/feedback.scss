@@ -1,0 +1,21 @@
+.order__feedback {
+  @extend %cover;
+
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.order__feedback__title {
+  font: 5.8rem $font-ampersand;
+  opacity: 0;
+  text-align: center;
+  visibility: hidden;
+
+  @include media('<=phone') {
+    font-size: 4.3rem;
+    max-width: 30rem;
+  }
+}

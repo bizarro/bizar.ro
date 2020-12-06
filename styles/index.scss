@@ -1,0 +1,43 @@
+@import './utils/variables';
+@import './utils/functions';
+@import './utils/responsive';
+@import './utils/mixins';
+@import './utils/vendors';
+
+@import './base/fonts';
+@import './base/global';
+@import './base/reset';
+
+@import './shared/links';
+@import './shared/paragraphs';
+@import './shared/sections';
+
+@import './components/canvas';
+@import './components/cursor';
+@import './components/functionals';
+@import './components/navigation';
+@import './components/menu';
+@import './components/wheel';
+
+@import './pages/home/home';
+
+@import './pages/about/about';
+@import './pages/about/header';
+@import './pages/about/gallery';
+@import './pages/about/sections';
+@import './pages/about/slider';
+
+@import './pages/order/order';
+@import './pages/order/fields';
+@import './pages/order/feedback';
+
+@import './pages/preloader/preloader';
+
+@import './pages/project/project';
+@import './pages/project/media';
+@import './pages/project/information';
+@import './pages/project/gallery';
+
+@import './pages/terms-and-conditions/terms-and-conditions';
+
+@import './pages/work/work';

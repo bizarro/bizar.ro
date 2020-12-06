@@ -4,16 +4,19 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CnameWebpackPlugin = require('cname-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'dev'
 
 const dirApp = path.join(__dirname, 'app')
 const dirAssets = path.join(__dirname, 'assets')
+const dirStyles = path.join(__dirname, 'styles')
 const dirNode = 'node_modules'
 
 module.exports = {
   entry: [
-    path.join(dirApp, 'index.js')
+    path.join(dirApp, 'index.js'),
+    path.join(dirStyles, 'index.scss')
   ],
 
   resolve: {
@@ -66,7 +69,12 @@ module.exports = {
         from: './shared',
         to: ''
       }
-    ])
+    ]),
+
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    })
   ],
 
   module: {
@@ -88,6 +96,31 @@ module.exports = {
             ]
           }
         }
+      },
+
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: IS_DEVELOPMENT
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: IS_DEVELOPMENT
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: IS_DEVELOPMENT
+            }
+          }
+        ]
       },
 
       {

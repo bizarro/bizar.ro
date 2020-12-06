@@ -1,0 +1,80 @@
+.order__fields {
+  @extend %cover;
+
+  opacity: 0;
+  visibility: hidden;
+}
+
+.order__fields__button {
+  border: 1px solid $color-white;
+  border-radius: 50%;
+  bottom: 4.5rem;
+  font-size: 1.4rem;
+  height: 13.4rem;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  transform: translateX(-50%);
+  width: 13.4rem;
+
+  @include media('<=phone') {
+    bottom: 2.5rem;
+  }
+}
+
+.order__fields__description {
+  @extend %description__medium;
+
+  bottom: 4.5rem;
+  left: 50%;
+  line-height: 12rem;
+  position: absolute;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+
+  @include media('<=phone') {
+    bottom: 2.5rem;
+    line-height: 8rem;
+    margin-left: 4rem;
+    white-space: nowrap;
+  }
+}
+
+.order__field {
+  font-size: 0;
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+}
+
+.order__field__input {
+  @extend %title__large;
+
+  color: $color-white;
+  height: 13.5rem;
+  line-height: 1.2;
+  resize: none;
+  text-align: center;
+  text-transform: none;
+  width: 130rem;
+
+  @include media('<=phone') {
+    height: 5.2rem;
+    width: 36rem;
+  }
+}
+
+.order__field__description {
+  display: block;
+  font: 2.8rem $font-ampersand;
+  margin-top: 2rem;
+  text-align: center;
+
+  @include media('<=phone') {
+    font-size: 1.8rem;
+    margin-top: 1rem;
+  }
+}

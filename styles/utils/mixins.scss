@@ -1,0 +1,29 @@
+%cover {
+  height: 100%;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+@mixin placeholder {
+  &.placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &:-ms-input-placeholder { @content; }
+}
+
+@mixin ratio ($height, $width) {
+  font-size: 0;
+  overflow: hidden;
+  position: relative;
+
+  &:after {
+    content: '';
+    display: inline-block;
+    padding-top: $width / $height * 100%;
+    width: 100%;
+  }
+}

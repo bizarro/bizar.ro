@@ -1,0 +1,29 @@
+.about__header {
+  margin-bottom: 20rem;
+  text-align: center;
+}
+
+.about__header__title {
+  font: 28rem/0.8 $font-ampersand;
+  display: inline-block;
+  text-align: left;
+}
+
+.about__header__title__text {
+  display: flex;
+  justify-content: space-between;
+}
+
+.about__header__title__role {
+  span {
+    display: block;
+  }
+
+  span:first-child {
+
+  }
+
+  span:last-child {
+    text-align: right;
+  }
+}

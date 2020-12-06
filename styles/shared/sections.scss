@@ -1,0 +1,15 @@
+%page {
+  opacity: 0;
+  visibility: hidden;
+  z-index: z('content');
+}
+
+%wrapper {
+  margin: auto;
+  max-width: 130rem;
+  width: 90%;
+
+  @include media('<=phone') {
+    width: calc(100% - 5rem);
+  }
+}

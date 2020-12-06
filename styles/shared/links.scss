@@ -1,0 +1,61 @@
+%link__wrapper {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  vertical-align: top;
+}
+
+%link__line {
+  background: currentColor;
+  bottom: 0;
+  content: '';
+  height: 1px;
+  left: 0;
+  position: absolute;
+  transition: transform 0.7s $ease-out-expo;
+  width: 100%;
+}
+
+%link__line--visible {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+%link__line--hidden {
+  transform: scaleX(0);
+  transform-origin: right center;
+}
+
+%link {
+  @extend %link__wrapper;
+
+  display: inline-block;
+
+  &:after {
+    @extend %link__line;
+    @extend %link__line--visible;
+  }
+
+  &:hover {
+    &:after {
+      @extend %link__line--hidden;
+    }
+  }
+}
+
+%link--hidden {
+  @extend %link__wrapper;
+
+  display: inline-block;
+
+  &:after {
+    @extend %link__line;
+    @extend %link__line--hidden;
+  }
+
+  &:hover {
+    &:after {
+      @extend %link__line--visible;
+    }
+  }
+}

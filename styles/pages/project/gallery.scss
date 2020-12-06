@@ -1,0 +1,33 @@
+.project__gallery {
+  margin-top: 20rem;
+
+  @include media('<=phone') {
+    margin-top: 5rem;
+  }
+}
+
+.project__gallery__media {
+  position: relative;
+
+  &:not(:first-child) {
+    margin-top: 7.5rem;
+  }
+
+  &:nth-child(even) {
+    margin-left: auto;
+  }
+
+  @include media('<=phone') {
+    max-width: 90%;
+
+    &:not(:first-child) {
+      margin-top: 3.5rem;
+    }
+  }
+}
+
+.project__gallery__image {
+  @extend %cover;
+
+  object-fit: cover;
+}

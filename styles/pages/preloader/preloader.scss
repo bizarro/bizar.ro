@@ -1,0 +1,16 @@
+.preloader {
+  @extend %cover;
+
+  align-items: center;
+  background: $color-black;
+  color: rgba($color-white, 0.1);
+  display: flex;
+  font: 500px $font-ampersand;
+  justify-content: center;
+  z-index: z('preloader');
+
+  @include media('<phone') {
+    font-size: 250px;
+    height: 100vh;
+  }
+}

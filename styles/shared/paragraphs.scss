@@ -1,0 +1,37 @@
+%title__large {
+  font: 13.5rem $font-ampersand;
+  text-transform: uppercase;
+
+  @include media('<=phone') {
+    font-size: 5.2rem;
+  }
+}
+
+%title__medium {
+  font: 11rem $font-ampersand;
+  text-transform: uppercase;
+
+  @include media('<=phone') {
+    font-size: 5.2rem;
+  }
+}
+
+%title__small {
+  text-transform: uppercase;
+}
+
+%description__medium {
+  font: 1.8rem/1.33 $font-neue-machina;
+
+  @include media('<=phone') {
+    font-size: 1.2rem;
+  }
+}
+
+%description__small {
+  font: 1.6rem/1.5 $font-neue-machina;
+
+  @include media('<=phone') {
+    font-size: 1.2rem;
+  }
+}

@@ -4,6 +4,11 @@ import 'utils/sw'
 import AutoBind from 'auto-bind'
 import Stats from 'stats.js'
 
+import Responsive from 'classes/Responsive'
+
+import About from 'pages/About'
+import Home from 'pages/Home'
+
 import Canvas from 'components/Canvas'
 
 class App {
@@ -19,21 +24,38 @@ class App {
 
     AutoBind(this)
 
+    this.createResponsive()
     this.createCanvas()
+    // this.createAbout()
+    this.createHome()
 
     this.addEventListeners()
 
     this.update()
   }
 
+  createResponsive () {
+    this.responsive = new Responsive()
+  }
+
   createCanvas () {
-    this.canvas = new Canvas()
+    // this.canvas = new Canvas()
   }
 
   createStats () {
     this.stats = new Stats()
 
     document.body.appendChild(this.stats.dom)
+  }
+
+  createAbout () {
+    this.about = new About()
+    this.about.show()
+  }
+
+  createHome () {
+    this.home = new Home()
+    this.home.show()
   }
 
   /**
@@ -66,6 +88,10 @@ class App {
   }
 
   onResize () {
+    if (this.responsive && this.responsive.onResize) {
+      this.responsive.onResize()
+    }
+
     if (this.canvas && this.canvas.onResize) {
       this.canvas.onResize()
     }
