@@ -1,17 +1,38 @@
 .about__header {
   margin-bottom: 20rem;
   text-align: center;
+
+  @include media('<=phone') {
+    margin-bottom: 5rem;
+  }
 }
 
 .about__header__title {
-  font: 28rem/0.8 $font-ampersand;
+  font: 28rem/1 $font-ampersand;
   display: inline-block;
+  opacity: 0;
   text-align: left;
+  visibility: hidden;
+
+  @include media('<=phone') {
+    font-size: 5.5rem;
+  }
 }
 
 .about__header__title__text {
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
+
+  &:not(:first-child) {
+    margin-top: -6rem;
+  }
+
+  @include media('<=phone') {
+    &:not(:first-child) {
+      margin-top: -1rem;
+    }
+  }
 }
 
 .about__header__title__role {

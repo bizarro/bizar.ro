@@ -39,16 +39,20 @@ export default class extends Component {
     this.heightTotal = this.elements.list.getBoundingClientRect().height
 
     this.windowHalf = window.innerHeight * 0.5
-
-    this.addEventListeners()
   }
 
   enable () {
     this.isEnabled = true
+
+    this.update()
+
+    this.addEventListeners()
   }
 
   disable () {
     this.isEnabled = false
+
+    this.removeEventListeners()
   }
 
   onDown (event) {
@@ -93,11 +97,11 @@ export default class extends Component {
   }
 
   transform (element, y) {
-    element.style[this.transformPrefix] = `translate3d(0, ${y}px, 0)`
+    element.style[this.transformPrefix] = `translate3d(0, ${Math.floor(y)}px, 0)`
   }
 
-  update () {
-    if (!this.isEnabled) {
+  update (isForced = false) {
+    if (!this.isEnabled && !isForced) {
       return
     }
 
@@ -157,6 +161,8 @@ export default class extends Component {
   }
 
   onResize () {
+    this.direction = 'down'
+
     this.scroll = {
       position: 0,
       current: 0,
@@ -182,12 +188,14 @@ export default class extends Component {
     this.heightTotal = this.elements.list.getBoundingClientRect().height
 
     this.windowHalf = window.innerHeight * 0.5
+
+    this.update(true)
   }
 
   addEventListeners () {
-    this.element.addEventListener('mousedown', this.onDown, { passive: true })
-    this.element.addEventListener('mousemove', this.onMove, { passive: true })
-    this.element.addEventListener('mouseup', this.onUp, { passive: true })
+    // this.element.addEventListener('mousedown', this.onDown, { passive: true })
+    // this.element.addEventListener('mousemove', this.onMove, { passive: true })
+    // this.element.addEventListener('mouseup', this.onUp, { passive: true })
 
     this.element.addEventListener('touchstart', this.onDown, { passive: true })
     this.element.addEventListener('touchmove', this.onMove, { passive: true })
@@ -199,9 +207,9 @@ export default class extends Component {
   }
 
   removeEventListeners () {
-    this.element.removeEventListener('mousedown', this.onDown)
-    this.element.removeEventListener('mousemove', this.onMove)
-    this.element.removeEventListener('mouseup', this.onUp)
+    // this.element.removeEventListener('mousedown', this.onDown)
+    // this.element.removeEventListener('mousemove', this.onMove)
+    // this.element.removeEventListener('mouseup', this.onUp)
 
     this.element.removeEventListener('touchstart', this.onDown)
     this.element.removeEventListener('touchmove', this.onMove)

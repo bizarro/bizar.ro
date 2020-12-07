@@ -3,6 +3,10 @@ import EventEmitter from 'events'
 import GSAP from 'gsap'
 import Prefix from 'prefix'
 
+import Line from 'animations/Line'
+import Paragraph from 'animations/Paragraph'
+import Y from 'animations/Y'
+
 import each from 'lodash/each'
 
 import { mapEach } from 'utils/dom'
@@ -20,7 +24,9 @@ export default class extends EventEmitter {
     this.selectors = {
       element,
       elements: {
+        animationsLines: '[data-animation="line"]',
         animationsParagraphs: '[data-animation="paragraph"]',
+        animationsYs: '[data-animation="y"]',
 
         ...elements
       }
@@ -53,29 +59,31 @@ export default class extends EventEmitter {
       }
     })
 
-    this.content = window
-    this.wrapper = document.body
-
     this.scroll = {
       current: 0,
       ease: 0.05,
       last: 0
     }
 
-    this.createAnimations()
+    this.content = window
+    this.wrapper = document.body
 
-    if (this.isScrollable) {
-      this.createScrollHeight()
-      this.createScrollStyles()
-    } else {
-      document.documentElement.style.overflow = 'hidden'
-    }
+    this.createAnimations()
   }
 
   /**
    * Animations.
    */
   createAnimations () {
+    // Lines.
+    this.lines = mapEach(this.elements.animationsLines, element => {
+      return new Line({
+        element
+      })
+    })
+
+    this.animations.push(...this.lines)
+
     // Paragraphs.
     this.paragraphs = mapEach(this.elements.animationsParagraphs, element => {
       return new Paragraph({
@@ -84,12 +92,29 @@ export default class extends EventEmitter {
     })
 
     this.animations.push(...this.paragraphs)
+
+    // Y.
+    this.ys = mapEach(this.elements.animationsYs, element => {
+      return new Y({
+        element
+      })
+    })
+
+    this.animations.push(...this.ys)
   }
 
   /**
    * Scroll.
    */
   createScrollStyles () {
+    this.scroll = {
+      current: 0,
+      ease: 0.05,
+      last: 0
+    }
+
+    this.element.style[this.transform] = `translate3d(0, -${this.scroll.last}px, 0)`
+
     Object.assign(this.element.style, {
       left: 0,
       pointerEvents: 'none',
@@ -97,8 +122,6 @@ export default class extends EventEmitter {
       top: 0,
       width: '100%'
     })
-
-    window.scrollTo(0, 0)
   }
 
   createScrollHeight () {
@@ -113,6 +136,13 @@ export default class extends EventEmitter {
   show (animation) {
     return new Promise(resolve => {
       animation.call(() => {
+        if (this.isScrollable) {
+          this.createScrollHeight()
+          this.createScrollStyles()
+        } else {
+          document.documentElement.style.overflow = 'hidden'
+        }
+
         resolve()
 
         this.isVisible = true
@@ -140,11 +170,13 @@ export default class extends EventEmitter {
    * Events.
    */
   onResize () {
-    this.createScrollHeight()
-
     each(this.animations, animation => {
       animation.onResize()
     })
+
+    if (this.isScrollable) {
+      this.createScrollHeight()
+    }
   }
 
   onScroll () {
@@ -155,9 +187,7 @@ export default class extends EventEmitter {
    * Frames.
    */
   update () {
-    if (!this.isScrollable) {
-      return
-    }
+    if (!this.isScrollable) return
 
     this.scroll.last = GSAP.utils.interpolate(this.scroll.last, this.scroll.current, this.scroll.ease)
 
@@ -165,7 +195,7 @@ export default class extends EventEmitter {
       this.scroll.last = 0
     }
 
-    this.element.style[this.transform] = `translate3d(0, -${this.scroll.last}px, 0)`
+    this.element.style[this.transform] = `translate3d(0, -${Math.floor(this.scroll.last)}px, 0)`
 
     if (this.isVisible) {
       each(this.animations, animation => {

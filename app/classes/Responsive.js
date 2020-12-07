@@ -55,8 +55,8 @@ export default class {
     }
 
     const mobile = {
-      height: 736,
-      width: 400
+      height: 667,
+      width: 375
     }
 
     let { height, width } = mobile
@@ -97,7 +97,7 @@ export default class {
     }
 
     if (this.round) {
-      fontSize = Math.round(fontSize)
+      fontSize = Math.floor(fontSize)
     }
 
     document.documentElement.style.fontSize = `${fontSize}px`

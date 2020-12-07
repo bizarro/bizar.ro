@@ -3,10 +3,15 @@
 
   padding: 15rem 0;
   text-align: center;
+
+  @include media('<=phone') {
+    padding: 10rem 0 5rem;
+  }
 }
 
 .about__wrapper {
   display: inline-block;
+  max-width: 176.7rem;
   text-align: left;
-  width: 176.7rem;
+  width: 95%;
 }

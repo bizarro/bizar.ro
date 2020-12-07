@@ -21,21 +21,48 @@ export default class extends Page {
     this.create()
   }
 
+  /**
+   * Animations.
+   */
   show () {
     const timeline = GSAP.timeline()
 
+    timeline.call(_ => {
+      this.list.enable()
+    })
+
     timeline.to(this.element, {
       autoAlpha: 1,
-      duration: 1
+      duration: 0.33
     })
 
     timeline.call(_ => {
       this.update()
     })
 
-    super.show(timeline)
+    return super.show(timeline)
   }
 
+  hide () {
+    const timeline = GSAP.timeline()
+
+    timeline.to(this.element, {
+      autoAlpha: 0,
+      duration: 0.33
+    })
+
+    timeline.call(_ => {
+      this.list.disable()
+
+      window.cancelAnimationFrame(this.frame)
+    })
+
+    return super.show(timeline)
+  }
+
+  /**
+   * Create.
+   */
   create () {
     super.create()
 
@@ -43,8 +70,6 @@ export default class extends Page {
   }
 
   createList () {
-    console.log(this.elements)
-
     this.list = new Scrolling({
       element: document.body,
       elements: {
@@ -53,13 +78,25 @@ export default class extends Page {
         buttons: this.elements.links
       }
     })
-
-    this.list.enable()
   }
 
+  /**
+   * Events.
+   */
+  onResize () {
+    super.onResize()
+
+    this.list.onResize()
+  }
+
+  /**
+   * Loop.
+   */
   update () {
+    super.update()
+
     this.list.update()
 
-    window.requestAnimationFrame(this.update)
+    this.frame = window.requestAnimationFrame(this.update)
   }
 }

@@ -1,6 +1,6 @@
 {
-    "name": "Bizarro",
-    "short_name": "Bizarro",
+    "name": "Bizarr\u00f8",
+    "short_name": "Bizarr\u00f8",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -8,12 +8,12 @@
             "type": "image/png"
         },
         {
-            "src": "/android-chrome-384x384.png",
-            "sizes": "384x384",
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "theme_color": "#151c13",
+    "background_color": "#151c13",
     "display": "standalone"
 }

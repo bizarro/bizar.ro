@@ -42,7 +42,7 @@ html {
 }
 
 body {
-  font-family: $font-neue-machina;
+  font-family:  $font-neue-montreal;
   height: 100%;
   left: 0;
   opacity: 1;
@@ -73,9 +73,9 @@ body {
 }
 
 ::-webkit-scrollbar {
-  // display: none;
-  // opacity: 0;
-  // visibility: hidden;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
 }
 
 ::-webkit-scrollbar-thumb {

@@ -8,19 +8,19 @@
 }
 
 @font-face {
-  font-family: 'Neue Machina';
-  src: url('../fonts/neue-machina.woff2') format('woff2'),
-       url('../fonts/neue-machina.woff') format('woff');
+  font-family: 'Neue Montreal';
+  src: url('../fonts/neue-montreal-regular.woff2') format('woff2'),
+       url('../fonts/neue-montreal-regular.woff') format('woff');
   font-weight: 400;
   font-display: swap;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Peclet';
-  src:
-       url('../fonts/untitled-sans.woff') format('woff');
-  font-weight: 400;
+  font-family: 'Neue Montreal';
+  src: url('../fonts/neue-montreal-bold.woff2') format('woff2'),
+       url('../fonts/neue-montreal-bold.woff') format('woff');
+  font-weight: bold;
   font-display: swap;
   font-style: normal;
 }

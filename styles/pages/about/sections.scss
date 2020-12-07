@@ -1,44 +1,65 @@
 .about__sections {
   margin-top: 10rem;
-
-  @include media('<=phone') {
-    margin-top: 6rem;
-  }
 }
 
 .about__section {
   display: flex;
 
   &:not(:first-child) {
-    margin-top: 20rem;
+    margin-top: 10rem;
   }
 
   @include media('<=phone') {
+    display: block;
+
     &:not(:first-child) {
-      margin-top: 5rem;
+      margin-top: 7.5rem;
     }
   }
 }
 
 .about__section__title {
   font: 10rem/0.95 $font-ampersand;
+  margin-bottom: auto;
+  padding-top: 10rem;
   width: 33.33%;
+
+  @include media('<=phone') {
+    font-size: 4rem;
+    width: 100%;
+  }
 }
 
 .about__section__content {
+  padding-top: 10rem;
   width: 66.66%;
+
+  @include media('<=phone') {
+    padding-top: 2rem;
+    width: 100%;
+  }
 }
 
 .about__section__description {
-  font: 3rem/1.5 $font-neue-machina;
-  width: 75%;
+  font: 3.5rem/1.5  $font-neue-montreal;
+  width: 79%;
 
   a {
     @extend %link;
   }
 
   &:not(:first-child) {
-    margin-top: 3rem;
+    margin-top: 5rem;
+  }
+
+  @include media('<=phone') {
+    font-size: 1.6rem;
+    padding-left: 16.66667%;
+    width: 100%;
+
+    &:not(:first-child) {
+      margin-top: 2rem;
+    }
   }
 }
 
@@ -49,14 +70,37 @@
 .about__section__number {
   font: 50rem/1 $font-ampersand;
   margin-top: -10rem;
+
+  @include media('<=phone') {
+    font-size: 20rem;
+    margin-top: -2rem;
+  }
 }
 
 .about__section__list {
-  font: 2rem $font-neue-machina;
+  font: 2.5rem  $font-neue-montreal;
+  white-space: nowrap;
+
+  @include media('<=phone') {
+    font-size: 1.4rem;
+  }
+}
+
+.about__section__list__item {
+  overflow: hidden;
+  position: relative;
+}
+
+.about__section__list__dash {
+  border-top: 1px solid rgba($color-iron, 0.1);
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform-origin: left;
+  width: 100%;
 }
 
 .about__section__list__link {
-  border-top: 1px solid rgba($color-iron, 0.1);
   display: flex;
   justify-content: space-between;
   padding: 2rem;
@@ -73,13 +117,18 @@
     top: 0;
     transform: scaleY(0);
     transform-origin: top;
-    transition: transform 0.4s ease;
+    transition: transform 0.4s $ease-out-expo;
     width: 100%;
   }
 
   &:hover:after {
     transform: scaleY(1);
     transform-origin: bottom;
+  }
+
+  @include media('<=phone') {
+    flex-wrap: wrap;
+    padding: 1rem 0;
   }
 }
 
@@ -110,6 +159,21 @@
 
     &:nth-child(2) {
       width: 50%;
+    }
+  }
+
+  @include media('<=phone') {
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4) {
+      width: 50%;
+    }
+
+    .about__section__list__link--article & {
+      &:nth-child(2) {
+        display: block;
+      }
     }
   }
 }

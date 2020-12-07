@@ -1,21 +1,27 @@
 import 'utils/polyfill'
+import 'utils/scroll'
 import 'utils/sw'
 
 import AutoBind from 'auto-bind'
 import Stats from 'stats.js'
+
+import each from 'lodash/each'
 
 import Responsive from 'classes/Responsive'
 
 import About from 'pages/About'
 import Home from 'pages/Home'
 
-import Canvas from 'components/Canvas'
+// import Canvas from 'components/Canvas'
+import Navigation from 'components/Navigation'
 
 class App {
   constructor () {
     if (IS_DEVELOPMENT) {
       this.createStats()
     }
+
+    this.url = window.location.pathname
 
     this.mouse = {
       x: window.innerWidth / 2,
@@ -26,10 +32,20 @@ class App {
 
     this.createResponsive()
     this.createCanvas()
-    // this.createAbout()
+    this.createNavigation()
+    this.createAbout()
     this.createHome()
 
+    this.pages = {
+      '/': this.home,
+      '/about': this.about
+    }
+
+    this.page = this.pages[this.url]
+    this.page.show()
+
     this.addEventListeners()
+    this.addLinksEventsListeners()
 
     this.update()
   }
@@ -42,6 +58,11 @@ class App {
     // this.canvas = new Canvas()
   }
 
+  createNavigation () {
+    this.navigation = new Navigation()
+    this.navigation.onChange(this.url)
+  }
+
   createStats () {
     this.stats = new Stats()
 
@@ -50,12 +71,46 @@ class App {
 
   createAbout () {
     this.about = new About()
-    this.about.show()
   }
 
   createHome () {
     this.home = new Home()
-    this.home.show()
+  }
+
+  /**
+   * Change.
+   */
+  async onChange ({ push = !IS_DEVELOPMENT, url = null }) {
+    url = url.replace(window.location.origin, '')
+
+    if (this.url === url) return
+
+    document.documentElement.style.overflow = 'hidden'
+    document.body.style.pointerEvents = 'none'
+
+    this.url = url
+
+    await this.page.hide()
+
+    window.scrollTo(0, 0)
+
+    if (push) {
+      window.history.pushState({}, document.title, url)
+    }
+
+    if (this.navigation) {
+      this.navigation.onChange(this.url)
+    }
+
+    this.page = this.pages[this.url]
+
+    await this.page.show()
+
+    if (this.page.isScrollable) {
+      document.documentElement.style.overflow = ''
+    }
+
+    document.body.style.pointerEvents = ''
   }
 
   /**
@@ -87,6 +142,13 @@ class App {
     return false
   }
 
+  onPopState () {
+    this.onChange({
+      url: window.location.pathname,
+      push: false
+    })
+  }
+
   onResize () {
     if (this.responsive && this.responsive.onResize) {
       this.responsive.onResize()
@@ -94,6 +156,14 @@ class App {
 
     if (this.canvas && this.canvas.onResize) {
       this.canvas.onResize()
+    }
+
+    if (this.about) {
+      this.about.onResize()
+    }
+
+    if (this.home) {
+      this.home.onResize()
     }
   }
 
@@ -140,6 +210,7 @@ class App {
    * Listeners.
    */
   addEventListeners () {
+    window.addEventListener('popstate', this.onPopState, { passive: true })
     window.addEventListener('resize', this.onResize, { passive: true })
 
     window.addEventListener('mousedown', this.onTouchDown, { passive: true })
@@ -155,6 +226,27 @@ class App {
     window.addEventListener('wheel', this.onWheel, { passive: true })
 
     window.oncontextmenu = this.onContextMenu
+  }
+
+  addLinksEventsListeners () {
+    const links = document.querySelectorAll('a')
+
+    each(links, link => {
+      const isLocal = link.href.indexOf(window.location.origin) > -1
+
+      if (isLocal) {
+        link.onclick = event => {
+          event.preventDefault()
+
+          this.onChange({
+            url: link.href
+          })
+        }
+      } else if (link.href.indexOf('mailto') === -1 && link.href.indexOf('tel') === -1) {
+        link.rel = 'noopener'
+        link.target = '_blank'
+      }
+    })
   }
 }
 

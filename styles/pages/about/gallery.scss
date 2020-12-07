@@ -1,5 +1,9 @@
 .about__gallery {
   margin-bottom: 20rem;
+
+  @include media('<=phone') {
+    margin-bottom: 5rem;
+  }
 }
 
 .about__gallery__media {
@@ -41,8 +45,18 @@
   left: 1rem;
   top: 1rem;
   width: calc(100% - 2rem);
+
+  @include media('<=phone') {
+    height: calc(100% - 0.4rem);
+    left: 0.2rem;
+    top: 0.2rem;
+    width: calc(100% - 0.4rem);
+  }
 }
 
 .about__gallery__media__image {
   @extend %cover;
+
+  filter: grayscale(1);
+  mix-blend-mode: screen;
 }

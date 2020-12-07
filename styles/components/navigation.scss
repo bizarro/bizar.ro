@@ -7,13 +7,84 @@
 }
 
 .navigation__list {
-
+  @extend %cover;
 }
 
 .navigation__item {
+  font-size: 2rem;
+  line-height: 3.6rem;
   pointer-events: auto;
+  position: absolute;
+
+  &:nth-child(1) {
+    font: 3rem $font-ampersand;
+    left: 5rem;
+    top: 5rem;
+  }
+
+  &:nth-child(2) {
+    right: 20rem;
+    top: 5rem;
+  }
+
+  &:nth-child(3) {
+    right: 5rem;
+    top: 5rem;
+  }
+
+  @include media('<=phone') {
+    font-size: 1.6rem;
+    line-height: 3.3rem;
+
+    &:nth-child(1) {
+      font-size: 2.5rem;
+      left: 1.5rem;
+      top: 1rem;
+    }
+
+    &:nth-child(2) {
+      right: 8rem;
+      top: 1rem;
+    }
+
+    &:nth-child(3) {
+      right: 2rem;
+      top: 1rem;
+    }
+  }
+}
+
+.navigation__link--active {
+  &:after {
+    transform: scaleX(1) !important;
+    transform-origin: left center !important;
+  }
 }
 
 .navigation__link {
+  .navigation__item:not(:first-child) & {
+    @extend %link--hidden;
+  }
+}
 
+.navigation__easter {
+  background: $color-iron;
+  border-radius: 50%;
+  bottom: 5rem;
+  cursor: pointer;
+  font-size: 0;
+  height: 2rem;
+  position: absolute;
+  right: 5rem;
+  transition: transform 0.4s $ease-out-expo;
+  width: 2rem;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  @include media('<=phone') {
+    right: 2rem;
+    bottom: 2rem;
+  }
 }
