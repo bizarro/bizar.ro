@@ -21,7 +21,7 @@
 .about__section__title {
   font: 10rem/0.95 $font-ampersand;
   margin-bottom: auto;
-  padding-top: 10rem;
+  padding-top: 10.5rem;
   width: 33.33%;
 
   @include media('<=phone') {
@@ -69,11 +69,11 @@
 
 .about__section__number {
   font: 50rem/1 $font-ampersand;
-  margin-top: -10rem;
+  margin-top: -4.3rem;
 
   @include media('<=phone') {
     font-size: 20rem;
-    margin-top: -2rem;
+    margin-top: 0;
   }
 }
 
