@@ -13,6 +13,39 @@
   // }
 }
 
+.home__background {
+  @extend %cover;
+
+  color: $color-pine-tree;
+  display: none;
+  pointer-events: none;
+  z-index: 10;
+
+  &__top,
+  &__bottom {
+    background: currentColor;
+    content: '';
+    display: block;
+    height: 10rem;
+    position: absolute;
+    width: 100%;
+  }
+
+  &__top {
+    background: linear-gradient(to bottom, currentColor 0%, transparent 100%);
+    top: 0;
+  }
+
+  &__bottom {
+    background: linear-gradient(to bottom, transparent 0%, currentColor 100%);
+    bottom: 0;
+  }
+
+  @include media('<=phone') {
+    display: block;
+  }
+}
+
 .home__wrapper {
   @extend %cover;
 }

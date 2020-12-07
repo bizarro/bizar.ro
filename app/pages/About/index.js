@@ -5,6 +5,7 @@ import each from 'lodash/each'
 
 import Page from 'components/Page'
 
+import { BREAKPOINT_PHONE } from 'utils/breakpoints'
 import { getOffset } from 'utils/dom'
 
 export default class extends Page {
@@ -86,11 +87,15 @@ export default class extends Page {
       title.limit = title.parentNode.clientHeight - title.clientHeight
     })
 
-    each(this.elements.sectionsTitles, title => {
-      const distance = clamp(this.scroll.last - title.start, 0, title.limit)
+    if (window.innerWidth > BREAKPOINT_PHONE) {
+      each(this.elements.sectionsTitles, title => {
+        const distance = clamp(this.scroll.last - title.start, 0, title.limit)
 
-      title.style.transform = `translateY(${distance}px)`
-    })
+        title.style.transform = `translateY(${distance}px)`
+      })
+    } else {
+      each(this.elements.sectionsTitles, title => title.style.transform = '')
+    }
   }
 
   /**
@@ -99,11 +104,13 @@ export default class extends Page {
   update () {
     super.update()
 
-    each(this.elements.sectionsTitles, title => {
-      const distance = clamp(this.scroll.last - title.start, 0, title.limit)
+    if (window.innerWidth > BREAKPOINT_PHONE) {
+      each(this.elements.sectionsTitles, title => {
+        const distance = clamp(this.scroll.last - title.start, 0, title.limit)
 
-      title.style.transform = `translateY(${distance}px)`
-    })
+        title.style.transform = `translateY(${distance}px)`
+      })
+    }
 
     this.frame = window.requestAnimationFrame(this.update)
   }

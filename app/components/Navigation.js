@@ -16,6 +16,9 @@ export default class extends Component {
         easter: '.navigation__easter'
       }
     })
+
+    this.homeBottom = document.querySelector('.home__background__bottom')
+    this.homeTop = document.querySelector('.home__background__top')
   }
 
   /**
@@ -34,7 +37,12 @@ export default class extends Component {
   }
 
   onEasterEgg () {
-    document.documentElement.style.background = `hsl(${GSAP.utils.random(0, 360, 0.01)}deg 19% 9%)`
+    let color = `hsl(${GSAP.utils.random(0, 360, 0.01)}deg 19% 9%)`
+
+    document.documentElement.style.background = color
+
+    this.homeBottom.style.background = `linear-gradient(to bottom, transparent 0%, ${color} 100%)`
+    this.homeTop.style.background = `linear-gradient(to bottom, ${color} 0%, transparent 100%)`
   }
 
   /**
