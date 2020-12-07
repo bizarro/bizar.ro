@@ -61,7 +61,7 @@ export default class extends EventEmitter {
 
     this.scroll = {
       current: 0,
-      ease: 0.05,
+      ease: 0.07,
       last: 0
     }
 
@@ -109,7 +109,7 @@ export default class extends EventEmitter {
   createScrollStyles () {
     this.scroll = {
       current: 0,
-      ease: 0.05,
+      ease: 0.07,
       last: 0
     }
 

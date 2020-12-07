@@ -19,6 +19,7 @@ export default class extends Component {
     this.distance = 0
 
     this.scroll = {
+      ease: 0.07,
       position: 0,
       current: 0,
       target: 0,
@@ -105,7 +106,7 @@ export default class extends Component {
       return
     }
 
-    this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, 0.1)
+    this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, this.scroll.ease)
 
     const scrollClamp = Math.round((this.scroll.current + this.windowHalf) % this.heightTotal)
     const scrollPercent = scrollClamp / this.heightTotal
@@ -161,9 +162,8 @@ export default class extends Component {
   }
 
   onResize () {
-    this.direction = 'down'
-
     this.scroll = {
+      ease: 0.07,
       position: 0,
       current: 0,
       target: 0,

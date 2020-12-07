@@ -85,13 +85,13 @@ export default class extends Page {
     each(this.elements.sectionsTitles, title => {
       title.start = getOffset(title.parentNode).top
       title.limit = title.parentNode.clientHeight - title.clientHeight
+      title.y = 0
     })
 
     if (window.innerWidth > BREAKPOINT_PHONE) {
       each(this.elements.sectionsTitles, title => {
-        const distance = clamp(this.scroll.last - title.start, 0, title.limit)
-
-        title.style.transform = `translateY(${distance}px)`
+        title.y = title.target = clamp(this.scroll.last - title.start, 0, title.limit)
+        title.style.transform = `translateY(${title.y}px)`
       })
     } else {
       each(this.elements.sectionsTitles, title => title.style.transform = '')
@@ -106,9 +106,10 @@ export default class extends Page {
 
     if (window.innerWidth > BREAKPOINT_PHONE) {
       each(this.elements.sectionsTitles, title => {
-        const distance = clamp(this.scroll.last - title.start, 0, title.limit)
+        title.target = clamp(this.scroll.last - title.start, 0, title.limit)
 
-        title.style.transform = `translateY(${distance}px)`
+        title.y = GSAP.utils.interpolate(title.y, title.target, 0.15)
+        title.style.transform = `translateY(${title.y}px)`
       })
     }
 

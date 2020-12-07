@@ -19,6 +19,10 @@ module.exports = {
     path.join(dirStyles, 'index.scss')
   ],
 
+  output: {
+    filename: '[name].[contenthash].js'
+  },
+
   resolve: {
     modules: [
       dirApp,
@@ -72,8 +76,8 @@ module.exports = {
     ]),
 
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
+      filename: '[name].[hash].css',
+      chunkFilename: '[id].css',
     })
   ],
 
