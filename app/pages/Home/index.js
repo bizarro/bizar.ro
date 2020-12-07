@@ -28,6 +28,8 @@ export default class extends Page {
     const timeline = GSAP.timeline()
 
     timeline.call(_ => {
+      document.documentElement.style.position = 'fixed'
+
       this.list.enable()
     })
 
@@ -45,6 +47,10 @@ export default class extends Page {
 
   hide () {
     const timeline = GSAP.timeline()
+
+    timeline.call(_ => {
+      document.documentElement.style.position = ''
+    })
 
     timeline.to(this.element, {
       autoAlpha: 0,
