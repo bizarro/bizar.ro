@@ -29,6 +29,7 @@ export default class extends Component {
     each(this.elements.buttons, button => {
       const offset = getOffset(button)
 
+      button.extra = 0
       button.height = offset.height
       button.offset = offset.top
       button.position = 0
@@ -123,31 +124,29 @@ export default class extends Component {
       this.emit('change', index)
     }
 
-    each(this.elements.items, item => {
-      this.transform(item, -this.scroll.current)
-    })
-
     if (this.scroll.current < this.scroll.last) {
       this.direction = 'down'
     } else {
       this.direction = 'up'
     }
 
-    each(this.elements.buttons, element => {
-      const position = (element.offset + element.position + element.height - this.scroll.current)
+    each(this.elements.buttons, (element, index) => {
+      element.position = -this.scroll.current - element.extra
 
-      element.isBefore = position < 0
-      element.isAfter = position > this.heightTotal
+      const offset = element.position + element.offset + element.height
+
+      element.isBefore = offset < 0
+      element.isAfter = offset > this.heightTotal
 
       if (this.direction === 'up' && element.isBefore) {
-        element.position = element.position + this.heightTotal
+        element.extra = element.extra - this.heightTotal
 
         element.isBefore = false
         element.isAfter = false
       }
 
       if (this.direction === 'down' && element.isAfter) {
-        element.position = element.position - this.heightTotal
+        element.extra = element.extra + this.heightTotal
 
         element.isBefore = false
         element.isAfter = false
@@ -175,13 +174,10 @@ export default class extends Component {
 
       const offset = getOffset(button)
 
+      button.extra = 0
       button.height = offset.height
       button.offset = offset.top
       button.position = 0
-    })
-
-    each(this.elements.items, item => {
-      item.style[this.transform] = ''
     })
 
     this.height = this.elements.buttons[0].getBoundingClientRect().height
