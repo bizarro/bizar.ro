@@ -35,12 +35,27 @@ export default class extends Page {
       this.element.style.height = `${this.selected.clientHeight}px`
     })
 
-    timeline.to(this.element, {
+    timeline.set(this.element, {
       autoAlpha: 1,
-      duration: 0.33
     })
 
+    this.showCase(timeline)
+
     return super.show(timeline)
+  }
+
+  showCase (timeline) {
+    const title = this.selected.querySelector('.case__title__text')
+
+    timeline.fromTo(title, {
+      y: '100%'
+    }, {
+      delay: 0.5,
+      duration: 1.5,
+      ease: 'expo.out',
+      stagger: 0.1,
+      y: '0%'
+    })
   }
 
   hide () {

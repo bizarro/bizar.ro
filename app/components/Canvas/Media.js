@@ -2,6 +2,8 @@ import AutoBind from 'auto-bind'
 import GSAP from 'gsap'
 import { Mesh, Program, TextureLoader } from 'ogl'
 
+import { interpolate } from 'utils/math'
+
 import fragment from 'shaders/fragment.glsl'
 import vertex from 'shaders/vertex.glsl'
 
@@ -119,15 +121,15 @@ export default class {
   }
 
   updateScale () {
-    this.height = GSAP.utils.interpolate(this.boundsHome.height, this.boundsCase.height, this.transition)
-    this.width = GSAP.utils.interpolate(this.boundsHome.width, this.boundsCase.width, this.transition)
+    this.height = interpolate(this.boundsHome.height, this.boundsCase.height, this.transition)
+    this.width = interpolate(this.boundsHome.width, this.boundsCase.width, this.transition)
 
     this.plane.scale.x = this.viewport.width * this.width / this.screen.width
     this.plane.scale.y = this.viewport.height * this.height / this.screen.height
   }
 
   updateY (y = 0) {
-    this.y = GSAP.utils.interpolate(
+    this.y = interpolate(
       this.boundsHome.top - this.homeItem.extra,
       this.boundsCase.top,
       this.transition
@@ -136,9 +138,9 @@ export default class {
     this.plane.position.y = (this.viewport.height / 2) - (this.plane.scale.y / 2) - ((this.y - y) / this.screen.height) * this.viewport.height
   }
 
-  updateX (x = 0) {
-    this.x = GSAP.utils.interpolate(
-      this.boundsHome.left + x,
+  updateX () {
+    this.x = interpolate(
+      this.boundsHome.left,
       this.boundsCase.left,
       this.transition
     )
@@ -148,8 +150,8 @@ export default class {
 
   update (scroll) {
     this.updateScale()
-    this.updateY(scroll)
     this.updateX()
+    this.updateY(scroll)
 
     this.plane.program.uniforms.uTime.value += (this.direction === 'left' ? 0.04 : -0.04)
   }
@@ -157,6 +159,13 @@ export default class {
   /**
    * Events.
    */
+  onResize ({ screen, viewport }) {
+    this.screen = screen
+    this.viewport = viewport
+
+    this.createBounds()
+  }
+
   onMouseOver () {
     this.tween.play()
   }

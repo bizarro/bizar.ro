@@ -179,16 +179,16 @@ class App {
       this.responsive.onResize()
     }
 
-    if (this.canvas && this.canvas.onResize) {
-      this.canvas.onResize()
-    }
-
     if (this.about) {
       this.about.onResize()
     }
 
     if (this.home) {
       this.home.onResize()
+    }
+
+    if (this.canvas && this.canvas.onResize) {
+      this.canvas.onResize()
     }
   }
 

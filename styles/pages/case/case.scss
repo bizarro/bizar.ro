@@ -32,9 +32,14 @@
 
 .case__title {
   font: 15rem/0.8 $font-ampersand;
+  overflow: hidden;
   text-align: center;
   transform: translateY(50%);
   white-space: nowrap;
+}
+
+.case__title__text {
+  display: block;
 }
 
 .case__subtitle {

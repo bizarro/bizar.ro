@@ -33,10 +33,6 @@ export default class extends Page {
   show () {
     const timeline = GSAP.timeline()
 
-    timeline.call(_ => {
-      this.onResize()
-    })
-
     timeline.set(this.element, {
       autoAlpha: 1
     })
@@ -45,7 +41,7 @@ export default class extends Page {
       autoAlpha: 1
     })
 
-    GSAP.fromTo(this.elements.titles, {
+    timeline.fromTo(this.elements.titles, {
       y: '100%'
     }, {
       duration: 1.5,
@@ -53,6 +49,8 @@ export default class extends Page {
       stagger: 0.1,
       y: '0%'
     })
+
+    timeline.call(this.onResize)
 
     return super.show(timeline)
   }
@@ -62,7 +60,7 @@ export default class extends Page {
 
     timeline.to(this.element, {
       autoAlpha: 0,
-      duration: 0.33
+      duration: 0.4
     })
 
     return super.show(timeline)
@@ -100,7 +98,7 @@ export default class extends Page {
       each(this.elements.sectionsTitles, title => {
         title.target = clamp(this.scroll.last - title.start, 0, title.limit)
 
-        title.y = GSAP.utils.interpolate(title.y, title.target, 0.15)
+        title.y = GSAP.utils.interpolate(title.y, title.target, 0.75)
         title.style.transform = `translateY(${title.y}px)`
       })
     }

@@ -128,9 +128,12 @@ export default class {
    * Resize.
    */
   onResize () {
-    this.gl.clearColor(this.background.r / 255, this.background.g / 255, this.background.b / 255, 1)
+    this.screen = {
+      height: window.innerHeight,
+      width: window.innerWidth
+    }
 
-    this.renderer.setSize(window.innerWidth, window.innerHeight)
+    this.renderer.setSize(this.screen.width, this.screen.height)
 
     this.camera.perspective({
       aspect: this.gl.canvas.width / this.gl.canvas.height
@@ -140,11 +143,6 @@ export default class {
     const height = 2 * Math.tan(fov / 2) * this.camera.position.z
     const width = height * this.camera.aspect
 
-    this.screen = {
-      height: window.innerHeight,
-      width: window.innerWidth
-    }
-
     this.viewport = {
       height,
       width
@@ -153,12 +151,21 @@ export default class {
     this.post.resize()
 
     this.resolution.value.set(this.gl.canvas.width, this.gl.canvas.height)
+
+    if (this.medias) {
+      this.medias.forEach(media => media.onResize({
+        screen: this.screen,
+        viewport: this.viewport
+      }))
+    }
   }
 
   /**
    * Update.
    */
   update (scroll) {
+    this.gl.clearColor(this.background.r / 255, this.background.g / 255, this.background.b / 255, 1)
+
     this.post.render({
       scene: this.scene,
       camera: this.camera

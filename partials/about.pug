@@ -1,3 +1,33 @@
+mixin award(link, date, title, description, project)
+  li.about__section__list__item
+    span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
+
+    a.about__section__list__link(
+      data-animation="y"
+      data-animation-threshold="1"
+      data-animation-target=".about__section__list__item"
+      href=link target="_blank"
+      rel="noreferrer noopener"
+    )
+      span.about__section__list__column=date
+      span.about__section__list__column=title
+      span.about__section__list__column=description
+      span.about__section__list__column=project
+
+mixin press(link, title, description)
+  li.about__section__list__item
+    span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
+
+    a.about__section__list__link.about__section__list__link--article(
+      data-animation="y"
+      data-animation-threshold="1"
+      data-animation-target=".about__section__list__item"
+      href=link target="_blank"
+      rel="noreferrer noopener"
+    )
+      span.about__section__list__column=title
+      span.about__section__list__column=description
+
 section.about
   .about__wrapper
     header.about__header
@@ -57,9 +87,9 @@ section.about
             | I love having this surname and I try to embrace this adjective as part of my life and also my work.
 
           p.about__section__description(data-animation="paragraph")
-            | I’m working at #[a(href="https://activetheory.net/" target="_blank") Active Theory] as a #[b Senior Interactive Developer]. #[br]
-            | I’m also currently the #[a(href="https://awwwards.com/winner-list/Brazil" target="_blank") Most Awarded Brazilian] at #[a(href="https://awwwards.com/" target="_blank") Awwwards] and member of the #[a(href="https://awwwards.com/jury/?year=2020&type=code" target="_blank") Development Jury].
-            | In the past I’ve also collaborated with #[a(href="https://antinomy.eu/" target="_blank") Antinomy] and #[a(href="https://unit9.com/" target="_blank") UNIT9].
+            | I’m working at #[a(href="https://activetheory.net/" rel="noreferrer noopener" target="_blank") Active Theory] as a #[b Senior Interactive Developer]. #[br]
+            | I’m also currently the #[a(href="https://awwwards.com/winner-list/Brazil" rel="noreferrer noopener" target="_blank") Most Awarded Brazilian] at #[a(href="https://awwwards.com/" rel="noreferrer noopener" target="_blank") Awwwards] and member of the #[a(href="https://awwwards.com/jury/?year=2020&type=code" target="_blank") Development Jury].
+            | In the past I’ve also collaborated with #[a(href="https://antinomy.eu/" rel="noreferrer noopener" target="_blank") Antinomy] and #[a(href="https://unit9.com/" rel="noreferrer noopener" target="_blank") UNIT9].
 
           p.about__section__description(data-animation="paragraph")
             | During my career, I have had the opportunity to collaborate in challenging projects for renown
@@ -74,747 +104,59 @@ section.about
           p.about__section__number 53+
 
           ul.about__section__list
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/deliciously-dark-escape" target="_blank"
-              )
-                span.about__section__list__column Dec 02, 2020
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Deliciously Dark Escape
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/inbound-2020" target="_blank"
-              )
-                span.about__section__list__column Oct 28, 2020
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column INBOUND 2020
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.cssdesignawards.com/sites/duall-studio/37667/" target="_blank"
-              )
-                span.about__section__list__column Oct 12, 2020
-                span.about__section__list__column CSS Design Awards
-                span.about__section__list__column Site of The Day
-                span.about__section__list__column Duall
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/duallstudio/" target="_blank"
-              )
-                span.about__section__list__column Sep 26, 2020
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Developer Award
-                span.about__section__list__column Duall
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/duallstudio/" target="_blank"
-              )
-                span.about__section__list__column Sep 26, 2020
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Site of The Day
-                span.about__section__list__column Duall
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/hulu-pridefest" target="_blank"
-              )
-                span.about__section__list__column Sep 17, 2020
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Hulu Pride Fest
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/oneplus-crackables-20-p2" target="_blank"
-              )
-                span.about__section__list__column Aug 13, 2020
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Crackables 2.0
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/vote-now-for-julys-site-of-the-month-and-win-a-years-free-pro-plan-in-the-awwwards-directory-1.html" target="_blank"
-              )
-                span.about__section__list__column Jul 2020
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Site of The Month Nominee
-                span.about__section__list__column Adventure Time Distant Lands
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/kaleidoztm-design-website" target="_blank"
-              )
-                span.about__section__list__column Jul 24, 2020
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Developer Award
-                span.about__section__list__column Kaleidoz
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/kaleidoztm-design-website" target="_blank"
-              )
-                span.about__section__list__column Jul 24, 2020
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Site of The Day
-                span.about__section__list__column Kaleidoz
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/kaleidoztm-design-website-p2" target="_blank"
-              )
-                span.about__section__list__column Jul 22, 2020
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Kaleidoz
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/adventure-time-distant-lands" target="_blank"
-              )
-                span.about__section__list__column Jul 10, 2020
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Site of The Day
-                span.about__section__list__column Adventure Time Distant Lands
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/redisconf20/" target="_blank"
-              )
-                span.about__section__list__column Jul 02, 2020
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column RedisConf 2020
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/vote-now-for-junes-site-of-the-month-and-win-a-years-free-pro-plan-in-the-awwwards-directory-3.html" target="_blank"
-              )
-                span.about__section__list__column Jun 2020
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Site of The Month Nominee
-                span.about__section__list__column Studio Mærtens
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.cssdesignawards.com/blog/website-of-the-month-2020-june/335/" target="_blank"
-              )
-                span.about__section__list__column Jun 2020
-                span.about__section__list__column CSS Design Awards
-                span.about__section__list__column Site of The Month Nominee
-                span.about__section__list__column Studio Mærtens
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/adventure-time-distant-lands-bmo" target="_blank"
-              )
-                span.about__section__list__column Jun 18, 2020
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Adventure Time Distant Lands
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://cssdesignawards.com/sites/studio-maertens/37148/" target="_blank"
-              )
-                span.about__section__list__column Jun 07, 2020
-                span.about__section__list__column CSS Design Awards
-                span.about__section__list__column Site of The Day
-                span.about__section__list__column Studio Mærtens
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/studio-maertensr-industrial-design-studio-p3" target="_blank"
-              )
-                span.about__section__list__column Jun 07, 2020
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Studio Mærtens
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/studio-maertens" target="_blank"
-              )
-                span.about__section__list__column Jun 05, 2020
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Developer Award
-                span.about__section__list__column Studio Mærtens
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/studio-maertens" target="_blank"
-              )
-                span.about__section__list__column Jun 05, 2020
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Site of The Day
-                span.about__section__list__column Studio Mærtens
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.behance.net/gallery/97244173/Studio-Maertens-Industrial-Design-Studio-Website" target="_blank"
-              )
-                span.about__section__list__column Jun 05, 2020
-                span.about__section__list__column Behance
-                span.about__section__list__column UI/UX Feature
-                span.about__section__list__column Studio Mærtens
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.behance.net/gallery/97244173/Studio-Maertens-Industrial-Design-Studio-Website" target="_blank"
-              )
-                span.about__section__list__column May 22, 2020
-                span.about__section__list__column Behance
-                span.about__section__list__column AIGA Feature
-                span.about__section__list__column Studio Mærtens
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.behance.net/gallery/89455165/Bruno-Arizio-Portfolio" target="_blank"
-              )
-                span.about__section__list__column Apr 13, 2020
-                span.about__section__list__column Behance
-                span.about__section__list__column AIGA Feature
-                span.about__section__list__column Bruno Arizio
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.behance.net/gallery/93147167/Erika-Moreira-Portfolio" target="_blank"
-              )
-                span.about__section__list__column Apr 03, 2020
-                span.about__section__list__column Behance
-                span.about__section__list__column AIGA Feature
-                span.about__section__list__column Érika Moreira
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.behance.net/gallery/89455165/Bruno-Arizio-Portfolio" target="_blank"
-              )
-                span.about__section__list__column Apr 03, 2020
-                span.about__section__list__column Behance
-                span.about__section__list__column UI/UX Feature
-                span.about__section__list__column Bruno Arizio
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.behance.net/gallery/93147167/Erika-Moreira-Portfolio" target="_blank"
-              )
-                span.about__section__list__column Mar 23, 2020
-                span.about__section__list__column Behance
-                span.about__section__list__column AIGA Feature
-                span.about__section__list__column Érika Moreira
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/bruno-arizio" target="_blank"
-              )
-                span.about__section__list__column Mar 23, 2020
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Bruno Arizio
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.cssdesignawards.com/sites/erika-moreira-portfolio/36741/" target="_blank"
-              )
-                span.about__section__list__column Mar 21, 2020
-                span.about__section__list__column CSS Design Awards
-                span.about__section__list__column Site of The Day
-                span.about__section__list__column Erika Moreira
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/erika-moreira-portfolio" target="_blank"
-              )
-                span.about__section__list__column Mar 16, 2020
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Developer Award
-                span.about__section__list__column Erika Moreira
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/erika-moreira-portfolio" target="_blank"
-              )
-                span.about__section__list__column Mar 16, 2020
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Site of The Day
-                span.about__section__list__column Erika Moreira
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/johnnie-walker-dragon-glass" target="_blank"
-              )
-                span.about__section__list__column Feb 09, 2020
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Johnnie Walker: Dragon Glass
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://annual.awwwards.com/categories/independent-of-the-year/luis-henrique-bizarro" target="_blank"
-              )
-                span.about__section__list__column 2019
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Independent of The Year Nominee
-                span.about__section__list__column
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://annual.awwwards.com/categories/site-of-the-year/dominic-berzins" target="_blank"
-              )
-                span.about__section__list__column 2019
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Site of The Year Nominee
-                span.about__section__list__column Dominic Berzins
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/bruno-arizio-portfolio" target="_blank"
-              )
-                span.about__section__list__column Nov 25, 2019
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Developer Award
-                span.about__section__list__column Bruno Arizio
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/bruno-arizio-portfolio" target="_blank"
-              )
-                span.about__section__list__column Nov 25, 2019
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Site of The Day
-                span.about__section__list__column Bruno Arizio
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/samsung-spaceselfie" target="_blank"
-              )
-                span.about__section__list__column Nov 22, 2019
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Samsung SpaceSelfie
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/vote-now-for-marchs-site-of-the-month-and-win-a-years-free-pro-plan-in-the-awwwards-directory.html" target="_blank"
-              )
-                span.about__section__list__column Mar 2019
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Site of The Month Nominee
-                span.about__section__list__column Dominic Berzins
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.cssdesignawards.com/blog/website-of-the-month-2019-march/314/" target="_blank"
-              )
-                span.about__section__list__column Mar 2019
-                span.about__section__list__column CSS Design Awards
-                span.about__section__list__column Site of The Month Nominee
-                span.about__section__list__column Dominic Berzins
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.cssdesignawards.com/sites/dominic-berzins/34803/" target="_blank"
-              )
-                span.about__section__list__column Mar 19, 2019
-                span.about__section__list__column CSS Design Awards
-                span.about__section__list__column Site of The Day
-                span.about__section__list__column Dominic Berzins
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/tiaa-difference-maker" target="_blank"
-              )
-                span.about__section__list__column Mar 26, 2019
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column TIAA: The Difference Maker
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/giant-ar-screen-p2" target="_blank"
-              )
-                span.about__section__list__column Mar 24, 2019
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column EMAAR’s VR Park
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/dominic-berzins" target="_blank"
-              )
-                span.about__section__list__column Mar 11, 2019
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Dominic Berzins
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/dominic-berzins" target="_blank"
-              )
-                span.about__section__list__column Mar 07, 2019
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Developer Award
-                span.about__section__list__column Dominic Berzins
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/dominic-berzins" target="_blank"
-              )
-                span.about__section__list__column Mar 07, 2019
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Site of The Day
-                span.about__section__list__column Dominic Berzins
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/google-pixel-holidays" target="_blank"
-              )
-                span.about__section__list__column Mar 06, 2019
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Google Pixel Holidays
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/mobile-sites/dominic-berzins" target="_blank"
-              )
-                span.about__section__list__column Mar 01, 2019
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Mobile of The Week
-                span.about__section__list__column Dominic Berzins
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/cult" target="_blank"
-              )
-                span.about__section__list__column Dec 12, 2018
-                span.about__section__list__column Awards
-                span.about__section__list__column Developer Award
-                span.about__section__list__column Cult
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/sites/cult" target="_blank"
-              )
-                span.about__section__list__column Dec 12, 2018
-                span.about__section__list__column Awards
-                span.about__section__list__column Site of The Day
-                span.about__section__list__column Cult
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/stubhub-gift-rapper" target="_blank"
-              )
-                span.about__section__list__column Dec 10, 2018
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Stubhub Gift Rapper
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/samsung-augmented-reality-spacesuit" target="_blank"
-              )
-                span.about__section__list__column May 18, 2018
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Samsung AR Supersuit
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/shell-make-the-future" target="_blank"
-              )
-                span.about__section__list__column Feb 20, 2018
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Shell Make The Future
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="http://winners.lovieawards.eu/share/?y=2018&a=201" target="_blank"
-              )
-                span.about__section__list__column 2018
-                span.about__section__list__column The Lovie Awards
-                span.about__section__list__column Best Visual Design
-                span.about__section__list__column Silver: Shell Make The Future
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://thefwa.com/cases/nike-city-fast" target="_blank"
-              )
-                span.about__section__list__column Dec 12, 2017
-                span.about__section__list__column FWA
-                span.about__section__list__column FWA of The Day
-                span.about__section__list__column Nike City Fast
+            +award('https://thefwa.com/cases/deliciously-dark-escape', 'Dec 02, 2020', 'FWA', 'FWA of The Day', 'Deliciously Dark Escape')
+            +award('https://thefwa.com/cases/inbound-2020', 'Oct 28, 2020', 'FWA', 'FWA of The Day', 'INBOUND 2020')
+            +award('https://www.cssdesignawards.com/sites/duall-studio/37667/', 'Oct 12, 2020', 'CSS Design Awards', 'Site of The Day', 'Duall')
+            +award('https://www.awwwards.com/sites/duallstudio/', 'Sep 26, 2020', 'Awwwards', 'Developer Award', 'Duall')
+            +award('https://www.awwwards.com/sites/duallstudio/', 'Sep 26, 2020', 'Awwwards', 'Site of The Day', 'Duall')
+            +award('https://thefwa.com/cases/hulu-pridefest', 'Sep 17, 2020', 'FWA', 'FWA of The Day', 'Hulu Pride Fest')
+            +award('https://thefwa.com/cases/oneplus-crackables-20-p2', 'Aug 13, 2020', 'FWA', 'FWA of The Day', 'Crackables 2.0')
+            +award('https://www.awwwards.com/vote-now-for-julys-site-of-the-month-and-win-a-years-free-pro-plan-in-the-awwwards-directory-1.html', 'Jul 2020', 'Awwwards', 'Site of The Month Nominee', 'Adventure Time Distant Lands')
+            +award('https://www.awwwards.com/sites/kaleidoztm-design-website', 'Jul 24, 2020', 'Awwwards', 'Developer Award', 'Kaleidoz')
+            +award('https://www.awwwards.com/sites/kaleidoztm-design-website', 'Jul 24, 2020', 'Awwwards', 'Site of The Day', 'Kaleidoz')
+            +award('https://thefwa.com/cases/kaleidoztm-design-website-p2', 'Jul 22, 2020', 'FWA', 'FWA of The Day', 'Kaleidoz')
+            +award('https://www.awwwards.com/sites/adventure-time-distant-lands', 'Jul 10, 2020', 'Awwwards', 'Site of The Day', 'Adventure Time Distant Lands')
+            +award('https://thefwa.com/cases/redisconf20/', 'Jul 02, 2020', 'FWA', 'FWA of The Day', 'RedisConf 2020')
+            +award('https://www.awwwards.com/vote-now-for-junes-site-of-the-month-and-win-a-years-free-pro-plan-in-the-awwwards-directory-3.html', 'Jun 2020', 'Awwwards', 'Site of The Month Nominee', 'Studio Mærtens')
+            +award('https://www.cssdesignawards.com/blog/website-of-the-month-2020-june/335/', 'Jun 2020', 'CSS Design Awards', 'Site of The Month Nominee', 'Studio Mærtens')
+            +award('https://thefwa.com/cases/adventure-time-distant-lands-bmo', 'Jun 18, 2020', 'FWA', 'FWA of The Day', 'Adventure Time Distant Lands')
+            +award('https://cssdesignawards.com/sites/studio-maertens/37148/', 'Jun 07, 2020', 'CSS Design Awards', 'Site of The Day', 'Studio Mærtens')
+            +award('https://thefwa.com/cases/studio-maertensr-industrial-design-studio-p3', 'Jun 07, 2020', 'FWA', 'FWA of The Day', 'Studio Mærtens')
+            +award('https://www.awwwards.com/sites/studio-maertens', 'Jun 05, 2020', 'Awwwards', 'Developer Award', 'Studio Mærtens')
+            +award('https://www.awwwards.com/sites/studio-maertens', 'Jun 05, 2020', 'Awwwards', 'Site of The Day', 'Studio Mærtens')
+            +award('https://www.behance.net/gallery/97244173/Studio-Maertens-Industrial-Design-Studio-Website', 'Jun 05, 2020', 'Behance', 'UI/UX Feature', 'Studio Mærtens')
+            +award('https://www.behance.net/gallery/97244173/Studio-Maertens-Industrial-Design-Studio-Website', 'May 22, 2020', 'Behance', 'AIGA Feature', 'Studio Mærtens')
+            +award('https://www.behance.net/gallery/89455165/Bruno-Arizio-Portfolio', 'Apr 13, 2020', 'Behance', 'AIGA Feature', 'Bruno Arizio')
+            +award('https://www.behance.net/gallery/93147167/Erika-Moreira-Portfolio', 'Apr 03, 2020', 'Behance', 'AIGA Feature', 'Érika Moreira')
+            +award('https://www.behance.net/gallery/89455165/Bruno-Arizio-Portfolio', 'Apr 03, 2020', 'Behance', 'UI/UX Feature', 'Bruno Arizio')
+            +award('https://www.behance.net/gallery/93147167/Erika-Moreira-Portfolio', 'Mar 23, 2020', 'Behance', 'AIGA Feature', 'Érika Moreira')
+            +award('https://thefwa.com/cases/bruno-arizio', 'Mar 23, 2020', 'FWA', 'FWA of The Day', 'Bruno Arizio')
+            +award('https://www.cssdesignawards.com/sites/erika-moreira-portfolio/36741/', 'Mar 21, 2020', 'CSS Design Awards', 'Site of The Day', 'Erika Moreira')
+            +award('https://www.awwwards.com/sites/erika-moreira-portfolio', 'Mar 16, 2020', 'Awwwards', 'Developer Award', 'Erika Moreira')
+            +award('https://www.awwwards.com/sites/erika-moreira-portfolio', 'Mar 16, 2020', 'Awwwards', 'Site of The Day', 'Erika Moreira')
+            +award('https://thefwa.com/cases/johnnie-walker-dragon-glass', 'Feb 09, 2020', 'FWA', 'FWA of The Day', 'Johnnie Walker: Dragon Glass')
+            +award('https://annual.awwwards.com/categories/independent-of-the-year/luis-henrique-bizarro', '2019', 'Awwwards', 'Independent of The Year Nominee', '')
+            +award('https://annual.awwwards.com/categories/site-of-the-year/dominic-berzins', '2019', 'Awwwards', 'Site of The Year Nominee', 'Dominic Berzins')
+            +award('https://www.awwwards.com/sites/bruno-arizio-portfolio', 'Nov 25, 2019', 'Awwwards', 'Developer Award', 'Bruno Arizio')
+            +award('https://www.awwwards.com/sites/bruno-arizio-portfolio', 'Nov 25, 2019', 'Awwwards', 'Site of The Day', 'Bruno Arizio')
+            +award('https://thefwa.com/cases/samsung-spaceselfie', 'Nov 22, 2019', 'FWA', 'FWA of The Day', 'Samsung SpaceSelfie')
+            +award('https://www.awwwards.com/vote-now-for-marchs-site-of-the-month-and-win-a-years-free-pro-plan-in-the-awwwards-directory.html', 'Mar 2019', 'Awwwards', 'Site of The Month Nominee', 'Dominic Berzins')
+            +award('https://www.cssdesignawards.com/blog/website-of-the-month-2019-march/314/', 'Mar 2019', 'CSS Design Awards', 'Site of The Month Nominee', 'Dominic Berzins')
+            +award('https://www.cssdesignawards.com/sites/dominic-berzins/34803/', 'Mar 19, 2019', 'CSS Design Awards', 'Site of The Day', 'Dominic Berzins')
+            +award('https://thefwa.com/cases/tiaa-difference-maker', 'Mar 26, 2019', 'FWA', 'FWA of The Day', 'TIAA: The Difference Maker')
+            +award('https://thefwa.com/cases/giant-ar-screen-p2', 'Mar 24, 2019', 'FWA', 'FWA of The Day', 'EMAAR’s VR Park')
+            +award('https://thefwa.com/cases/dominic-berzins', 'Mar 11, 2019', 'FWA', 'FWA of The Day', 'Dominic Berzins')
+            +award('https://www.awwwards.com/sites/dominic-berzins', 'Mar 07, 2019', 'Awwwards', 'Developer Award', 'Dominic Berzins')
+            +award('https://www.awwwards.com/sites/dominic-berzins', 'Mar 07, 2019', 'Awwwards', 'Site of The Day', 'Dominic Berzins')
+            +award('https://thefwa.com/cases/google-pixel-holidays', 'Mar 06, 2019', 'FWA', 'FWA of The Day', 'Google Pixel Holidays')
+            +award('https://www.awwwards.com/mobile-sites/dominic-berzins', 'Mar 01, 2019', 'Awwwards', 'Mobile of The Week', 'Dominic Berzins')
+            +award('https://www.awwwards.com/sites/cult', 'Dec 12, 2018', 'Awards', 'Developer Award', 'Cult')
+            +award('https://www.awwwards.com/sites/cult', 'Dec 12, 2018', 'Awards', 'Site of The Day', 'Cult')
+            +award('https://thefwa.com/cases/stubhub-gift-rapper', 'Dec 10, 2018', 'FWA', 'FWA of The Day', 'Stubhub Gift Rapper')
+            +award('https://thefwa.com/cases/samsung-augmented-reality-spacesuit', 'May 18, 2018', 'FWA', 'FWA of The Day', 'Samsung AR Supersuit')
+            +award('https://thefwa.com/cases/shell-make-the-future', 'Feb 20, 2018', 'FWA', 'FWA of The Day', 'Shell Make The Future')
+            +award('http://winners.lovieawards.eu/share/?y=2018&a=201', '2018', 'The Lovie Awards', 'Best Visual Design', 'Silver: Shell Make The Future')
+            +award('https://thefwa.com/cases/nike-city-fast', 'Dec 12, 2017', 'FWA', 'FWA of The Day', 'Nike City Fast')
 
       .about__section
         h2.about__section__title(data-animation="paragraph") PRESS
@@ -823,94 +165,30 @@ section.about
           p.about__section__number 5+
 
           ul.about__section__list
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link.about__section__list__link--article(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.youtube.com/watch?v=Q6rUaa_lyK0&ab_channel=awwwards." target="_blank"
-              )
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Live Jury Review in Portuguese
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link.about__section__list__link--article(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.commarts.com/webpicks/studio-m-rtens" target="_blank"
-              )
-                span.about__section__list__column Communication Arts
-                span.about__section__list__column Studio Mærtens
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link.about__section__list__link--article(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://tympanus.net/codrops/2019/12/18/case-study-portfolio-of-bruno-arizio/" target="_blank"
-              )
-                span.about__section__list__column Codrops
-                span.about__section__list__column Case Study: Bruno Arizio
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link.about__section__list__link--article(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/case-study-dominic-berzins-single-page-portfolio-site.html" target="_blank"
-              )
-                span.about__section__list__column Awwwards
-                span.about__section__list__column Case Study: Dominic Berzins
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link.about__section__list__link--article(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://www.awwwards.com/50-beautifully-designed-black-websites.html" target="_blank"
-              )
-                span.about__section__list__column Awwwards
-                span.about__section__list__column 50 Beautifully Designed Black Websites
-
-            li.about__section__list__item
-              span.about__section__list__dash(data-animation="line" data-animation-threshold="1" data-animation-target=".about__section__list__item")
-
-              a.about__section__list__link.about__section__list__link--article(
-                data-animation="y"
-                data-animation-threshold="1"
-                data-animation-target=".about__section__list__item"
-                href="https://pocketmags.com/us/net-magazine/april-2019" target="_blank"
-              )
-                span.about__section__list__column net Magazine
-                span.about__section__list__column April 2019 Profile Interview
+            +press('https://www.youtube.com/watch?v=Q6rUaa_lyK0&ab_channel=awwwards.', 'Awwwards', 'Live Jury Review in Portuguese')
+            +press('https://www.commarts.com/webpicks/studio-m-rtens', 'Communication Arts', 'Studio Mærtens')
+            +press('https://tympanus.net/codrops/2019/12/18/case-study-portfolio-of-bruno-arizio/', 'Codrops', 'Case Study: Bruno Arizio')
+            +press('https://www.awwwards.com/case-study-dominic-berzins-single-page-portfolio-site.html', 'Awwwards', 'Case Study: Dominic Berzins')
+            +press('https://www.awwwards.com/50-beautifully-designed-black-websites.html', 'Awwwards', '50 Beautifully Designed Black Websites')
+            +press('https://pocketmags.com/us/net-magazine/april-2019', 'net Magazine', 'April 2019 Profile Interview')
 
       .about__section
-        h2.about__section__title(data-animation="paragraph" data-animation-threshold="1") COLOPHON
+        h2.about__section__title(data-animation="paragraph" data-animation-threshold="1") DETAILS
 
         .about__section__content
           p.about__section__description(data-animation="paragraph" data-animation-threshold="1")
-            | #[a(href="https://hardalstudio.com/ampersand/" target="_blank") Ampersand Typeface by Fatih Hardal] #[br]
-            | #[a(href="https://pangrampangram.com/products/neue-montreal" target="_blank") Neue Montreal by PangramPangram] #[br]
+            | That’s my first adventure mixing design and typography with my technical skills.
+            | (#[a(href="https://hardalstudio.com/ampersand/" rel="noreferrer noopener" target="_blank") Ampersand Typeface] #[br] and
+            | #[a(href="https://pangrampangram.com/products/neue-montreal" rel="noreferrer noopener" target="_blank") Neue Montreal]) with my technical skills.
 
       .about__section
         h2.about__section__title(data-animation="paragraph" data-animation-threshold="1") CONTACT
 
         .about__section__content
           p.about__section__description(data-animation="paragraph" data-animation-threshold="1")
-            | #[a(href="mailto:luis@bizar.ro" target="_blank") Email] #[br]
-            | #[a(href="https://twitter.com/lhbizarro" target="_blank") Twitter] #[br]
-            | #[a(href="https://github.com/lhbizarro" target="_blank") GitHub] #[br]
-            | #[a(href="https://last.fm/user/lhbizarro" target="_blank") Last.fm] #[br]
-            | #[a(href="https://linkedin.com/in/lhbizarro" target="_blank") LinkedIn] #[br]
-            | #[a(href="https://lhbzr.tumblr.com/" target="_blank") Tumblr] #[br]
+            | #[a(href="mailto:luis@bizar.ro") Email] #[br]
+            | #[a(href="https://twitter.com/lhbizarro" rel="noreferrer noopener" target="_blank") Twitter] #[br]
+            | #[a(href="https://github.com/lhbizarro" rel="noreferrer noopener" target="_blank") GitHub] #[br]
+            | #[a(href="https://last.fm/user/lhbizarro" rel="noreferrer noopener" target="_blank") Last.fm] #[br]
+            | #[a(href="https://linkedin.com/in/lhbizarro" rel="noreferrer noopener" target="_blank") LinkedIn] #[br]
+            | #[a(href="https://lhbzr.tumblr.com/" rel="noreferrer noopener" target="_blank") Tumblr] #[br]

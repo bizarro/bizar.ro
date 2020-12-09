@@ -32,6 +32,11 @@
     top: 5rem;
   }
 
+  &:nth-child(4) {
+    bottom: 5rem;
+    left: 5rem;
+  }
+
   @include media('<=phone') {
     font-size: 1.6rem;
     line-height: 3.3rem;
@@ -50,6 +55,11 @@
     &:nth-child(3) {
       right: 2rem;
       top: 1rem;
+    }
+
+    &:nth-child(4) {
+      bottom: 1rem;
+      left: 2rem;
     }
   }
 }
