@@ -10,9 +10,10 @@ import each from 'lodash/each'
 import Responsive from 'classes/Responsive'
 
 import About from 'pages/About'
+import Case from 'pages/Case'
 import Home from 'pages/Home'
 
-// import Canvas from 'components/Canvas'
+import Canvas from 'components/Canvas'
 import Navigation from 'components/Navigation'
 
 class App {
@@ -34,15 +35,22 @@ class App {
     this.createCanvas()
     this.createNavigation()
     this.createAbout()
+    this.createCase()
     this.createHome()
 
     this.pages = {
       '/': this.home,
-      '/about': this.about
+      '/about': this.about,
+      '/case': this.case
     }
 
-    this.page = this.pages[this.url]
-    this.page.show()
+    if (this.url.indexOf('/case') > -1) {
+      this.page = this.case
+    } else {
+      this.page = this.pages[this.url]
+    }
+
+    this.page.show(this.url)
 
     this.addEventListeners()
     this.addLinksEventsListeners()
@@ -55,11 +63,14 @@ class App {
   }
 
   createCanvas () {
-    // this.canvas = new Canvas()
+    this.canvas = new Canvas()
   }
 
   createNavigation () {
-    this.navigation = new Navigation()
+    this.navigation = new Navigation({
+      canvas: this.canvas
+    })
+
     this.navigation.onChange(this.url)
   }
 
@@ -77,6 +88,10 @@ class App {
     this.home = new Home()
   }
 
+  createCase () {
+    this.case = new Case()
+  }
+
   /**
    * Change.
    */
@@ -90,6 +105,8 @@ class App {
 
     this.url = url
 
+    this.canvas.onChange(this.url)
+
     await this.page.hide()
 
     window.scrollTo(0, 0)
@@ -98,13 +115,15 @@ class App {
       window.history.pushState({}, document.title, url)
     }
 
-    if (this.navigation) {
-      this.navigation.onChange(this.url)
+    this.navigation.onChange(this.url)
+
+    if (this.url.indexOf('/case') > -1) {
+      this.page = this.case
+    } else {
+      this.page = this.pages[this.url]
     }
 
-    this.page = this.pages[this.url]
-
-    await this.page.show()
+    await this.page.show(this.url)
 
     if (this.page.isScrollable) {
       document.documentElement.style.overflow = ''
@@ -121,8 +140,14 @@ class App {
       this.stats.begin()
     }
 
+    if (this.page) {
+      this.page.update()
+    }
+
     if (this.canvas && this.canvas.update) {
-      this.canvas.update(this.page && this.page.scroll)
+      const scroll = this.page.list ? this.page.list.scroll.current : this.page.scroll.last
+
+      this.canvas.update(scroll)
     }
 
     if (this.stats) {

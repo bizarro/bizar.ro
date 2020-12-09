@@ -1,17 +1,17 @@
 import GSAP from 'gsap'
 
+import each from 'lodash/each'
+
 import Page from 'components/Page'
-import Scrolling from 'components/Scrolling'
 
 export default class extends Page {
   constructor () {
     super({
-      element: '.home',
+      element: '.cases',
       elements: {
-        list: '.home__list',
-        items: '.home__item'
+        cases: '.case'
       },
-      isScrollable: false
+      isScrollable: true
     })
 
     this.create()
@@ -20,13 +20,19 @@ export default class extends Page {
   /**
    * Animations.
    */
-  show () {
+  show (url) {
+    const id = url.replace('/case/', '')
+
+    this.selected = Array.from(this.elements.cases).find(item => item.id === id)
+
     const timeline = GSAP.timeline()
 
-    timeline.call(_ => {
-      document.documentElement.style.position = 'fixed'
+    timeline.set(this.selected, {
+      autoAlpha: 1
+    })
 
-      this.list.enable()
+    timeline.call(_ => {
+      this.element.style.height = `${this.selected.clientHeight}px`
     })
 
     timeline.to(this.element, {
@@ -40,15 +46,13 @@ export default class extends Page {
   hide () {
     const timeline = GSAP.timeline()
 
-    timeline.call(_ => {
-      document.documentElement.style.position = ''
-
-      this.list.disable()
-    })
-
     timeline.to(this.element, {
       autoAlpha: 0,
       duration: 0.33
+    })
+
+    timeline.set(this.selected, {
+      autoAlpha: 0
     })
 
     return super.show(timeline)
@@ -59,18 +63,10 @@ export default class extends Page {
    */
   create () {
     super.create()
-
-    this.createList()
   }
 
   createList () {
-    this.list = new Scrolling({
-      element: document.body,
-      elements: {
-        list: this.elements.list,
-        items: this.elements.items
-      }
-    })
+
   }
 
   /**
@@ -78,8 +74,6 @@ export default class extends Page {
    */
   onResize () {
     super.onResize()
-
-    this.list.onResize()
   }
 
   /**
@@ -87,7 +81,5 @@ export default class extends Page {
    */
   update () {
     super.update()
-
-    this.list.update()
   }
 }

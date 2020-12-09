@@ -72,109 +72,100 @@
   display: inline-block;
   position: relative;
 
-  .home__item:nth-child(1) &,
-  .home__item:nth-child(#{1 + 21 * 1}) & {
+  .home__item--trolli & {
     transform: translateX(-24.3rem);
   }
 
-  .home__item:nth-child(2) &,
-  .home__item:nth-child(#{2 + 21 * 1}) & {
+  .home__item--adventure-time & {
     transform: translateX(7.5rem);
   }
 
-  .home__item:nth-child(3) &,
-  .home__item:nth-child(#{3 + 21 * 1}) & {
+  .home__item--studio-maertens & {
     transform: translateX(24.5rem);
   }
 
-  .home__item:nth-child(4) &,
-  .home__item:nth-child(#{4 + 21 * 1}) & {
+  .home__item--inbound & {
     transform: translateX(28.6rem);
   }
 
-  .home__item:nth-child(5) &,
-  .home__item:nth-child(#{5 + 21 * 1}) & {
+  .home__item--redis & {
     transform: translateX(-9rem);
   }
 
-  .home__item:nth-child(6) &,
-  .home__item:nth-child(#{6 + 21 * 1}) & {
+  .home__item--kaleidoz & {
     transform: translateX(-4.7rem);
   }
 
-  .home__item:nth-child(7) &,
-  .home__item:nth-child(#{7 + 21 * 1}) & {
+  .home__item--erika-moreira & {
     transform: translateX(-32.5rem);
   }
 
-  .home__item:nth-child(8) &,
-  .home__item:nth-child(#{8 + 21 * 1}) & {
+  .home__item--bruno-arizio & {
     transform: translateX(37.4rem);
   }
 
-  .home__item:nth-child(9) &,
-  .home__item:nth-child(#{9 + 21 * 1}) & {
+  .home__item--dominic-berzins & {
     transform: translateX(12.8rem);
   }
 
-  .home__item:nth-child(10) &,
-  .home__item:nth-child(#{10 + 21 * 1}) & {
+  .home__item--pagethink & {
+    transform: translateX(-1.8rem);
+  }
+
+  .home__item--cult & {
     transform: translateX(-13.5rem);
   }
 
-  .home__item:nth-child(11) &,
-  .home__item:nth-child(#{11 + 21 * 1}) & {
+  .home__item--movida & {
     transform: translateX(-7.6rem);
   }
 
-  .home__item:nth-child(12) &,
-  .home__item:nth-child(#{12 + 21 * 1}) & {
+  .home__item--lufthansa-2 & {
     transform: translateX(9.8rem);
   }
 
-  .home__item:nth-child(13) &,
-  .home__item:nth-child(#{13 + 21 * 1}) & {
+  .home__item--tiaa & {
     transform: translateX(5.9rem);
   }
 
-  .home__item:nth-child(14) &,
-  .home__item:nth-child(#{14 + 21 * 1}) & {
+  .home__item--lufthansa-1 & {
     transform: translateX(40rem);
   }
 
-  .home__item:nth-child(15) &,
-  .home__item:nth-child(#{15 + 21 * 1}) & {
+  .home__item--shell & {
     transform: translateX(-14.3rem);
   }
 
-  .home__item:nth-child(16) &,
-  .home__item:nth-child(#{16 + 21 * 1}) & {
+  .home__item--corvette & {
     transform: translateX(-24.5rem);
   }
 
-  .home__item:nth-child(17) &,
-  .home__item:nth-child(#{17 + 21 * 1}) & {
+  .home__item--nike & {
     transform: translateX(3.7rem);
   }
 
-  .home__item:nth-child(18) &,
-  .home__item:nth-child(#{18 + 21 * 1}) & {
+  .home__item--airbnb & {
     transform: translateX(-18rem);
   }
 
-  .home__item:nth-child(19) &,
-  .home__item:nth-child(#{19 + 21 * 1}) & {
+  .home__item--discovery-kids & {
     transform: translateX(-36.8rem);
   }
 
-  .home__item:nth-child(20) &,
-  .home__item:nth-child(#{20 + 21 * 1}) & {
+  .home__item--rock-in-rio & {
     transform: translateX(-3.1rem);
   }
 
-  .home__item:nth-child(21) &,
-  .home__item:nth-child(#{21 + 21 * 1}) & {
+  .home__item--neoway & {
     transform: translateX(18.4rem);
+  }
+
+  .home__item--one-plus & {
+    transform: translateX(12.2rem);
+  }
+
+  .home__item--samsung & {
+    transform: translateX(4.9rem);
   }
 
   @include media('<=phone') {
@@ -187,137 +178,23 @@
   bottom: 2.2rem;
   height: 10.3rem;
   margin: 0 1rem;
+  object-fit: cover;
+  opacity: 0;
   overflow: hidden;
   position: absolute;
   transition: width 0.4s 0.4s $ease-out-expo;
-  width: 0;
+  width: 18.3rem;
 
-  .home__item:hover & {
-    transition: width 0.4s $ease-out-expo;
-    width: 18.3rem;
+  &[data-direction="left"] {
+    right: 100%;
   }
 
-  .home__item:nth-child(1) &,
-  .home__item:nth-child(#{1 + 21 * 1}) & {
+  &[data-direction="right"] {
     left: 100%;
-  }
-
-  .home__item:nth-child(2) &,
-  .home__item:nth-child(#{2 + 21 * 1}) & {
-    right: 100%;
-  }
-
-  .home__item:nth-child(3) &,
-  .home__item:nth-child(#{3 + 21}) & {
-    right: 100%;
-  }
-
-  .home__item:nth-child(4) &,
-  .home__item:nth-child(#{4 + 21 * 1}) & {
-    right: 100%;
-  }
-
-  .home__item:nth-child(5) &,
-  .home__item:nth-child(#{5 + 21 * 1}) & {
-    right: 100%;
-  }
-
-  .home__item:nth-child(6) &,
-  .home__item:nth-child(#{6 + 21 * 1}) & {
-    right: 100%;
-  }
-
-  .home__item:nth-child(7) &,
-  .home__item:nth-child(#{7 + 21 * 1}) & {
-    left: 100%;
-  }
-
-  .home__item:nth-child(8) &,
-  .home__item:nth-child(#{8 + 21 * 1}) & {
-    right: 100%;
-  }
-
-  .home__item:nth-child(9) &,
-  .home__item:nth-child(#{9 + 21 * 1}) & {
-    right: 100%;
-  }
-
-  .home__item:nth-child(10) &,
-  .home__item:nth-child(#{10 + 21 * 1}) & {
-    left: 100%;
-  }
-
-  .home__item:nth-child(11) &,
-  .home__item:nth-child(#{11 + 21 * 1}) & {
-    right: 100%;
-  }
-
-  .home__item:nth-child(12) &,
-  .home__item:nth-child(#{12 + 21 * 1}) & {
-    right: 100%;
-  }
-
-  .home__item:nth-child(13) &,
-  .home__item:nth-child(#{13 + 21 * 1}) & {
-    right: 100%;
-  }
-
-  .home__item:nth-child(14) &,
-  .home__item:nth-child(#{14 + 21 * 1}) & {
-    right: 100%;
-  }
-
-  .home__item:nth-child(15) &,
-  .home__item:nth-child(#{15 + 21 * 1}) & {
-    left: 100%;
-  }
-
-  .home__item:nth-child(16) &,
-  .home__item:nth-child(#{16 + 21 * 1}) & {
-    left: 100%;
-  }
-
-  .home__item:nth-child(17) &,
-  .home__item:nth-child(#{17 + 21 * 1}) & {
-    right: 100%;
-  }
-
-  .home__item:nth-child(18) &,
-  .home__item:nth-child(#{18 + 21 * 1}) & {
-    left: 100%;
-  }
-
-  .home__item:nth-child(19) &,
-  .home__item:nth-child(#{19 + 21 * 1}) & {
-    left: 100%;
-  }
-
-  .home__item:nth-child(20) &,
-  .home__item:nth-child(#{20 + 21 * 1}) & {
-    right: 100%;
-  }
-
-  .home__item:nth-child(21) &,
-  .home__item:nth-child(#{21 + 21 * 1}) & {
-    right: 100%;
   }
 
   @include media('<=phone') {
     display: none;
-  }
-}
-
-.home__link__media__image {
-  @extend %cover;
-
-  filter: grayscale(1);
-  mix-blend-mode: screen;
-  opacity: 0;
-  transition: opacity 0.4s $ease-out-expo;
-
-  .home__item:hover & {
-    opacity: 1;
-    transition: opacity 0.4s 0.4s $ease-out-expo;
   }
 }
 

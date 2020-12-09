@@ -1,0 +1,289 @@
+mixin template({ id, title, category, company, description, link })
+  article.case(id=id)
+    header.case__header
+      h3.case__title=title
+
+      figure.case__media
+
+    .case__information
+      .case__information__details
+        p.case__information__detail
+          | #[strong.case__information__detail__title Company]
+          | #{company}
+
+        p.case__information__detail
+          | #[strong.case__information__detail__title Category]
+          | #{category}
+
+        if link
+          p.case__information__detail
+            | #[strong.case__information__detail__title URL]
+            | #[a(href=link target="_blank" rel="noreferrer noopener") View →]
+
+      p.case__information__description=description
+
+.cases
+  +template({
+    id: 'trolli',
+    title: 'TROLLI',
+    category: 'Game',
+    company: 'Active Theory',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://trollideliciouslydarkescape.com/'
+  })
+
+  +template({
+    id: 'adventure-time',
+    title: 'ADVENTURE TIME',
+    category: 'WebGL',
+    company: 'Active Theory',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://adventuretimedistantlands.com/'
+  })
+
+  +template({
+    id: 'studio-maertens',
+    title: 'STUDIO MÆRTENS',
+    category: 'Portfolio',
+    company: 'Freelance',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://studiomaertens.com/'
+  })
+
+  +template({
+    id: 'inbound',
+    title: 'INBOUND',
+    category: 'Conference',
+    company: 'Active Theory',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://dreamwave.tech/inbound-2020'
+  })
+
+  +template({
+    id: 'redis',
+    title: 'REDIS',
+    category: 'Conference',
+    company: 'Active Theory',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://dreamwave.tech/redis-conf'
+  })
+
+  +template({
+    id: 'kaleidoz',
+    title: 'KALEIDOZ',
+    category: 'Portfolio',
+    company: 'Freelance',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://kaleidozdesign.com/'
+  })
+
+  +template({
+    id: 'erika-moreira',
+    title: 'ÉRIKA MOREIRA',
+    category: 'Portfolio',
+    company: 'Freelance',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://erikamoreira.co/'
+  })
+
+  +template({
+    id: 'bruno-arizio',
+    title: 'BRUNO ARIZIO',
+    category: 'Portfolio',
+    company: 'Freelance',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://www.behance.net/gallery/89455165/Bruno-Arizio-Portfolio'
+  })
+
+  +template({
+    id: 'dominic-berzins',
+    title: 'DOMINIC BERZINS',
+    category: 'Portfolio',
+    company: 'Freelance',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://dominic.bz/'
+  })
+
+  +template({
+    id: 'pagethink',
+    title: 'PAGETHINK',
+    category: 'Portfolio',
+    company: 'Antinomy',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://www.pagethink.com/'
+  })
+
+  +template({
+    id: 'neoway',
+    title: 'NEOWAY',
+    category: 'Interactive Installation',
+    company: 'SOLID',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://www.linkedin.com/posts/rise-new-york_independent-advertising-agency-activity-6553695483888451584-ejxI/'
+  })
+
+  +template({
+    id: 'cult',
+    title: 'CULT',
+    category: 'Portfolio',
+    company: 'Freelance',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://cultldn.com/'
+  })
+
+  +template({
+    id: 'movida',
+    title: 'MOVIDA',
+    category: 'Game',
+    company: 'Royalpixel',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://apps.apple.com/br/app/movida-kids/id1337822375'
+  })
+
+  +template({
+    id: 'one-plus',
+    title: 'ONE PLUS',
+    category: 'Game',
+    company: 'UNIT9',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://www.unit9.com/project/oneplus-crackables-2-0/'
+  })
+
+  +template({
+    id: 'samsung',
+    title: 'SAMSUNG',
+    category: 'Campaign',
+    company: 'UNIT9',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://www.unit9.com/project/samsung-spaceselfie/'
+  })
+
+  +template({
+    id: 'lufthansa-2',
+    title: 'LUFTHANSA',
+    category: 'Campaign',
+    company: 'UNIT9',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://www.unit9.com/project/lufthansa-sayyestotheworld-2/'
+  })
+
+  +template({
+    id: 'tiaa',
+    title: 'TIAA',
+    category: 'Campaign',
+    company: 'UNIT9',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://www.unit9.com/project/tiaa-difference-maker/'
+  })
+
+  +template({
+    id: 'lufthansa-1',
+    title: 'LUFTHANSA',
+    category: 'Campaign',
+    company: 'UNIT9',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://www.unit9.com/project/lufthansa-sayyestotheworld/'
+  })
+
+  +template({
+    id: 'shell',
+    title: 'SHELL',
+    category: 'Campaign',
+    company: 'UNIT9',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'http://shell-bts-master.thisisnotbranded.com/ontopoftheworld/en'
+  })
+
+  +template({
+    id: 'corvette',
+    title: 'CORVETTE',
+    category: 'Audio Visualizer',
+    company: 'UNIT9',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://www.unit9.com/project/corvette-modules/'
+  })
+
+  +template({
+    id: 'nike',
+    title: 'NIKE',
+    category: 'Game',
+    company: 'UNIT9',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'http://nikecityfast.co.uk/'
+  })
+
+  +template({
+    id: 'airbnb',
+    title: 'AIRBNB',
+    category: 'Campaign',
+    company: 'UNIT9',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://www.unit9.com/project/airbnb-family-trips/'
+  })
+
+  +template({
+    id: 'discovery-kids',
+    title: 'DISCOVERY KIDS',
+    category: 'Game',
+    company: 'Royalpixel',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://lhbizarro.github.io/doki/game-es/'
+  })
+
+  +template({
+    id: 'rock-in-rio',
+    title: 'ROCK IN RIO',
+    category: 'Campaign',
+    company: 'Royalpixel',
+    description: `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
+    `,
+    link: 'https://believe.earth/earth/'
+  })
+

@@ -53,10 +53,3 @@
     width: calc(100% - 0.4rem);
   }
 }
-
-.about__gallery__media__image {
-  @extend %cover;
-
-  filter: grayscale(1);
-  mix-blend-mode: screen;
-}

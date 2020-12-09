@@ -1,12 +1,20 @@
 precision highp float;
-precision highp int;
-varying vec3 vNormal;
+
+uniform float uAlpha;
+uniform float uAlphaMultiplier;
+
+uniform sampler2D tMap;
+
+varying float vDisplacement;
+varying vec2 vUv;
 
 void main() {
-  vec3 normal = normalize(vNormal);
+  vec3 color = texture2D(tMap, vUv).rgb;
 
-  float lighting = dot(normal, normalize(vec3(-0.3, 0.8, 0.6)));
+  if (vDisplacement > 0.0) {
+    color += vDisplacement;
+  }
 
-  gl_FragColor.rgb = vec3(0.2, 0.8, 1.0) + lighting * 0.1;
-  gl_FragColor.a = 1.0;
+  gl_FragColor.rgb = color;
+  gl_FragColor.a = mix(uAlpha, 1.0, uAlphaMultiplier);
 }

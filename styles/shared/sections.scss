@@ -1,6 +1,10 @@
 %page {
+  left: 0;
   opacity: 0;
+  position: absolute;
+  top: 0;
   visibility: hidden;
+  width: 100%;
   z-index: z('content');
 }
 

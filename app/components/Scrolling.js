@@ -26,7 +26,7 @@ export default class extends Component {
       last: 0
     }
 
-    each(this.elements.buttons, button => {
+    each(this.elements.items, button => {
       const offset = getOffset(button)
 
       button.extra = 0
@@ -35,9 +35,9 @@ export default class extends Component {
       button.position = 0
     })
 
-    this.length = this.elements.buttons.length
+    this.length = this.elements.items.length
 
-    this.height = this.elements.buttons[0].height
+    this.height = this.elements.items[0].height
     this.heightTotal = this.elements.list.getBoundingClientRect().height
 
     this.windowHalf = window.innerHeight * 0.5
@@ -130,7 +130,7 @@ export default class extends Component {
       this.direction = 'up'
     }
 
-    each(this.elements.buttons, (element, index) => {
+    each(this.elements.items, (element, index) => {
       element.position = -this.scroll.current - element.extra
 
       const offset = element.position + element.offset + element.height
@@ -169,7 +169,7 @@ export default class extends Component {
       last: 0
     }
 
-    each(this.elements.buttons, button => {
+    each(this.elements.items, button => {
       button.style[this.transform] = ''
 
       const offset = getOffset(button)
@@ -180,7 +180,7 @@ export default class extends Component {
       button.position = 0
     })
 
-    this.height = this.elements.buttons[0].getBoundingClientRect().height
+    this.height = this.elements.items[0].getBoundingClientRect().height
     this.heightTotal = this.elements.list.getBoundingClientRect().height
 
     this.windowHalf = window.innerHeight * 0.5

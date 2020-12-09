@@ -54,10 +54,6 @@ export default class extends Page {
       y: '0%'
     })
 
-    timeline.call(_ => {
-      this.update()
-    })
-
     return super.show(timeline)
   }
 
@@ -67,10 +63,6 @@ export default class extends Page {
     timeline.to(this.element, {
       autoAlpha: 0,
       duration: 0.33
-    })
-
-    timeline.call(_ => {
-      window.cancelAnimationFrame(this.frame)
     })
 
     return super.show(timeline)
@@ -112,7 +104,5 @@ export default class extends Page {
         title.style.transform = `translateY(${title.y}px)`
       })
     }
-
-    this.frame = window.requestAnimationFrame(this.update)
   }
 }

@@ -1,0 +1,73 @@
+.cases {
+  @extend %page;
+}
+
+.case {
+  @extend %page;
+
+  padding: 15rem 0;
+
+  @include media('<=phone') {
+    padding: 5rem 0;
+  }
+}
+
+.case__header {
+
+}
+
+.case__media {
+  @include ratio(1366, 768);
+
+  margin: auto;
+  // max-width: 144rem;
+  width: 100%;
+}
+
+.case__header__content {
+  text-align: center;
+  margin: auto;
+  width: 40%;
+}
+
+.case__title {
+  font: 15rem/0.8 $font-ampersand;
+  text-align: center;
+  transform: translateY(50%);
+  white-space: nowrap;
+}
+
+.case__subtitle {
+  font-size: 2.5rem;
+}
+
+.case__information {
+  display: flex;
+  margin: 10rem auto;
+  max-width: 144rem;
+}
+
+.case__information__details {
+  width: 33.33%;
+}
+
+.case__information__detail {
+  font-size: 2.5rem;
+
+  &:not(:first-child) {
+    margin-top: 5rem;
+  }
+}
+
+.case__information__detail__title {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.case__information__description {
+  font-size: 3.5rem;
+  line-height: 1.5;
+  width: 66.66%;
+}
