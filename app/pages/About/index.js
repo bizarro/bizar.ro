@@ -50,8 +50,6 @@ export default class extends Page {
       y: '0%'
     })
 
-    timeline.call(this.onResize)
-
     return super.show(timeline)
   }
 

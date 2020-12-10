@@ -5,6 +5,7 @@
   top: 0;
   visibility: hidden;
   width: 100%;
+  will-change: transform;
   z-index: z('content');
 }
 

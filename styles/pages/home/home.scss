@@ -194,17 +194,16 @@
   }
 
   @include media('<=phone') {
-    display: none;
-  }
-}
+    bottom: 50%;
 
-.home__text {
-  bottom: 5rem;
-  font-size: 2rem;
-  left: 5rem;
-  position: absolute;
+    &[data-direction="left"] {
+      right: 50%;
+      transform: translate(50%, 50%);
+    }
 
-  @include media('<=phone') {
-    display: none;
+    &[data-direction="right"] {
+      left: 50%;
+      transform: translate(-50%, 50%);
+    }
   }
 }

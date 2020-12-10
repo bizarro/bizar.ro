@@ -177,17 +177,23 @@ class App {
       this.responsive.onResize()
     }
 
-    if (this.about) {
-      this.about.onResize()
-    }
+    requestAnimationFrame(_ => {
+      if (this.about.isVisible) {
+        this.about.onResize()
+      }
 
-    if (this.home) {
-      this.home.onResize()
-    }
+      if (this.home.isVisible) {
+        this.home.onResize()
+      }
 
-    if (this.canvas && this.canvas.onResize) {
-      this.canvas.onResize()
-    }
+      if (this.case.isVisible) {
+        this.case.onResize()
+      }
+
+      if (this.canvas && this.canvas.onResize) {
+        this.canvas.onResize()
+      }
+    })
   }
 
   onTouchDown (event) {

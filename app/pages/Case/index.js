@@ -4,6 +4,8 @@ import each from 'lodash/each'
 
 import Page from 'components/Page'
 
+import { getOffset } from 'utils/dom'
+
 export default class extends Page {
   constructor () {
     super({
@@ -28,6 +30,8 @@ export default class extends Page {
 
     this.selected = Array.from(this.elements.cases).find(item => item.id === id)
 
+    this.element.style.height = `${getOffset(this.selected).height}px`
+
     const timeline = GSAP.timeline()
 
     timeline.set(this.selected, {
@@ -39,10 +43,6 @@ export default class extends Page {
     })
 
     this.showCase(timeline)
-
-    timeline.call(_ => {
-      this.element.style.height = `${this.selected.clientHeight}px`
-    })
 
     return super.show(timeline)
   }
@@ -90,18 +90,9 @@ export default class extends Page {
       autoAlpha: 0
     })
 
+    this.selected = null
+
     return super.show(timeline)
-  }
-
-  /**
-   * Create.
-   */
-  create () {
-    super.create()
-  }
-
-  createList () {
-
   }
 
   /**
@@ -109,12 +100,9 @@ export default class extends Page {
    */
   onResize () {
     super.onResize()
-  }
 
-  /**
-   * Loop.
-   */
-  update () {
-    super.update()
+    if (this.selected) {
+      this.element.style.height = `${getOffset(this.selected).height}px`
+    }
   }
 }

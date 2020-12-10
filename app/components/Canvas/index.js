@@ -168,15 +168,15 @@ export default class {
   update (scroll) {
     this.gl.clearColor(this.background.r / 255, this.background.g / 255, this.background.b / 255, 1)
 
-    this.post.render({
-      scene: this.scene,
-      camera: this.camera
-    })
-
     if (this.medias) {
       this.medias.forEach(media => {
         media.update(scroll)
       })
     }
+
+    this.post.render({
+      scene: this.scene,
+      camera: this.camera
+    })
   }
 }

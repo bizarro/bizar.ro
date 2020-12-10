@@ -1,5 +1,7 @@
 .cases {
   @extend %page;
+
+  overflow: hidden;
 }
 
 .case {

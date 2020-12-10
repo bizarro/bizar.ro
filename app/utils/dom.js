@@ -11,7 +11,8 @@ export const getOffset = element => {
     bottom: box.bottom + window.pageXOffset - document.documentElement.clientLeft,
     height: box.height,
     left: box.left + window.pageXOffset - document.documentElement.clientLeft,
-    top: box.top + window.pageYOffset - document.documentElement.clientTop
+    top: box.top + window.pageYOffset - document.documentElement.clientTop,
+    width: box.width
   }
 }
 

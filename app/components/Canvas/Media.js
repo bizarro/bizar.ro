@@ -5,6 +5,8 @@ import { Mesh, Program, TextureLoader } from 'ogl'
 import fragment from 'shaders/fragment.glsl'
 import vertex from 'shaders/vertex.glsl'
 
+import { getOffset } from 'utils/dom'
+
 export default class {
   constructor ({ caseMedia, geometry, gl, homeList, homeItem, homeLink, homeLinkMedia, id, scene, screen, viewport }) {
     AutoBind(this)
@@ -63,9 +65,9 @@ export default class {
   }
 
   createBounds () {
-    this.boundsList = this.homeList.getBoundingClientRect()
-    this.boundsHome = this.homeLinkMedia.getBoundingClientRect()
-    this.boundsCase = this.caseMedia.getBoundingClientRect()
+    this.boundsList = getOffset(this.homeList)
+    this.boundsHome = getOffset(this.homeLinkMedia)
+    this.boundsCase = getOffset(this.caseMedia)
 
     this.updateScale()
     this.updateX()

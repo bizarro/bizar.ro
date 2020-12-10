@@ -125,9 +125,11 @@ export default class extends EventEmitter {
   }
 
   createScrollHeight () {
-    this.wrapper.style.height = `${this.element.offsetHeight}px`
+    if (this.isVisible) {
+      this.wrapper.style.height = `${this.element.offsetHeight}px`
 
-    this.scroll.length = this.element.offsetHeight
+      this.scroll.length = this.element.offsetHeight
+    }
   }
 
   /**
@@ -136,16 +138,16 @@ export default class extends EventEmitter {
   show (animation) {
     return new Promise(resolve => {
       animation.call(() => {
+        this.isVisible = true
+
         if (this.isScrollable) {
-          this.createScrollHeight()
+          this.onResize()
           this.createScrollStyles()
         } else {
           document.documentElement.style.overflow = 'hidden'
         }
 
         resolve()
-
-        this.isVisible = true
       })
 
       this.addEventListeners()
