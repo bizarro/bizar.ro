@@ -78,8 +78,6 @@ export default class extends Component {
 
     let background = this.convert(random / 100, 0.19, 0.09)
 
-    console.log(background)
-
     this.canvas.background = {
       r: background[0],
       g: background[1],

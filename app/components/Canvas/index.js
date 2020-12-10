@@ -62,6 +62,7 @@ export default class {
     const font = new FontFaceObserver('Ampersand')
 
     font.load().then(_ => {
+      this.mediasList = document.querySelector('.home__list')
       this.mediasElements = document.querySelectorAll('.home__item')
       this.medias = mapEach(this.mediasElements, (homeItem, index) => {
         const homeLink = homeItem.querySelector('.home__link')
@@ -78,6 +79,7 @@ export default class {
           homeLink,
           homeLinkMedia,
           id,
+          homeList: this.mediasList,
           scene: this.scene,
           screen: this.screen,
           viewport: this.viewport
@@ -173,7 +175,7 @@ export default class {
 
     if (this.medias) {
       this.medias.forEach(media => {
-        media.update(scroll, this.mediasElements)
+        media.update(scroll)
       })
     }
   }

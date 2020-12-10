@@ -1,0 +1,81 @@
+@keyframes loading {
+  from { opacity: 1 };
+}
+
+.case__gallery__media {
+  &:not(:first-child) {
+    margin-top: 10rem;
+  }
+
+  @include media('<=phone') {
+    &:not(:first-child) {
+      margin-top: 2.5rem;
+    }
+  }
+}
+
+.case__gallery__media__box {
+  background: $color-iron;
+  display: block;
+  font-size: 0;
+  margin: auto;
+  max-width: 192rem;
+  position: relative;
+  width: 90%;
+}
+
+.case__gallery__media__loader {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s ease;
+  white-space: nowrap;
+  z-index: 1;
+
+  span {
+    animation: loading 0.4s ease infinite alternate;
+    background: $color-pine-tree;
+    border-radius: 50%;
+    display: inline-block;
+    height: 2rem;
+    margin-right: 1rem;
+    opacity: 0;
+    transition: background-color 0.5s ease;
+    width: 2rem;
+
+    &:nth-child(2) {
+      animation-delay: 0.13s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.26s;
+    }
+  }
+
+  .case__gallery__media--active & {
+    opacity: 0;
+  }
+}
+
+.case__gallery__media__placeholder {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+.case__gallery__media__image {
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transition: opacity 1s ease;
+  width: 100%;
+
+  &--active {
+    opacity: 1;
+  }
+}

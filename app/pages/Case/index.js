@@ -7,6 +7,9 @@ import Page from 'components/Page'
 export default class extends Page {
   constructor () {
     super({
+      classes: {
+        imageActive: 'case__gallery__media__image--active'
+      },
       element: '.cases',
       elements: {
         cases: '.case'
@@ -31,15 +34,15 @@ export default class extends Page {
       autoAlpha: 1
     })
 
-    timeline.call(_ => {
-      this.element.style.height = `${this.selected.clientHeight}px`
-    })
-
     timeline.set(this.element, {
       autoAlpha: 1,
     })
 
     this.showCase(timeline)
+
+    timeline.call(_ => {
+      this.element.style.height = `${this.selected.clientHeight}px`
+    })
 
     return super.show(timeline)
   }
@@ -56,15 +59,32 @@ export default class extends Page {
       stagger: 0.1,
       y: '0%'
     })
+
+    const images = this.selected.querySelectorAll('img')
+
+    each(images, image => {
+      if (!image.hasAttribute('src')) {
+        image.classList.add(this.classes.imageActive)
+        image.setAttribute('src', image.getAttribute('data-src'))
+      }
+    })
   }
 
   hide () {
     const timeline = GSAP.timeline()
 
+    timeline.to(window, {
+      duration: 1,
+      ease: 'expo.inOut',
+      scrollTo: {
+        y: 0,
+      }
+    }, 'start')
+
     timeline.to(this.element, {
       autoAlpha: 0,
-      duration: 0.33
-    })
+      duration: 1
+    }, 'start')
 
     timeline.set(this.selected, {
       autoAlpha: 0

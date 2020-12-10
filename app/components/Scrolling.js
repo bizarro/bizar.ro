@@ -23,7 +23,8 @@ export default class extends Component {
       position: 0,
       current: 0,
       target: 0,
-      last: 0
+      last: 0,
+      clamp: 0
     }
 
     each(this.elements.items, button => {
@@ -109,20 +110,7 @@ export default class extends Component {
 
     this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, this.scroll.ease)
 
-    const scrollClamp = Math.round((this.scroll.current + this.windowHalf) % this.heightTotal)
-    const scrollPercent = scrollClamp / this.heightTotal
-
-    let index = Math.floor(scrollPercent * this.length)
-
-    if (index < 0) {
-      index = (this.length - Math.abs(index % this.length)) % this.length
-    }
-
-    if (this.index !== index) {
-      this.index = index
-
-      this.emit('change', index)
-    }
+    const scrollClamp = Math.round(this.scroll.current % this.heightTotal)
 
     if (this.scroll.current < this.scroll.last) {
       this.direction = 'down'
@@ -152,12 +140,15 @@ export default class extends Component {
         element.isAfter = false
       }
 
+      element.clamp = element.extra % scrollClamp
+
       this.transform(element, element.position)
     })
 
     this.distance = this.scroll.current - this.scroll.target
 
     this.scroll.last = this.scroll.current
+    this.scroll.clamp = scrollClamp
   }
 
   onResize () {

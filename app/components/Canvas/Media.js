@@ -2,13 +2,11 @@ import AutoBind from 'auto-bind'
 import GSAP from 'gsap'
 import { Mesh, Program, TextureLoader } from 'ogl'
 
-import { interpolate } from 'utils/math'
-
 import fragment from 'shaders/fragment.glsl'
 import vertex from 'shaders/vertex.glsl'
 
 export default class {
-  constructor ({ caseMedia, geometry, gl, homeItem, homeLink, homeLinkMedia, id, scene, screen, viewport }) {
+  constructor ({ caseMedia, geometry, gl, homeList, homeItem, homeLink, homeLinkMedia, id, scene, screen, viewport }) {
     AutoBind(this)
 
     this.transition = 0
@@ -19,6 +17,7 @@ export default class {
 
     this.caseMedia = caseMedia
 
+    this.homeList = homeList
     this.homeItem = homeItem
     this.homeLink = homeLink
     this.homeLinkMedia = homeLinkMedia
@@ -64,6 +63,7 @@ export default class {
   }
 
   createBounds () {
+    this.boundsList = this.homeList.getBoundingClientRect()
     this.boundsHome = this.homeLinkMedia.getBoundingClientRect()
     this.boundsCase = this.caseMedia.getBoundingClientRect()
 
@@ -121,25 +121,21 @@ export default class {
   }
 
   updateScale () {
-    this.height = interpolate(this.boundsHome.height, this.boundsCase.height, this.transition)
-    this.width = interpolate(this.boundsHome.width, this.boundsCase.width, this.transition)
+    this.height = GSAP.utils.interpolate(this.boundsHome.height, this.boundsCase.height, this.transition)
+    this.width = GSAP.utils.interpolate(this.boundsHome.width, this.boundsCase.width, this.transition)
 
     this.plane.scale.x = this.viewport.width * this.width / this.screen.width
     this.plane.scale.y = this.viewport.height * this.height / this.screen.height
   }
 
   updateY (y = 0) {
-    this.y = interpolate(
-      this.boundsHome.top - this.homeItem.extra,
-      this.boundsCase.top,
-      this.transition
-    )
+    this.y = GSAP.utils.interpolate(this.boundsHome.top + (this.homeItem.position % this.homeList.clientHeight), this.boundsCase.top - y, this.transition)
 
-    this.plane.position.y = (this.viewport.height / 2) - (this.plane.scale.y / 2) - ((this.y - y) / this.screen.height) * this.viewport.height
+    this.plane.position.y = (this.viewport.height / 2) - (this.plane.scale.y / 2) - (this.y / this.screen.height) * this.viewport.height
   }
 
   updateX () {
-    this.x = interpolate(
+    this.x = GSAP.utils.interpolate(
       this.boundsHome.left,
       this.boundsCase.left,
       this.transition
@@ -148,10 +144,10 @@ export default class {
     this.plane.position.x = -(this.viewport.width / 2) + (this.plane.scale.x / 2) + (this.x / this.screen.width) * this.viewport.width
   }
 
-  update (scroll) {
+  update (y) {
     this.updateScale()
     this.updateX()
-    this.updateY(scroll)
+    this.updateY(y)
 
     this.plane.program.uniforms.uTime.value += (this.direction === 'left' ? 0.04 : -0.04)
   }

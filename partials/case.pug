@@ -1,4 +1,4 @@
-mixin template({ id, title, category, company, description, link })
+mixin template({ id, title, category, company, description, link, gallery })
   article.case(id=id)
     header.case__header
       h3.case__title
@@ -23,6 +23,18 @@ mixin template({ id, title, category, company, description, link })
 
       p.case__information__description=description
 
+    .case__gallery
+      each content, index in gallery
+        .case__gallery__media
+          .case__gallery__media__box(style=`max-width: ${content.width / 10}rem;`)
+            span.case__gallery__media__loader
+              span
+              span
+              span
+
+            span.case__gallery__media__placeholder(style=`padding-top: ${content.height / content.width * 100}%;`)
+              img.case__gallery__media__image(alt=`Screenshot ${title} #${index}` data-src=`/case/${id}/${content.image}`)
+
 .cases
   +template({
     id: 'trolli',
@@ -33,7 +45,15 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '7.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '8.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '9.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://trollideliciouslydarkescape.com/'
   })
@@ -47,7 +67,18 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '7.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '8.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '9.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '10.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '11.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '12.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://adventuretimedistantlands.com/'
   })
@@ -61,7 +92,12 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://studiomaertens.com/'
   })
@@ -75,7 +111,7 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '', type: '', height: '', width: '' }
     ],
     link: 'https://dreamwave.tech/inbound-2020'
   })
@@ -89,7 +125,7 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '', type: '', height: '', width: '' }
     ],
     link: 'https://dreamwave.tech/redis-conf'
   })
@@ -103,7 +139,13 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '7.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://kaleidozdesign.com/'
   })
@@ -117,7 +159,10 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://erikamoreira.co/'
   })
@@ -131,7 +176,15 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '7.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '8.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '9.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://www.behance.net/gallery/89455165/Bruno-Arizio-Portfolio'
   })
@@ -145,7 +198,13 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '7.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://dominic.bz/'
   })
@@ -159,7 +218,7 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '', type: '', height: '', width: '' }
     ],
     link: 'https://www.pagethink.com/'
   })
@@ -173,7 +232,15 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '7.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '8.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '9.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://www.linkedin.com/posts/rise-new-york_independent-advertising-agency-activity-6553695483888451584-ejxI/'
   })
@@ -187,7 +254,21 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '7.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '8.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '9.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '10.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '11.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '12.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '13.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '14.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '15.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://cultldn.com/'
   })
@@ -201,7 +282,15 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'portrait', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'portrait', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'portrait', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'portrait', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'portrait', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'portrait', height: '1080', width: '1920' },
+      { image: '7.jpg', type: 'portrait', height: '1080', width: '1920' },
+      { image: '8.jpg', type: 'portrait', height: '1080', width: '1920' },
+      { image: '9.jpg', type: 'portrait', height: '1080', width: '1920' },
     ],
     link: 'https://apps.apple.com/br/app/movida-kids/id1337822375'
   })
@@ -215,7 +304,7 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '', type: '', height: '', width: '' }
     ],
     link: 'https://www.unit9.com/project/oneplus-crackables-2-0/'
   })
@@ -223,13 +312,13 @@ mixin template({ id, title, category, company, description, link })
   +template({
     id: 'samsung',
     title: 'SAMSUNG',
-    category: 'Campaign',
+    category: 'Website',
     company: 'UNIT9',
     description: `
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '', type: '', height: '', width: '' }
     ],
     link: 'https://www.unit9.com/project/samsung-spaceselfie/'
   })
@@ -237,13 +326,20 @@ mixin template({ id, title, category, company, description, link })
   +template({
     id: 'lufthansa-2',
     title: 'LUFTHANSA',
-    category: 'Campaign',
+    category: 'Website',
     company: 'UNIT9',
     description: `
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '7.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '8.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://www.unit9.com/project/lufthansa-sayyestotheworld-2/'
   })
@@ -251,13 +347,28 @@ mixin template({ id, title, category, company, description, link })
   +template({
     id: 'tiaa',
     title: 'TIAA',
-    category: 'Campaign',
+    category: 'Website',
     company: 'UNIT9',
     description: `
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '7.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '8.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '9.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '10.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '11.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '12.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '13.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '14.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '15.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '16.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://www.unit9.com/project/tiaa-difference-maker/'
   })
@@ -265,13 +376,19 @@ mixin template({ id, title, category, company, description, link })
   +template({
     id: 'lufthansa-1',
     title: 'LUFTHANSA',
-    category: 'Campaign',
+    category: 'Website',
     company: 'UNIT9',
     description: `
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '7.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://www.unit9.com/project/lufthansa-sayyestotheworld/'
   })
@@ -279,13 +396,17 @@ mixin template({ id, title, category, company, description, link })
   +template({
     id: 'shell',
     title: 'SHELL',
-    category: 'Campaign',
+    category: 'Website',
     company: 'UNIT9',
     description: `
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'http://shell-bts-master.thisisnotbranded.com/ontopoftheworld/en'
   })
@@ -299,7 +420,11 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://www.unit9.com/project/corvette-modules/'
   })
@@ -313,7 +438,16 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'landscape', height: '414', width: '736' },
+      { image: '2.jpg', type: 'landscape', height: '414', width: '736' },
+      { image: '3.jpg', type: 'landscape', height: '414', width: '736' },
+      { image: '4.jpg', type: 'landscape', height: '414', width: '736' },
+      { image: '5.jpg', type: 'landscape', height: '414', width: '736' },
+      { image: '6.jpg', type: 'landscape', height: '414', width: '736' },
+      { image: '7.jpg', type: 'landscape', height: '414', width: '736' },
+      { image: '8.jpg', type: 'landscape', height: '414', width: '736' },
+      { image: '9.jpg', type: 'landscape', height: '414', width: '736' },
+      { image: '10.jpg', type: 'landscape', height: '414', width: '736' },
     ],
     link: 'http://nikecityfast.co.uk/'
   })
@@ -321,13 +455,19 @@ mixin template({ id, title, category, company, description, link })
   +template({
     id: 'airbnb',
     title: 'AIRBNB',
-    category: 'Campaign',
+    category: 'Website',
     company: 'UNIT9',
     description: `
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '7.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://www.unit9.com/project/airbnb-family-trips/'
   })
@@ -341,7 +481,18 @@ mixin template({ id, title, category, company, description, link })
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '650', width: '1156' },
+      { image: '2.jpg', type: 'screenshot', height: '650', width: '1156' },
+      { image: '3.jpg', type: 'screenshot', height: '650', width: '1156' },
+      { image: '4.jpg', type: 'screenshot', height: '650', width: '1156' },
+      { image: '5.jpg', type: 'screenshot', height: '650', width: '1156' },
+      { image: '6.jpg', type: 'screenshot', height: '650', width: '1156' },
+      { image: '7.jpg', type: 'screenshot', height: '650', width: '1156' },
+      { image: '8.jpg', type: 'screenshot', height: '650', width: '1156' },
+      { image: '9.jpg', type: 'screenshot', height: '650', width: '1156' },
+      { image: '10.jpg', type: 'screenshot', height: '650', width: '1156' },
+      { image: '11.jpg', type: 'screenshot', height: '650', width: '1156' },
+      { image: '12.jpg', type: 'screenshot', height: '650', width: '1156' },
     ],
     link: 'https://lhbizarro.github.io/doki/game-es/'
   })
@@ -349,13 +500,17 @@ mixin template({ id, title, category, company, description, link })
   +template({
     id: 'rock-in-rio',
     title: 'ROCK IN RIO',
-    category: 'Campaign',
+    category: 'Website',
     company: 'Royalpixel',
     description: `
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
     `,
     gallery: [
-      ''
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://believe.earth/earth/'
   })
