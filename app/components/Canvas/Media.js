@@ -40,7 +40,7 @@ export default class {
 
   createMesh () {
     const texture = TextureLoader.load(this.gl, {
-      src: this.homeLinkMedia.getAttribute('data-src')
+      src: this.homeLinkMedia.getAttribute(Detection.isWebPSupported() ? 'data-src-webp' : 'data-src')
     })
 
     const program = new Program(this.gl, {

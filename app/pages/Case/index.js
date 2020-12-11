@@ -2,6 +2,7 @@ import GSAP from 'gsap'
 
 import each from 'lodash/each'
 
+import Detection from 'classes/Detection'
 import Page from 'components/Page'
 
 import { getOffset } from 'utils/dom'
@@ -65,7 +66,7 @@ export default class extends Page {
     each(images, image => {
       if (!image.hasAttribute('src')) {
         image.classList.add(this.classes.imageActive)
-        image.setAttribute('src', image.getAttribute('data-src'))
+        image.setAttribute('src', image.getAttribute(Detection.isWebPSupported() ? 'data-src-webp' : 'data-src'))
       }
     })
   }

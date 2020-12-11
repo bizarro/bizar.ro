@@ -2,7 +2,7 @@ mixin template(id, title, direction)
   li.home__item(class=`home__item--${id}`)
     a.home__link(href=`/case/${id}`)
       span.home__link__wrapper=title
-        img.home__link__media(alt=`${title} Project Preview` data-direction=direction data-src=`/projects/${id}.jpg`)
+        img.home__link__media(alt=`${title} Project Preview` data-direction=direction data-src=`/projects/${id}.jpg` data-src-webp=`/projects/${id}.webp`)
 
 section.home
   .home__background
