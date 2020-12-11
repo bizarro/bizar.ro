@@ -5,6 +5,7 @@ import 'utils/sw'
 import AutoBind from 'auto-bind'
 import Stats from 'stats.js'
 
+import debounce from 'lodash/debounce'
 import each from 'lodash/each'
 
 import Responsive from 'classes/Responsive'
@@ -177,23 +178,21 @@ class App {
       this.responsive.onResize()
     }
 
-    requestAnimationFrame(_ => {
-      if (this.about.isVisible) {
-        this.about.onResize()
-      }
+    if (this.about.isVisible) {
+      this.about.onResize()
+    }
 
-      if (this.home.isVisible) {
-        this.home.onResize()
-      }
+    if (this.home.isVisible) {
+      this.home.onResize()
+    }
 
-      if (this.case.isVisible) {
-        this.case.onResize()
-      }
+    if (this.case.isVisible) {
+      this.case.onResize()
+    }
 
-      if (this.canvas && this.canvas.onResize) {
-        this.canvas.onResize()
-      }
-    })
+    if (this.canvas && this.canvas.onResize) {
+      this.canvas.onResize()
+    }
   }
 
   onTouchDown (event) {
@@ -240,7 +239,10 @@ class App {
    */
   addEventListeners () {
     window.addEventListener('popstate', this.onPopState, { passive: true })
-    window.addEventListener('resize', this.onResize, { passive: true })
+
+    this.onResizeDebounce = debounce(this.onResize, 400)
+
+    window.addEventListener('resize', this.onResizeDebounce, { passive: true })
 
     window.addEventListener('mousedown', this.onTouchDown, { passive: true })
     window.addEventListener('mousemove', this.onTouchMove, { passive: true })

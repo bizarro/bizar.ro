@@ -1,4 +1,4 @@
-mixin template({ id, title, category, company, description, link, gallery })
+mixin template({ id, title, category, company, role, technologies, link, label, gallery })
   article.case(id=id)
     header.case__header
       h3.case__title
@@ -7,21 +7,22 @@ mixin template({ id, title, category, company, description, link, gallery })
       figure.case__media
 
     .case__information
-      .case__information__details
+      p.case__information__detail
+        | #[strong.case__information__detail__title Company]
+        | #{company}
+
+      p.case__information__detail
+        | #[strong.case__information__detail__title Role]
+        | #{role}
+
+      p.case__information__detail
+        | #[strong.case__information__detail__title Technologies]
+        | #{technologies}
+
+      if link
         p.case__information__detail
-          | #[strong.case__information__detail__title Company]
-          | #{company}
-
-        p.case__information__detail
-          | #[strong.case__information__detail__title Category]
-          | #{category}
-
-        if link
-          p.case__information__detail
-            | #[strong.case__information__detail__title URL]
-            | #[a(href=link target="_blank" rel="noreferrer noopener") View →]
-
-      p.case__information__description=description
+          | #[strong.case__information__detail__title #{label}]
+          | #[a(href=link target="_blank" rel="noreferrer noopener") View →]
 
     .case__gallery
       each content, index in gallery
@@ -39,11 +40,11 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'trolli',
     title: 'TROLLI',
-    category: 'Game',
     company: 'Active Theory',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Interactive Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Live URL',
+    link: 'https://trollideliciouslydarkescape.com/',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -54,18 +55,16 @@ mixin template({ id, title, category, company, description, link, gallery })
       { image: '7.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '8.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '9.jpg', type: 'screenshot', height: '1080', width: '1920' },
-    ],
-    link: 'https://trollideliciouslydarkescape.com/'
+    ]
   })
 
   +template({
     id: 'adventure-time',
     title: 'ADVENTURE TIME',
-    category: 'WebGL',
     company: 'Active Theory',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Interactive Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Live URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -86,11 +85,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'studio-maertens',
     title: 'STUDIO MÆRTENS',
-    category: 'Portfolio',
     company: 'Freelance',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Live URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -105,13 +103,17 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'inbound',
     title: 'INBOUND',
-    category: 'Conference',
     company: 'Active Theory',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Interactive Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Case Study URL',
     gallery: [
-      { image: '', type: '', height: '', width: '' }
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://dreamwave.tech/inbound-2020'
   })
@@ -119,13 +121,16 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'redis',
     title: 'REDIS',
-    category: 'Conference',
     company: 'Active Theory',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Interactive Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Case Study URL',
     gallery: [
-      { image: '', type: '', height: '', width: '' }
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://dreamwave.tech/redis-conf'
   })
@@ -133,11 +138,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'kaleidoz',
     title: 'KALEIDOZ',
-    category: 'Portfolio',
     company: 'Freelance',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Live URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -152,12 +156,11 @@ mixin template({ id, title, category, company, description, link, gallery })
 
   +template({
     id: 'erika-moreira',
-    title: 'ÉRIKA MOREIRA',
-    category: 'Portfolio',
+    title: 'ERIKA MOREIRA',
     company: 'Freelance',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'Canvas · JavaScript',
+    label: 'Live URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -170,11 +173,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'bruno-arizio',
     title: 'BRUNO ARIZIO',
-    category: 'Portfolio',
     company: 'Freelance',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Case Study URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -192,11 +194,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'dominic-berzins',
     title: 'DOMINIC BERZINS',
-    category: 'Portfolio',
     company: 'Freelance',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Live URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -212,13 +213,18 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'pagethink',
     title: 'PAGETHINK',
-    category: 'Portfolio',
     company: 'Antinomy',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'WordPress · JavaScript',
+    label: 'Live URL',
     gallery: [
-      { image: '', type: '', height: '', width: '' }
+      { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '3.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '4.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '5.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '6.jpg', type: 'screenshot', height: '1080', width: '1920' },
+      { image: '7.jpg', type: 'screenshot', height: '1080', width: '1920' },
     ],
     link: 'https://www.pagethink.com/'
   })
@@ -226,11 +232,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'neoway',
     title: 'NEOWAY',
-    category: 'Interactive Installation',
     company: 'SOLID',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Live URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -248,11 +253,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'cult',
     title: 'CULT',
-    category: 'Portfolio',
     company: 'Freelance',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'WordPress · Canvas · JavaScript',
+    label: 'Live URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -276,11 +280,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'movida',
     title: 'MOVIDA',
-    category: 'Game',
     company: 'Royalpixel',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'Phaser · JavaScript · React Native',
+    label: 'App Store URL',
     gallery: [
       { image: '1.jpg', type: 'portrait', height: '667', width: '375' },
       { image: '2.jpg', type: 'portrait', height: '667', width: '375' },
@@ -296,41 +299,12 @@ mixin template({ id, title, category, company, description, link, gallery })
   })
 
   +template({
-    id: 'one-plus',
-    title: 'ONE PLUS',
-    category: 'Game',
-    company: 'UNIT9',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
-    gallery: [
-      { image: '', type: '', height: '', width: '' }
-    ],
-    link: 'https://www.unit9.com/project/oneplus-crackables-2-0/'
-  })
-
-  +template({
-    id: 'samsung',
-    title: 'SAMSUNG',
-    category: 'Website',
-    company: 'UNIT9',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
-    gallery: [
-      { image: '', type: '', height: '', width: '' }
-    ],
-    link: 'https://www.unit9.com/project/samsung-spaceselfie/'
-  })
-
-  +template({
     id: 'lufthansa-2',
     title: 'LUFTHANSA',
-    category: 'Website',
     company: 'UNIT9',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Case Study URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -347,11 +321,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'tiaa',
     title: 'TIAA',
-    category: 'Website',
     company: 'UNIT9',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'Canvas · React · JavaScript',
+    label: 'Case Study URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -376,11 +349,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'lufthansa-1',
     title: 'LUFTHANSA',
-    category: 'Website',
     company: 'UNIT9',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Case Study URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -396,11 +368,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'shell',
     title: 'SHELL',
-    category: 'Website',
     company: 'UNIT9',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Live URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -414,11 +385,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'corvette',
     title: 'CORVETTE',
-    category: 'Audio Visualizer',
     company: 'UNIT9',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Case Study URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -432,11 +402,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'nike',
     title: 'NIKE',
-    category: 'Game',
     company: 'UNIT9',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'Phaser · JavaScript',
+    label: 'Live URL',
     gallery: [
       { image: '1.jpg', type: 'landscape', height: '414', width: '736' },
       { image: '2.jpg', type: 'landscape', height: '414', width: '736' },
@@ -455,11 +424,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'airbnb',
     title: 'AIRBNB',
-    category: 'Website',
     company: 'UNIT9',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'Angular · Redux · JavaScript',
+    label: 'Case Study URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },
@@ -475,11 +443,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'discovery-kids',
     title: 'DISCOVERY KIDS',
-    category: 'Game',
     company: 'Royalpixel',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'Phaser · JavaScript',
+    label: 'Live URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '650', width: '1156' },
       { image: '2.jpg', type: 'screenshot', height: '650', width: '1156' },
@@ -500,11 +467,10 @@ mixin template({ id, title, category, company, description, link, gallery })
   +template({
     id: 'rock-in-rio',
     title: 'ROCK IN RIO',
-    category: 'Website',
     company: 'Royalpixel',
-    description: `
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget libero nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis dapibus tortor, et consequat ante porttitor vitae. Quisque finibus eleifend libero sit amet tempus. Sed ornare eu eros sit amet blandit.
-    `,
+    role: 'Creative Developer',
+    technologies: 'WebGL · GLSL · JavaScript',
+    label: 'Live URL',
     gallery: [
       { image: '1.jpg', type: 'screenshot', height: '1080', width: '1920' },
       { image: '2.jpg', type: 'screenshot', height: '1080', width: '1920' },

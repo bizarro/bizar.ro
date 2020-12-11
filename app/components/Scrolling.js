@@ -27,21 +27,19 @@ export default class extends Component {
       clamp: 0
     }
 
-    each(this.elements.items, button => {
-      const offset = getOffset(button)
+    each(this.elements.items, element => {
+      const offset = getOffset(element)
 
-      button.extra = 0
-      button.height = offset.height
-      button.offset = offset.top
-      button.position = 0
+      element.extra = 0
+      element.height = offset.height
+      element.offset = offset.top
+      element.position = 0
     })
 
     this.length = this.elements.items.length
 
     this.height = this.elements.items[0].height
     this.heightTotal = this.elements.list.getBoundingClientRect().height
-
-    this.windowHalf = window.innerHeight * 0.5
   }
 
   enable () {
@@ -103,8 +101,8 @@ export default class extends Component {
     element.style[this.transformPrefix] = `translate3d(0, ${Math.floor(y)}px, 0)`
   }
 
-  update (isForced = false) {
-    if (!this.isEnabled && !isForced) {
+  update () {
+    if (!this.isEnabled) {
       return
     }
 
@@ -152,6 +150,20 @@ export default class extends Component {
   }
 
   onResize () {
+    each(this.elements.items, element => {
+      this.transform(element, 0)
+
+      const offset = getOffset(element)
+
+      element.extra = 0
+      element.height = offset.height
+      element.offset = offset.top
+      element.position = 0
+    })
+
+    this.height = this.elements.items[0].getBoundingClientRect().height
+    this.heightTotal = this.elements.list.getBoundingClientRect().height
+
     this.scroll = {
       ease: 0.07,
       position: 0,
@@ -159,31 +171,9 @@ export default class extends Component {
       target: 0,
       last: 0
     }
-
-    each(this.elements.items, button => {
-      button.style[this.transform] = ''
-
-      const offset = getOffset(button)
-
-      button.extra = 0
-      button.height = offset.height
-      button.offset = offset.top
-      button.position = 0
-    })
-
-    this.height = this.elements.items[0].getBoundingClientRect().height
-    this.heightTotal = this.elements.list.getBoundingClientRect().height
-
-    this.windowHalf = window.innerHeight * 0.5
-
-    this.update(true)
   }
 
   addEventListeners () {
-    // this.element.addEventListener('mousedown', this.onDown, { passive: true })
-    // this.element.addEventListener('mousemove', this.onMove, { passive: true })
-    // this.element.addEventListener('mouseup', this.onUp, { passive: true })
-
     this.element.addEventListener('touchstart', this.onDown, { passive: true })
     this.element.addEventListener('touchmove', this.onMove, { passive: true })
     this.element.addEventListener('touchend', this.onUp, { passive: true })
@@ -194,10 +184,6 @@ export default class extends Component {
   }
 
   removeEventListeners () {
-    // this.element.removeEventListener('mousedown', this.onDown)
-    // this.element.removeEventListener('mousemove', this.onMove)
-    // this.element.removeEventListener('mouseup', this.onUp)
-
     this.element.removeEventListener('touchstart', this.onDown)
     this.element.removeEventListener('touchmove', this.onMove)
     this.element.removeEventListener('touchend', this.onUp)

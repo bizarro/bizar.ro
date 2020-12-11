@@ -2,6 +2,8 @@ import AutoBind from 'auto-bind'
 import GSAP from 'gsap'
 import { Mesh, Program, TextureLoader } from 'ogl'
 
+import Detection from 'classes/Detection'
+
 import fragment from 'shaders/fragment.glsl'
 import vertex from 'shaders/vertex.glsl'
 
@@ -46,7 +48,8 @@ export default class {
       vertex,
       uniforms: {
         uAlpha: { value: 0 },
-        uAlphaMultiplier: { value: 0 },
+        uAlphaDelta: { value: 0 },
+        uAlphaMultiplier: { value: 1 },
         uDirection: { value: this.direction === 'left' ? 0.5 : -0.5 },
         uMultiplier: { value: 1 },
         uTime: { value: 0 },
@@ -75,8 +78,14 @@ export default class {
   }
 
   createListeners () {
-    this.homeLink.addEventListener('mouseover', this.onMouseOver)
-    this.homeLink.addEventListener('mouseout', this.onMouseLeave)
+    if (Detection.isMobile()) {
+      this.homeLink.addEventListener('touchstart', this.onMouseOver)
+
+      window.addEventListener('touchend', this.onMouseLeave)
+    } else {
+      this.homeLink.addEventListener('mouseover', this.onMouseOver)
+      this.homeLink.addEventListener('mouseout', this.onMouseLeave)
+    }
   }
 
   createTween () {
@@ -131,7 +140,7 @@ export default class {
   }
 
   updateY (y = 0) {
-    this.y = GSAP.utils.interpolate(this.boundsHome.top + (this.homeItem.position % this.homeList.clientHeight), this.boundsCase.top - y, this.transition)
+    this.y = GSAP.utils.interpolate(this.boundsHome.top + (this.homeItem.position % this.boundsList.height), this.boundsCase.top - y, this.transition)
 
     this.plane.position.y = (this.viewport.height / 2) - (this.plane.scale.y / 2) - (this.y / this.screen.height) * this.viewport.height
   }
@@ -173,15 +182,32 @@ export default class {
   }
 
   /**
+   * About.
+   */
+  onAboutOpen () {
+    GSAP.to(this.plane.program.uniforms.uAlphaDelta, {
+      duration: 1,
+      value: 0
+    })
+  }
+
+  onAboutClose () {
+    GSAP.to(this.plane.program.uniforms.uAlphaDelta, {
+      duration: 1,
+      value: 1
+    })
+  }
+
+  /**
    * Methods.
    */
-  open () {
+  onOpen () {
     this.isExpanded = true
 
     this.animation.play()
   }
 
-  close () {
+  onClose () {
     this.isExpanded = false
 
     this.animation.reverse()

@@ -38,44 +38,35 @@
 }
 
 .case__information {
+  align-items: center;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   margin: 10rem auto;
   max-width: 144rem;
   width: 90%;
 
   @include media('<=phone') {
-    display: block;
     margin: 5rem auto;
-  }
-}
-
-.case__information__details {
-  width: 33.33%;
-
-  @include media('<=phone') {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
   }
 }
 
 .case__information__detail {
   font-size: 2.5rem;
 
-  &:not(:first-child) {
+  &:nth-child(4) {
     margin-top: 5rem;
+    width: 100%;
   }
 
   @include media('<=phone') {
     font-size: 1.6rem;
     width: 50%;
 
-    &:not(:first-child) {
-      margin-top: 0rem;
-    }
-
-    &:nth-child(3) {
+    &:nth-child(3),
+    &:nth-child(4) {
       margin-top: 2.5rem;
+      width: 100%;
     }
   }
 }
@@ -85,16 +76,4 @@
   font-size: 1rem;
   margin-bottom: 1rem;
   text-transform: uppercase;
-}
-
-.case__information__description {
-  font-size: 3.5rem;
-  line-height: 1.5;
-  width: 66.66%;
-
-  @include media('<=phone') {
-    font-size: 1.6rem;
-    margin-top: 2.5rem;
-    width: 100%;
-  }
 }

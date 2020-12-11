@@ -16,9 +16,10 @@ void main() {
 
   vec3 newPosition = position;
 
-  newPosition.z += cos(uTime + newPosition.x * 3.0) * (position.x - uDirection) * 0.4 * uMultiplier;
-
+  float z = cos(uTime + newPosition.x * mix(1.0, 3.0, uMultiplier));
+  newPosition.z += z * (position.x - uDirection) * 0.4;
   vDisplacement = newPosition.z;
+  newPosition.z *= uMultiplier;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
 }

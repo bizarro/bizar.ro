@@ -98,9 +98,15 @@ export default class {
       const id = url.replace('/case/', '')
       const media = this.medias.find(media => media.id === id)
 
-      media.open()
+      media.onOpen()
     } else {
-      this.medias.forEach(media => media.close())
+      this.medias.forEach(media => media.onClose())
+    }
+
+    if (url.indexOf('/about') > -1) {
+      this.medias.forEach(media => media.onAboutOpen())
+    } else {
+      this.medias.forEach(media => media.onAboutClose())
     }
   }
 

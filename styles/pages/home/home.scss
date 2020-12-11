@@ -170,6 +170,7 @@
 
   @include media('<=phone') {
     transform: none !important;
+    width: 100%;
   }
 }
 
@@ -195,6 +196,7 @@
 
   @include media('<=phone') {
     bottom: 50%;
+    margin: 0;
 
     &[data-direction="left"] {
       right: 50%;
