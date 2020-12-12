@@ -19,7 +19,7 @@ export default class extends Component {
     this.distance = 0
 
     this.scroll = {
-      ease: 0.07,
+      ease: 0.1,
       position: 0,
       current: 0,
       target: 0,
@@ -76,14 +76,6 @@ export default class extends Component {
 
   onUp (event) {
     this.isDown = false
-  }
-
-  previous () {
-    this.scroll.target -= this.height
-  }
-
-  next () {
-    this.scroll.target += this.height
   }
 
   onWheel (event) {
@@ -165,7 +157,7 @@ export default class extends Component {
     this.heightTotal = this.elements.list.getBoundingClientRect().height
 
     this.scroll = {
-      ease: 0.07,
+      ease: 0.1,
       position: 0,
       current: 0,
       target: 0,

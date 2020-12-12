@@ -2,6 +2,8 @@
   @extend %cover;
   @extend %page;
 
+  overflow: hidden;
+
   // &:after {
   //   background: #f0f;
   //   content: '';

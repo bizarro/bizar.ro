@@ -1,6 +1,5 @@
 import GSAP from 'gsap'
 
-import clamp from 'lodash/clamp'
 import each from 'lodash/each'
 
 import Page from 'components/Page'
@@ -11,9 +10,6 @@ import { getOffset } from 'utils/dom'
 export default class extends Page {
   constructor () {
     super({
-      classes: {
-        buttonActive: 'home__button--active'
-      },
       element: '.about',
       elements: {
         title: '.about__header__title',
@@ -50,6 +46,8 @@ export default class extends Page {
       y: '0%'
     })
 
+    timeline.call(this.onResize)
+
     return super.show(timeline)
   }
 
@@ -71,14 +69,14 @@ export default class extends Page {
     super.onResize()
 
     each(this.elements.sectionsTitles, title => {
-      title.start = getOffset(title.parentNode).top
+      title.start = getOffset(title.parentNode).top + this.scroll.current
       title.limit = title.parentNode.clientHeight - title.clientHeight
       title.y = 0
     })
 
     if (window.innerWidth > BREAKPOINT_PHONE) {
       each(this.elements.sectionsTitles, title => {
-        title.y = title.target = clamp(this.scroll.last - title.start, 0, title.limit)
+        title.y = title.position = GSAP.utils.clamp(0, title.limit, this.scroll.current - title.start)
         title.style.transform = `translateY(${title.y}px)`
       })
     } else {
@@ -94,9 +92,9 @@ export default class extends Page {
 
     if (window.innerWidth > BREAKPOINT_PHONE) {
       each(this.elements.sectionsTitles, title => {
-        title.target = clamp(this.scroll.last - title.start, 0, title.limit)
+        title.position = GSAP.utils.clamp(0, title.limit, this.scroll.current - title.start)
 
-        title.y = GSAP.utils.interpolate(title.y, title.target, 0.75)
+        title.y = GSAP.utils.interpolate(title.y, title.position, 0.75)
         title.style.transform = `translateY(${title.y}px)`
       })
     }

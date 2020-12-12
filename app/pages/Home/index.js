@@ -23,11 +23,7 @@ export default class extends Page {
   show () {
     const timeline = GSAP.timeline()
 
-    timeline.call(_ => {
-      document.documentElement.style.position = 'fixed'
-
-      this.list.enable()
-    })
+    timeline.call(this.list.enable)
 
     timeline.to(this.element, {
       autoAlpha: 1,
@@ -40,16 +36,12 @@ export default class extends Page {
   hide () {
     const timeline = GSAP.timeline()
 
-    timeline.call(_ => {
-      document.documentElement.style.position = ''
-
-      this.list.disable()
-    })
-
     timeline.to(this.element, {
       autoAlpha: 0,
       duration: 0.33
     })
+
+    timeline.call(this.list.disable)
 
     return super.show(timeline)
   }

@@ -110,8 +110,6 @@ class App {
 
     await this.page.hide()
 
-    window.scrollTo(0, 0)
-
     if (push) {
       window.history.pushState({}, document.title, url)
     }
@@ -146,7 +144,7 @@ class App {
     }
 
     if (this.canvas && this.canvas.update) {
-      this.canvas.update(this.page.scroll.last)
+      this.canvas.update(this.page.scroll.current)
     }
 
     if (this.stats) {
@@ -178,15 +176,15 @@ class App {
       this.responsive.onResize()
     }
 
-    if (this.about.isVisible) {
+    if (this.about) {
       this.about.onResize()
     }
 
-    if (this.home.isVisible) {
+    if (this.home) {
       this.home.onResize()
     }
 
-    if (this.case.isVisible) {
+    if (this.case) {
       this.case.onResize()
     }
 

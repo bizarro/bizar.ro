@@ -8,13 +8,15 @@ class Detection {
   }
 
   isWebPSupported () {
-    const element = document.createElement('canvas')
+    if (!this.isWebPSupported) {
+      const element = document.createElement('canvas')
 
-    if (element.getContext && element.getContext('2d')) {
-      return element.toDataURL('image/webp').indexOf('data:image/webp') === 0
+      if (element.getContext && element.getContext('2d')) {
+        this.isWebPSupported = element.toDataURL('image/webp').indexOf('data:image/webp') === 0
+      }
     }
 
-    return false
+    return this.isWebPSupported
   }
 }
 

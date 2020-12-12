@@ -1,7 +1,12 @@
 .about {
   @extend %page;
+}
+
+.about__content {
+  @extend %content;
 
   padding: 15rem 0;
+  pointer-events: none;
   text-align: center;
 
   @include media('<=phone') {

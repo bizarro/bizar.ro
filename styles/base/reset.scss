@@ -5,8 +5,9 @@ html {
   font-size: 10px;
   height: 100%;
   left: 0;
-  overflow: auto;
+  overflow: hidden;
   overscroll-behavior: none;
+  position: fixed;
   -moz-osx-font-smoothing: grayscale;
   top: 0;
   -webkit-font-smoothing: antialiased;
@@ -48,6 +49,7 @@ body {
   opacity: 1;
   overflow: hidden;
   overscroll-behavior: none;
+  position: fixed;
   top: 0;
   width: 100%;
 }
@@ -74,15 +76,15 @@ body {
   border: 0;
 }
 
-::-webkit-scrollbar {
-  display: none;
-  opacity: 0;
-  visibility: hidden;
-}
+// ::-webkit-scrollbar {
+//   display: none;
+//   opacity: 0;
+//   visibility: hidden;
+// }
 
-::-webkit-scrollbar-thumb {
-  background: $color-iron;
-}
+// ::-webkit-scrollbar-thumb {
+//   background: $color-iron;
+// }
 
 a {
   color: inherit;
@@ -117,17 +119,12 @@ textarea {
 }
 
 .content {
-  opacity: 1;
-  overflow: hidden;
-
-  html.mobile & {
-    height: 100%;
-    left: 0;
-    overflow: auto;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
+  height: 100%;
+  left: 0;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 [data-animation="paragraph"] {

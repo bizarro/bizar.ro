@@ -139,7 +139,7 @@ export default class {
     this.plane.scale.y = this.viewport.height * this.height / this.screen.height
   }
 
-  updateY (y = 0) {
+  updateY (y) {
     this.y = GSAP.utils.interpolate(this.boundsHome.top + (this.homeItem.position % this.boundsList.height), this.boundsCase.top - y, this.transition)
 
     this.plane.position.y = (this.viewport.height / 2) - (this.plane.scale.y / 2) - (this.y / this.screen.height) * this.viewport.height

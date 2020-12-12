@@ -1,6 +1,7 @@
 import AutoBind from 'auto-bind'
 import EventEmitter from 'events'
 import GSAP from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Prefix from 'prefix'
 
 import Line from 'animations/Line'
@@ -34,7 +35,7 @@ export default class extends EventEmitter {
 
     this.isScrollable = isScrollable
 
-    this.transform = Prefix('transform')
+    this.transformPrefix = Prefix('transform')
   }
 
   create () {
@@ -59,14 +60,15 @@ export default class extends EventEmitter {
       }
     })
 
-    this.scroll = {
-      current: 0,
-      ease: 0.07,
-      last: 0
-    }
+    this.wrapper = this.element.childNodes[0]
 
-    this.content = window
-    this.wrapper = document.body
+    this.scroll = {
+      ease: 0.1,
+      position: 0,
+      current: 0,
+      target: 0,
+      clamp: this.wrapper && this.wrapper.clientHeight - window.innerHeight
+    }
 
     this.createAnimations()
   }
@@ -78,7 +80,8 @@ export default class extends EventEmitter {
     // Lines.
     this.lines = mapEach(this.elements.animationsLines, element => {
       return new Line({
-        element
+        element,
+        scroller: this.element
       })
     })
 
@@ -87,7 +90,8 @@ export default class extends EventEmitter {
     // Paragraphs.
     this.paragraphs = mapEach(this.elements.animationsParagraphs, element => {
       return new Paragraph({
-        element
+        element,
+        scroller: this.element
       })
     })
 
@@ -96,7 +100,8 @@ export default class extends EventEmitter {
     // Y.
     this.ys = mapEach(this.elements.animationsYs, element => {
       return new Y({
-        element
+        element,
+        scroller: this.element
       })
     })
 
@@ -104,47 +109,20 @@ export default class extends EventEmitter {
   }
 
   /**
-   * Scroll.
-   */
-  createScrollStyles () {
-    this.scroll = {
-      current: 0,
-      ease: 0.07,
-      last: 0
-    }
-
-    this.element.style[this.transform] = `translate3d(0, -${this.scroll.last}px, 0)`
-
-    Object.assign(this.element.style, {
-      left: 0,
-      pointerEvents: 'none',
-      position: 'fixed',
-      top: 0,
-      width: '100%'
-    })
-  }
-
-  createScrollHeight () {
-    if (this.isVisible) {
-      this.wrapper.style.height = `${this.element.offsetHeight}px`
-
-      this.scroll.length = this.element.offsetHeight
-    }
-  }
-
-  /**
    * Animations.
    */
   show (animation) {
+    this.isVisible = true
+
     return new Promise(resolve => {
       animation.call(() => {
-        this.isVisible = true
 
-        if (this.isScrollable) {
-          this.onResize()
-          this.createScrollStyles()
-        } else {
-          document.documentElement.style.overflow = 'hidden'
+        this.scroll = {
+          ease: 0.1,
+          position: 0,
+          current: 0,
+          target: 0,
+          limit: this.wrapper ? this.wrapper.clientHeight - window.innerHeight : 0
         }
 
         resolve()
@@ -155,9 +133,9 @@ export default class extends EventEmitter {
   }
 
   hide (animation) {
-    return new Promise(resolve => {
-      this.isVisible = false
+    this.isVisible = false
 
+    return new Promise(resolve => {
       this.removeEventListeners()
 
       animation.call(() => {
@@ -168,53 +146,101 @@ export default class extends EventEmitter {
     })
   }
 
+  transform (element, y) {
+    element.style[this.transformPrefix] = `translate3d(0, ${-Math.round(y)}px, 0)`
+  }
+
   /**
    * Events.
    */
+  onDown (event) {
+    this.isDown = true
+
+    this.scroll.position = this.scroll.current
+    this.start = event.touches ? event.touches[0].clientY : event.clientY
+  }
+
+  onMove (event) {
+    if (!this.isDown) {
+      return
+    }
+
+    const y = event.touches ? event.touches[0].clientY : event.clientY
+    const distance = (this.start - y) * 2
+
+    this.scroll.target = this.scroll.position + distance
+  }
+
+  onUp (event) {
+    this.isDown = false
+  }
+
   onResize () {
+    this.scroll.limit = this.wrapper ? this.wrapper.clientHeight - window.innerHeight : 0
+
     each(this.animations, animation => {
       animation.onResize()
     })
-
-    if (this.isScrollable) {
-      this.createScrollHeight()
-    }
   }
 
-  onScroll () {
-    this.scroll.current = window.pageYOffset
+  onWheel (event) {
+    const delta = -event.wheelDeltaY || event.deltaY
+    let speed = 25
+
+    if (delta < 0) {
+      speed *= -1
+    }
+
+    this.scroll.target += speed
+    this.scroll.target = GSAP.utils.clamp(0, this.scroll.limit, this.scroll.target)
   }
 
   /**
    * Frames.
    */
   update () {
-    if (!this.isScrollable) return
+    if (!this.isScrollable || this.isAnimating || !this.isVisible) return
 
-    this.scroll.last = GSAP.utils.interpolate(this.scroll.last, this.scroll.current, this.scroll.ease)
+    this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, this.scroll.ease)
 
-    if (this.scroll.last < 0.1) {
-      this.scroll.last = 0
+    if (this.scroll.current < 0.1) {
+      this.scroll.current = 0
     }
 
-    this.element.style[this.transform] = `translate3d(0, -${Math.floor(this.scroll.last)}px, 0)`
-
-    if (this.isVisible) {
-      each(this.animations, animation => {
-        animation.onScroll(this.scroll.last)
-      })
+    if (this.wrapper) {
+      this.transform(this.wrapper, this.scroll.current)
     }
+
+    each(this.animations, animation => {
+      animation.onScroll(this.scroll.current)
+    })
   }
 
   /**
    * Listeners.
    */
   addEventListeners () {
-    this.content.addEventListener('scroll', this.onScroll, { passive: true })
+    if (this.isScrollable) {
+      this.element.addEventListener('touchstart', this.onDown, { passive: true })
+      this.element.addEventListener('touchmove', this.onMove, { passive: true })
+      this.element.addEventListener('touchend', this.onUp, { passive: true })
+
+      this.element.addEventListener('DOMMouseScroll', this.onWheel, { passive: true })
+      this.element.addEventListener('mousewheel', this.onWheel, { passive: true })
+      this.element.addEventListener('wheel', this.onWheel, { passive: true })
+    }
   }
 
   removeEventListeners () {
-    this.content.removeEventListener('scroll', this.onScroll, { passive: true })
+    if (this.isScrollable) {
+      this.element.removeEventListener('touchstart', this.onDown)
+      this.element.removeEventListener('touchmove', this.onMove)
+      this.element.removeEventListener('touchend', this.onUp)
+
+      this.element.removeEventListener('DOMMouseScroll', this.onWheel)
+      this.element.removeEventListener('mousewheel', this.onWheel)
+      this.element.removeEventListener('wheel', this.onWheel)
+    }
   }
 
   /**

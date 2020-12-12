@@ -1,12 +1,21 @@
 %page {
+  height: 100%;
   left: 0;
   opacity: 0;
+  overflow: hidden;
   position: absolute;
   top: 0;
   visibility: hidden;
   width: 100%;
-  will-change: transform;
   z-index: z('content');
+}
+
+%content {
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  will-change: transform;
 }
 
 %wrapper {

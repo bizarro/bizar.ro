@@ -1,4 +1,4 @@
-import clamp from 'lodash/clamp'
+import GSAP from 'gsap'
 
 import {
   BREAKPOINT_DESKTOP,
@@ -86,14 +86,14 @@ export default class {
       scale = scaleHeight
     }
 
-    let fontSize = clamp(multiplier * scale, this.minimum.phone, this.maximum.phone)
+    let fontSize = GSAP.utils.clamp(this.minimum.phone, this.maximum.phone, multiplier * scale)
 
     if (sizes.width >= 768) {
-      fontSize = clamp(multiplier * scale, this.minimum.tablet, this.maximum.tablet)
+      fontSize = GSAP.utils.clamp(this.minimum.tablet, this.maximum.tablet, multiplier * scale)
     }
 
     if (sizes.width >= 1152) {
-      fontSize = clamp(multiplier * scale, this.minimum.desktop, this.maximum.desktop)
+      fontSize = GSAP.utils.clamp(this.minimum.desktop, this.maximum.desktop, multiplier * scale)
     }
 
     if (this.round) {

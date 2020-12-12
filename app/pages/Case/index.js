@@ -5,8 +5,6 @@ import each from 'lodash/each'
 import Detection from 'classes/Detection'
 import Page from 'components/Page'
 
-import { getOffset } from 'utils/dom'
-
 export default class extends Page {
   constructor () {
     super({
@@ -27,15 +25,15 @@ export default class extends Page {
    * Animations.
    */
   show (url) {
+    this.isAnimating = false
+
     const id = url.replace('/case/', '')
 
-    this.selected = Array.from(this.elements.cases).find(item => item.id === id)
-
-    this.element.style.height = `${getOffset(this.selected).height}px`
+    this.wrapper = Array.from(this.elements.cases).find(item => item.id === id)
 
     const timeline = GSAP.timeline()
 
-    timeline.set(this.selected, {
+    timeline.set(this.wrapper, {
       autoAlpha: 1
     })
 
@@ -49,7 +47,8 @@ export default class extends Page {
   }
 
   showCase (timeline) {
-    const title = this.selected.querySelector('.case__title__text')
+    const title = this.wrapper.querySelector('.case__title__text')
+    const information = this.wrapper.querySelector('.case__information')
 
     timeline.fromTo(title, {
       y: '100%'
@@ -59,9 +58,17 @@ export default class extends Page {
       ease: 'expo.out',
       stagger: 0.1,
       y: '0%'
-    })
+    }, 'start')
 
-    const images = this.selected.querySelectorAll('img')
+    timeline.fromTo(information, {
+      autoAlpha: 0
+    }, {
+      autoAlpha: 1,
+      delay: 0.5,
+      duration: 0.5
+    }, 'start')
+
+    const images = this.wrapper.querySelectorAll('img')
 
     each(images, image => {
       if (!image.hasAttribute('src')) {
@@ -72,14 +79,17 @@ export default class extends Page {
   }
 
   hide () {
+    this.isAnimating = true
+
     const timeline = GSAP.timeline()
 
-    timeline.to(window, {
+    timeline.to(this.scroll, {
       duration: 1,
       ease: 'expo.inOut',
-      scrollTo: {
-        y: 0,
-      }
+      current: 0,
+      target: 0,
+      position: 0,
+      onUpdate: _ => this.transform(this.wrapper, this.scroll.current)
     }, 'start')
 
     timeline.to(this.element, {
@@ -87,11 +97,13 @@ export default class extends Page {
       duration: 1
     }, 'start')
 
-    timeline.set(this.selected, {
+    timeline.set(this.wrapper, {
       autoAlpha: 0
     })
 
-    this.selected = null
+    timeline.call(_ => {
+      this.wrapper = null
+    })
 
     return super.show(timeline)
   }
@@ -101,9 +113,5 @@ export default class extends Page {
    */
   onResize () {
     super.onResize()
-
-    if (this.selected) {
-      this.element.style.height = `${getOffset(this.selected).height}px`
-    }
   }
 }

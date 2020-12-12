@@ -1,13 +1,13 @@
 .cases {
   @extend %page;
-
-  overflow: hidden;
 }
 
 .case {
-  @extend %page;
+  @extend %content;
 
+  opacity: 0;
   padding: 15rem 0;
+  visibility: hidden;
 
   @include media('<=phone') {
     padding: 5rem 0;

@@ -1,6 +1,7 @@
 {
     "name": "Bizarr\u00f8",
     "short_name": "Bizarr\u00f8",
+    "start_url": "/",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
