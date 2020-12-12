@@ -12,6 +12,7 @@ export default class extends Page {
     super({
       element: '.about',
       elements: {
+        wrapper: '.about__content',
         title: '.about__header__title',
         titles: '.about__header__title__text span',
         sections: '.about__section',

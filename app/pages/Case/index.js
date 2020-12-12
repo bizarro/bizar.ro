@@ -13,6 +13,7 @@ export default class extends Page {
       },
       element: '.cases',
       elements: {
+        wrapper: '#trolli',
         cases: '.case'
       },
       isScrollable: true
@@ -29,11 +30,13 @@ export default class extends Page {
 
     const id = url.replace('/case/', '')
 
-    this.wrapper = Array.from(this.elements.cases).find(item => item.id === id)
+    this.elements.wrapper = Array.from(this.elements.cases).find(item => item.id === id)
+
+    this.scroll.limit = this.elements.wrapper.clientHeight - window.innerHeight
 
     const timeline = GSAP.timeline()
 
-    timeline.set(this.wrapper, {
+    timeline.set(this.elements.wrapper, {
       autoAlpha: 1
     })
 
@@ -47,8 +50,8 @@ export default class extends Page {
   }
 
   showCase (timeline) {
-    const title = this.wrapper.querySelector('.case__title__text')
-    const information = this.wrapper.querySelector('.case__information')
+    const title = this.elements.wrapper.querySelector('.case__title__text')
+    const information = this.elements.wrapper.querySelector('.case__information')
 
     timeline.fromTo(title, {
       y: '100%'
@@ -68,7 +71,7 @@ export default class extends Page {
       duration: 0.5
     }, 'start')
 
-    const images = this.wrapper.querySelectorAll('img')
+    const images = this.elements.wrapper.querySelectorAll('img')
 
     each(images, image => {
       if (!image.hasAttribute('src')) {
@@ -89,7 +92,7 @@ export default class extends Page {
       current: 0,
       target: 0,
       position: 0,
-      onUpdate: _ => this.transform(this.wrapper, this.scroll.current)
+      onUpdate: _ => this.transform(this.elements.wrapper, this.scroll.current)
     }, 'start')
 
     timeline.to(this.element, {
@@ -97,15 +100,15 @@ export default class extends Page {
       duration: 1
     }, 'start')
 
-    timeline.set(this.wrapper, {
+    timeline.set(this.elements.wrapper, {
       autoAlpha: 0
     })
 
     timeline.call(_ => {
-      this.wrapper = null
+      this.elements.wrapper = null
     })
 
-    return super.show(timeline)
+    return super.hide(timeline)
   }
 
   /**

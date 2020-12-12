@@ -79,9 +79,9 @@ export default class {
 
   createListeners () {
     if (Detection.isMobile()) {
-      this.homeLink.addEventListener('touchstart', this.onMouseOver)
+      this.homeLink.addEventListener('touchstart', this.onMouseOver, { passive: true })
 
-      window.addEventListener('touchend', this.onMouseLeave)
+      window.addEventListener('touchend', this.onMouseLeave, { passive: true })
     } else {
       this.homeLink.addEventListener('mouseover', this.onMouseOver)
       this.homeLink.addEventListener('mouseout', this.onMouseLeave)

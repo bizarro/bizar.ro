@@ -144,7 +144,7 @@ class App {
     }
 
     if (this.canvas && this.canvas.update) {
-      this.canvas.update(this.page.scroll.current)
+      this.canvas.update(this.page.scroll ? this.page.scroll.current : 0)
     }
 
     if (this.stats) {

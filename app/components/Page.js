@@ -60,14 +60,14 @@ export default class extends EventEmitter {
       }
     })
 
-    this.wrapper = this.element.childNodes[0]
-
-    this.scroll = {
-      ease: 0.1,
-      position: 0,
-      current: 0,
-      target: 0,
-      clamp: this.wrapper && this.wrapper.clientHeight - window.innerHeight
+    if (this.isScrollable) {
+      this.scroll = {
+        ease: 0.1,
+        position: 0,
+        current: 0,
+        target: 0,
+        limit: this.elements.wrapper.clientHeight - window.innerHeight
+      }
     }
 
     this.createAnimations()
@@ -116,13 +116,14 @@ export default class extends EventEmitter {
 
     return new Promise(resolve => {
       animation.call(() => {
-
-        this.scroll = {
-          ease: 0.1,
-          position: 0,
-          current: 0,
-          target: 0,
-          limit: this.wrapper ? this.wrapper.clientHeight - window.innerHeight : 0
+        if (this.isScrollable) {
+          this.scroll = {
+            ease: 0.1,
+            position: 0,
+            current: 0,
+            target: 0,
+            limit: this.elements.wrapper.clientHeight - window.innerHeight
+          }
         }
 
         resolve()
@@ -153,6 +154,16 @@ export default class extends EventEmitter {
   /**
    * Events.
    */
+  onResize () {
+    each(this.animations, animation => {
+      animation.onResize()
+    })
+
+    if (!this.isScrollable) return
+
+    this.scroll.limit = this.elements.wrapper.clientHeight - window.innerHeight
+  }
+
   onDown (event) {
     this.isDown = true
 
@@ -173,14 +184,6 @@ export default class extends EventEmitter {
 
   onUp (event) {
     this.isDown = false
-  }
-
-  onResize () {
-    this.scroll.limit = this.wrapper ? this.wrapper.clientHeight - window.innerHeight : 0
-
-    each(this.animations, animation => {
-      animation.onResize()
-    })
   }
 
   onWheel (event) {
@@ -207,9 +210,7 @@ export default class extends EventEmitter {
       this.scroll.current = 0
     }
 
-    if (this.wrapper) {
-      this.transform(this.wrapper, this.scroll.current)
-    }
+    this.transform(this.elements.wrapper, this.scroll.current)
 
     each(this.animations, animation => {
       animation.onScroll(this.scroll.current)

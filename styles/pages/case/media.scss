@@ -38,11 +38,11 @@
     background: $color-pine-tree;
     border-radius: 50%;
     display: inline-block;
-    height: 2rem;
+    height: 1rem;
     margin-right: 1rem;
     opacity: 0;
     transition: background-color 0.5s ease;
-    width: 2rem;
+    width: 1rem;
 
     &:nth-child(2) {
       animation-delay: 0.13s;
@@ -55,6 +55,14 @@
 
   .case__gallery__media--active & {
     opacity: 0;
+  }
+
+  @include media('<=phone') {
+    span {
+      height: 0.6rem;
+      margin-right: 1rem;
+      width: 0.6rem;
+    }
   }
 }
 
