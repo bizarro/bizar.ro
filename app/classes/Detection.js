@@ -14,15 +14,17 @@ class Detection {
   }
 
   isWebPSupported () {
-    if (!this.isWebPSupported) {
+    if (!this.isWebPChecked) {
+      this.isWebPChecked = true
+
       const element = document.createElement('canvas')
 
       if (element.getContext && element.getContext('2d')) {
-        this.isWebPSupported = element.toDataURL('image/webp').indexOf('data:image/webp') === 0
+        this.isWebPCheck = element.toDataURL('image/webp').indexOf('data:image/webp') === 0
       }
     }
 
-    return this.isWebPSupported
+    return this.isWebPCheck
   }
 }
 
