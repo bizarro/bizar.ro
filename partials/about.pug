@@ -47,10 +47,9 @@ section.about
             | #[span +]
             | #[span DEVELOPER]
 
-      .about__gallery(data-src="/about.jpg" data-src-webp="/about.jpg")
+      .about__gallery(data-src="/about.jpg" data-src-webp="/about.webp")
         each _, index in Array(24)
           .about__gallery__media(class=[1, 2, 8, 9, 11, 12, 13, 15, 16, 19, 21, 23].indexOf(index) > -1 ? "about__gallery__media--transparent" : "" data-index=index)
-            .about__gallery__media__wrapper
 
         a.about__gallery__text(
           href="https://www.nationalgallery.org.uk/paintings/ignace-henri-theodore-fantin-latour-a-basket-of-roses"
