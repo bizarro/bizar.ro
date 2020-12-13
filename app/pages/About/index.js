@@ -1,3 +1,5 @@
+import FontFaceObserver from 'fontfaceobserver'
+
 import each from 'lodash/each'
 
 import Detection from 'classes/Detection'
@@ -6,7 +8,7 @@ import Page from 'components/Page'
 
 import { BREAKPOINT_PHONE } from 'utils/breakpoints'
 import { getOffset } from 'utils/dom'
-import { clamp, delay, lerp } from 'utils/math'
+import { clamp, delay } from 'utils/math'
 
 export default class extends Page {
   constructor () {
@@ -43,6 +45,12 @@ export default class extends Page {
     image.decode().then(_ => {
       this.elements.gallery.classList.add(this.classes.galleryActive)
       this.elements.gallery.appendChild(image)
+    })
+
+    const font = new FontFaceObserver('Neue Montreal')
+
+    font.load().then(_ => {
+      this.onResize()
     })
   }
 
@@ -99,7 +107,7 @@ export default class extends Page {
 
     if (window.innerWidth > BREAKPOINT_PHONE) {
       each(this.elements.sectionsTitles, title => {
-        const y = clamp(0, title.limit, this.scroll.current - title.start)
+        const y = clamp(0, title.limit, Math.floor(this.scroll.current - title.start))
 
         title.style.transform = `translateY(${y}px)`
       })

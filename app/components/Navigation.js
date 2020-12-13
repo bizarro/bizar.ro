@@ -4,7 +4,7 @@ import Component from 'classes/Component'
 import { random } from 'utils/math'
 
 export default class extends Component {
-  constructor ({ canvas }) {
+  constructor ({ canvas, url }) {
     super({
       classes: {
         linksActive: 'navigation__link--active'
@@ -20,6 +20,9 @@ export default class extends Component {
 
     this.homeBottom = document.querySelector('.home__background__bottom')
     this.homeTop = document.querySelector('.home__background__top')
+    this.aboutGallery = document.querySelector('.about__gallery')
+
+    this.onChange(url)
   }
 
   /**
@@ -45,6 +48,7 @@ export default class extends Component {
 
     this.homeBottom.style.background = `linear-gradient(to bottom, transparent 0%, ${background} 100%)`
     this.homeTop.style.background = `linear-gradient(to bottom, ${background} 0%, transparent 100%)`
+    this.aboutGallery.style.color = background
 
     const canvas = document.documentElement.style.background.replace('rgb(', '').replace(')', '').replace(/ /g, '').split(',')
 

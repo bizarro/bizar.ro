@@ -3,7 +3,6 @@ import 'utils/scroll'
 import 'utils/sw'
 
 import AutoBind from 'auto-bind'
-import FontFaceObserver from 'fontfaceobserver'
 import Stats from 'stats.js'
 
 import each from 'lodash/each'
@@ -46,6 +45,7 @@ class App {
 
     if (this.url.indexOf('/case') > -1) {
       this.page = this.case
+      this.page.onResize()
     } else {
       this.page = this.pages[this.url]
     }
@@ -57,23 +57,20 @@ class App {
 
     this.update()
 
-    const font = new FontFaceObserver('Ampersand')
-
-    font.load().then(_ => {
-      this.onResize()
-    })
+    this.onResize()
   }
 
   createCanvas () {
-    this.canvas = new Canvas()
+    this.canvas = new Canvas({
+      url: this.url
+    })
   }
 
   createNavigation () {
     this.navigation = new Navigation({
-      canvas: this.canvas
+      canvas: this.canvas,
+      url: this.url
     })
-
-    this.navigation.onChange(this.url)
   }
 
   createStats () {
@@ -140,7 +137,7 @@ class App {
     }
 
     if (this.canvas && this.canvas.update) {
-      this.canvas.update(this.page.scroll ? this.page.scroll.current : 0)
+      this.canvas.update(this.case.scroll ? this.case.scroll.current : 0)
     }
 
     if (this.stats) {

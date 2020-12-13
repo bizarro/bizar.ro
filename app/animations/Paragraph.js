@@ -32,7 +32,10 @@ export default class extends Animation {
     })
 
     this.onResize()
-    this.animateOut()
+
+    if ('IntersectionObserver' in window) {
+      this.animateOut()
+    }
   }
 
   animateIn () {

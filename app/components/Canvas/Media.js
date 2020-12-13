@@ -76,7 +76,7 @@ export default class {
   createBounds () {
     this.boundsList = getOffset(this.homeList)
     this.boundsHome = getOffset(this.homeLinkMedia)
-    this.boundsCase = getOffset(this.caseMedia)
+    this.boundsCase = getOffset(this.caseMedia, this.scroll)
 
     this.updateScale()
     this.updateX()

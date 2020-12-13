@@ -3,7 +3,7 @@
 }
 
 .about__section {
-  padding-left: 33.33%;
+  display: flex;
   position: relative;
 
   &:not(:first-child) {
@@ -21,10 +21,9 @@
 
 .about__section__title {
   font: 10rem/0.95 $font-ampersand;
-  left: 0;
+  margin-bottom: auto;
   padding-top: 10.5rem;
-  position: absolute;
-  top: 0;
+  position: relative;
   width: 33.33%;
 
   @include media('<=phone') {
@@ -35,7 +34,7 @@
 
 .about__section__content {
   padding-top: 10rem;
-  width: 100%;
+  width: 66.66%;
 
   @include media('<=phone') {
     padding-top: 2rem;
@@ -44,7 +43,8 @@
 }
 
 .about__section__description {
-  font: 3.5rem/1.5 $font-neue-montreal;
+  font-size: 3.5rem;
+  line-height: 1.5;
   width: 79%;
 
   a {
@@ -72,16 +72,18 @@
 
 .about__section__number {
   font: 50rem/1 $font-ampersand;
+  height: 50rem;
   margin-top: -4.3rem;
 
   @include media('<=phone') {
     font-size: 20rem;
+    height: 20rem;
     margin-top: 0;
   }
 }
 
 .about__section__list {
-  font: 2.5rem  $font-neue-montreal;
+  font-size: 2.5rem;
   white-space: nowrap;
 
   @include media('<=phone') {

@@ -1,10 +1,12 @@
-noscript {
+noscript,
+.unsupported {
   align-items: center;
   background: $color-pine-tree;
   color: $color-iron;
   cursor: default;
   display: flex;
   font-size: 16px;
+  line-height: 1.1;
   height: 100%;
   justify-content: center;
   left: 0;
@@ -14,4 +16,13 @@ noscript {
   top: 0;
   width: 100%;
   z-index: z('noscript');
+
+  strong {
+    display: block;
+    font-weight: bold;
+  }
+}
+
+.unsupported {
+  display: none;
 }

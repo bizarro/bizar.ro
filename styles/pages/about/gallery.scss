@@ -1,4 +1,5 @@
 .about__gallery {
+  color: $color-pine-tree;
   font-size: 0;
   opacity: 0;
   overflow: hidden;
@@ -8,6 +9,17 @@
 
   .about--active & {
     opacity: 1;
+  }
+
+  &:before {
+    border: 0.5rem solid currentColor;
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
   }
 
   @include media('<=phone') {
@@ -40,7 +52,7 @@
   }
 
   &:before {
-    background: $color-pine-tree;
+    background: currentColor;
     bottom: 0;
     content: '';
     left: 0;
@@ -52,7 +64,7 @@
   &--transparent {
     &:before {
       background: none;
-      border: 1rem solid $color-pine-tree;
+      border: 1rem solid currentColor;
       bottom: 0;
       content: '';
       left: 0;

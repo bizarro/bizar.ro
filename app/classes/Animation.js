@@ -14,9 +14,13 @@ export default class {
 
     this.isVisible = false
 
-    this.createObserver()
+    if ('IntersectionObserver' in window) {
+      this.createObserver()
 
-    this.animateOut()
+      this.animateOut()
+    } else {
+      this.animateIn()
+    }
   }
 
   createObserver () {

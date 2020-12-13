@@ -1,4 +1,5 @@
 .about__header {
+  height: 94rem;
   margin-bottom: 20rem;
   text-align: center;
 
@@ -10,7 +11,6 @@
 .about__header__title {
   font: 28rem/1 $font-ampersand;
   display: inline-block;
-  max-height: 94rem;
   text-align: left;
 
   @include media('<=phone') {

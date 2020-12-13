@@ -170,7 +170,7 @@ export default class extends EventEmitter {
 
     const delta = -event.wheelDeltaY || event.deltaY
 
-    let speed = 25
+    let speed = 35
 
     if (delta < 0) {
       speed *= -1

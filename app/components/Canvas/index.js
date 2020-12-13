@@ -1,3 +1,4 @@
+import FontFaceObserver from 'fontfaceobserver'
 import { Renderer, Camera, Transform, Plane, Post, Vec2 } from 'ogl'
 
 import fragment from 'shaders/post.glsl'
@@ -7,12 +8,14 @@ import { mapEach } from 'utils/dom'
 import Media from './Media'
 
 export default class {
-  constructor () {
+  constructor ({ url }) {
     this.background = {
       r: 21,
       g: 28,
       b: 19
     }
+
+    this.url = url
 
     this.renderer = new Renderer()
     this.gl = this.renderer.gl
@@ -33,7 +36,11 @@ export default class {
 
     this.onResize()
 
-    this.createList()
+    const font = new FontFaceObserver('Ampersand')
+
+    font.load().then(_ => {
+      this.createList()
+    })
   }
 
   createCamera () {
@@ -83,6 +90,13 @@ export default class {
 
       return media
     })
+
+    if (this.url.indexOf('/case/') > -1) {
+      const id = this.url.replace('/case/', '')
+      const media = this.medias.find(media => media.id === id)
+
+      media.onOpen()
+    }
   }
 
   /**

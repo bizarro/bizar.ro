@@ -19,8 +19,11 @@
 }
 
 .about__wrapper {
-  display: inline-block;
-  max-width: 176.7rem;
+  margin: auto;
   text-align: left;
-  width: 95%;
+  width: 176.7rem;
+
+  @include media('<=phone') {
+    width: 95%;
+  }
 }
