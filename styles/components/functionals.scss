@@ -1,5 +1,4 @@
-noscript,
-.unsupported {
+noscript {
   align-items: center;
   background: $color-pine-tree;
   color: $color-iron;
@@ -16,13 +15,4 @@ noscript,
   top: 0;
   width: 100%;
   z-index: z('noscript');
-
-  strong {
-    display: block;
-    font-weight: bold;
-  }
-}
-
-.unsupported {
-  display: none;
 }

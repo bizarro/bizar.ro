@@ -2,7 +2,6 @@
   color: $color-pine-tree;
   font-size: 0;
   opacity: 0;
-  overflow: hidden;
   margin-bottom: 20rem;
   position: relative;
   transition: opacity 0.4s ease;
@@ -89,5 +88,29 @@
         border-width: 0.7rem;
       }
     }
+  }
+}
+
+.about__gallery__text {
+  @extend %link;
+
+  bottom: 1rem;
+  color: $color-iron;
+  font-size: 1.6rem;
+  line-height: 1.1;
+  position: absolute;
+  left: 0;
+  z-index: 3;
+
+  strong {
+    display: block;
+    font-weight: bold;
+  }
+
+  @include media('<=phone') {
+    bottom: auto;
+    font-size: 1rem;
+    margin-top: 0.2rem;
+    top: 100%;
   }
 }
