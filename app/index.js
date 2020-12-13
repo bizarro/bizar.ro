@@ -23,6 +23,7 @@ class App {
     }
 
     this.url = window.location.pathname
+    this.url = '/case/trolli/'
 
     this.mouse = {
       x: window.innerWidth / 2,

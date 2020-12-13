@@ -30,7 +30,7 @@ export default class extends Page {
   show (url) {
     this.element.classList.add(this.classes.active)
 
-    const id = url.replace('/case/', '')
+    const id = url.replace('/case/', '').replace('/', '')
 
     this.elements.wrapper = Array.from(this.elements.cases).find(item => item.id === id)
     this.elements.wrapper.classList.add(this.classes.caseActive)
