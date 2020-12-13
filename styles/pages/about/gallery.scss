@@ -23,7 +23,7 @@
   }
 
   @include media('<=phone') {
-    margin-bottom: 5rem;
+    margin-bottom: 10rem;
   }
 }
 
@@ -53,31 +53,40 @@
 
   &:before {
     background: currentColor;
-    bottom: 0;
+    bottom: -0.5rem;
     content: '';
-    left: 0;
+    left: -0.5rem;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: -0.5rem;
+    top: -0.5rem;
   }
 
   &--transparent {
     &:before {
       background: none;
-      border: 1rem solid currentColor;
-      bottom: 0;
+      border: 1.5rem solid currentColor;
+      bottom: -0.5rem;
       content: '';
-      left: 0;
+      left: -0.5rem;
       position: absolute;
-      right: 0;
-      top: 0;
+      right: -0.5rem;
+      top: -0.5rem;
     }
   }
 
   @include media('<=phone') {
+    &:before {
+      bottom: -0.4rem;
+      content: '';
+      left: -0.4rem;
+      position: absolute;
+      right: -0.4rem;
+      top: -0.4rem;
+    }
+
     &--transparent {
       &:before {
-        border-width: 0.2rem;
+        border-width: 0.7rem;
       }
     }
   }

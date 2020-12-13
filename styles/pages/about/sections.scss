@@ -28,6 +28,7 @@
 
   @include media('<=phone') {
     font-size: 4rem;
+    padding-top: 0;
     width: 100%;
   }
 }

@@ -4,6 +4,7 @@
   text-align: center;
 
   @include media('<=phone') {
+    height: 19rem;
     margin-bottom: 5rem;
   }
 }
