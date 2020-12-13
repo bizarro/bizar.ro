@@ -19,6 +19,7 @@
 .case__title {
   font: 15rem/0.8 $font-ampersand;
   overflow: hidden;
+  padding: 0 1rem;
   text-align: center;
   transform: translateY(50%);
   white-space: nowrap;
@@ -31,6 +32,13 @@
 
 .case__title__text {
   display: block;
+  transform: translateY(100%);
+  transition: transform 1.5s 1s $ease-out-expo;
+
+  .case--active & {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .case__subtitle {
@@ -44,7 +52,13 @@
   justify-content: space-between;
   margin: 10rem auto;
   max-width: 144rem;
+  opacity: 0;
+  transition: opacity 0.4s 1s ease;
   width: 90%;
+
+  .case--active & {
+    opacity: 1;
+  }
 
   @include media('<=phone') {
     margin: 5rem auto;

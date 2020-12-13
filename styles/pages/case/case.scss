@@ -1,5 +1,9 @@
 .cases {
   @extend %page;
+
+  &--active {
+    @extend %page--active;
+  }
 }
 
 .case {
@@ -7,7 +11,14 @@
 
   opacity: 0;
   padding: 15rem 0;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
   visibility: hidden;
+
+  &--active {
+    opacity: 1;
+    transition: none;
+    visibility: visible;
+  }
 
   @include media('<=phone') {
     padding: 5rem 0;

@@ -1,7 +1,5 @@
 import AutoBind from 'auto-bind'
 import EventEmitter from 'events'
-import GSAP from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Prefix from 'prefix'
 
 import Line from 'animations/Line'
@@ -11,6 +9,7 @@ import Y from 'animations/Y'
 import each from 'lodash/each'
 
 import { mapEach } from 'utils/dom'
+import { clamp, lerp } from 'utils/math'
 
 export default class extends EventEmitter {
   constructor ({ classes, element, elements, isScrollable = true }) {
@@ -66,7 +65,7 @@ export default class extends EventEmitter {
         position: 0,
         current: 0,
         target: 0,
-        limit: this.elements.wrapper.clientHeight - window.innerHeight
+        limit: 0
       }
     }
 
@@ -77,32 +76,20 @@ export default class extends EventEmitter {
    * Animations.
    */
   createAnimations () {
-    // Lines.
     this.lines = mapEach(this.elements.animationsLines, element => {
-      return new Line({
-        element,
-        scroller: this.element
-      })
+      return new Line({ element })
     })
 
     this.animations.push(...this.lines)
 
-    // Paragraphs.
     this.paragraphs = mapEach(this.elements.animationsParagraphs, element => {
-      return new Paragraph({
-        element,
-        scroller: this.element
-      })
+      return new Paragraph({ element })
     })
 
     this.animations.push(...this.paragraphs)
 
-    // Y.
     this.ys = mapEach(this.elements.animationsYs, element => {
-      return new Y({
-        element,
-        scroller: this.element
-      })
+      return new Y({ element })
     })
 
     this.animations.push(...this.ys)
@@ -111,40 +98,26 @@ export default class extends EventEmitter {
   /**
    * Animations.
    */
-  show (animation) {
+  show () {
+    if (this.isScrollable) {
+      this.scroll.position = 0
+      this.scroll.current = 0
+      this.scroll.target = 0
+    }
+
     this.isVisible = true
 
-    return new Promise(resolve => {
-      animation.call(() => {
-        if (this.isScrollable) {
-          this.scroll = {
-            ease: 0.1,
-            position: 0,
-            current: 0,
-            target: 0,
-            limit: this.elements.wrapper.clientHeight - window.innerHeight
-          }
-        }
-
-        resolve()
-      })
-
-      this.addEventListeners()
-    })
+    return Promise.resolve()
   }
 
-  hide (animation) {
+  hide () {
+    each(this.animations, animation => {
+      animation.animateOut()
+    })
+
     this.isVisible = false
 
-    return new Promise(resolve => {
-      this.removeEventListeners()
-
-      animation.call(() => {
-        this.destroy()
-
-        resolve()
-      })
-    })
+    return Promise.resolve()
   }
 
   transform (element, y) {
@@ -155,24 +128,28 @@ export default class extends EventEmitter {
    * Events.
    */
   onResize () {
-    each(this.animations, animation => {
-      animation.onResize()
-    })
-
-    if (!this.isScrollable) return
+    if (!this.isScrollable || !this.elements.wrapper) return
 
     this.scroll.limit = this.elements.wrapper.clientHeight - window.innerHeight
+
+    this.update()
+
+    each(this.animations, animation => {
+      animation.onResize && animation.onResize()
+    })
   }
 
-  onDown (event) {
+  onTouchDown (event) {
+    if (!this.isScrollable) return
+
     this.isDown = true
 
     this.scroll.position = this.scroll.current
     this.start = event.touches ? event.touches[0].clientY : event.clientY
   }
 
-  onMove (event) {
-    if (!this.isDown) {
+  onTouchMove (event) {
+    if (!this.isDown || !this.isScrollable) {
       return
     }
 
@@ -182,12 +159,17 @@ export default class extends EventEmitter {
     this.scroll.target = this.scroll.position + distance
   }
 
-  onUp (event) {
+  onTouchUp (event) {
+    if (!this.isScrollable) return
+
     this.isDown = false
   }
 
   onWheel (event) {
+    if (!this.isScrollable) return
+
     const delta = -event.wheelDeltaY || event.deltaY
+
     let speed = 25
 
     if (delta < 0) {
@@ -195,59 +177,24 @@ export default class extends EventEmitter {
     }
 
     this.scroll.target += speed
-    this.scroll.target = GSAP.utils.clamp(0, this.scroll.limit, this.scroll.target)
   }
 
   /**
    * Frames.
    */
   update () {
-    if (!this.isScrollable || this.isAnimating || !this.isVisible) return
+    if (!this.isScrollable || !this.isVisible) return
 
-    this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, this.scroll.ease)
+    this.scroll.target = clamp(0, this.scroll.limit, this.scroll.target)
+
+    this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease)
 
     if (this.scroll.current < 0.1) {
       this.scroll.current = 0
     }
 
-    this.transform(this.elements.wrapper, this.scroll.current)
-
-    each(this.animations, animation => {
-      animation.onScroll(this.scroll.current)
-    })
-  }
-
-  /**
-   * Listeners.
-   */
-  addEventListeners () {
-    if (this.isScrollable) {
-      this.element.addEventListener('touchstart', this.onDown, { passive: true })
-      this.element.addEventListener('touchmove', this.onMove, { passive: true })
-      this.element.addEventListener('touchend', this.onUp, { passive: true })
-
-      this.element.addEventListener('DOMMouseScroll', this.onWheel, { passive: true })
-      this.element.addEventListener('mousewheel', this.onWheel, { passive: true })
-      this.element.addEventListener('wheel', this.onWheel, { passive: true })
+    if (this.elements.wrapper) {
+      this.transform(this.elements.wrapper, this.scroll.current)
     }
-  }
-
-  removeEventListeners () {
-    if (this.isScrollable) {
-      this.element.removeEventListener('touchstart', this.onDown)
-      this.element.removeEventListener('touchmove', this.onMove)
-      this.element.removeEventListener('touchend', this.onUp)
-
-      this.element.removeEventListener('DOMMouseScroll', this.onWheel)
-      this.element.removeEventListener('mousewheel', this.onWheel)
-      this.element.removeEventListener('wheel', this.onWheel)
-    }
-  }
-
-  /**
-   * Destroy.
-   */
-  destroy () {
-    this.removeEventListeners()
   }
 }

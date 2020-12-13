@@ -3,7 +3,8 @@
 }
 
 .about__section {
-  display: flex;
+  padding-left: 33.33%;
+  position: relative;
 
   &:not(:first-child) {
     margin-top: 10rem;
@@ -20,8 +21,10 @@
 
 .about__section__title {
   font: 10rem/0.95 $font-ampersand;
-  margin-bottom: auto;
+  left: 0;
   padding-top: 10.5rem;
+  position: absolute;
+  top: 0;
   width: 33.33%;
 
   @include media('<=phone') {
@@ -32,7 +35,7 @@
 
 .about__section__content {
   padding-top: 10rem;
-  width: 66.66%;
+  width: 100%;
 
   @include media('<=phone') {
     padding-top: 2rem;
@@ -96,6 +99,8 @@
   left: 0;
   position: absolute;
   top: 0;
+  transform: scaleX(0);
+  transition: transform 1.5s $ease-out-expo;
   transform-origin: left;
   width: 100%;
 }

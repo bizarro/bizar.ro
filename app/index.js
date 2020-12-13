@@ -3,12 +3,12 @@ import 'utils/scroll'
 import 'utils/sw'
 
 import AutoBind from 'auto-bind'
+import FontFaceObserver from 'fontfaceobserver'
 import Stats from 'stats.js'
 
-import debounce from 'lodash/debounce'
 import each from 'lodash/each'
 
-import Responsive from 'classes/Responsive'
+import Detection from 'classes/Detection'
 
 import About from 'pages/About'
 import Case from 'pages/Case'
@@ -19,7 +19,7 @@ import Navigation from 'components/Navigation'
 
 class App {
   constructor () {
-    if (IS_DEVELOPMENT) {
+    if (IS_DEVELOPMENT && window.location.search.indexOf('fps') > -1) {
       this.createStats()
     }
 
@@ -32,12 +32,11 @@ class App {
 
     AutoBind(this)
 
-    this.createResponsive()
     this.createCanvas()
     this.createNavigation()
-    this.createAbout()
     this.createCase()
     this.createHome()
+    this.createAbout()
 
     this.pages = {
       '/': this.home,
@@ -57,10 +56,12 @@ class App {
     this.addLinksEventsListeners()
 
     this.update()
-  }
 
-  createResponsive () {
-    this.responsive = new Responsive()
+    const font = new FontFaceObserver('Ampersand')
+
+    font.load().then(_ => {
+      this.onResize()
+    })
   }
 
   createCanvas () {
@@ -99,10 +100,9 @@ class App {
   async onChange ({ push = !IS_DEVELOPMENT, url = null }) {
     url = url.replace(window.location.origin, '')
 
-    if (this.url === url) return
+    if (this.isFetching || this.url === url) return
 
-    document.documentElement.style.overflow = 'hidden'
-    document.body.style.pointerEvents = 'none'
+    this.isFetching = true
 
     this.url = url
 
@@ -124,11 +124,7 @@ class App {
 
     await this.page.show(this.url)
 
-    if (this.page.isScrollable) {
-      document.documentElement.style.overflow = ''
-    }
-
-    document.body.style.pointerEvents = ''
+    this.isFetching = false
   }
 
   /**
@@ -172,10 +168,6 @@ class App {
   }
 
   onResize () {
-    if (this.responsive && this.responsive.onResize) {
-      this.responsive.onResize()
-    }
-
     if (this.about) {
       this.about.onResize()
     }
@@ -196,8 +188,14 @@ class App {
   onTouchDown (event) {
     event.stopPropagation()
 
+    if (!Detection.isMobile() && event.target.tagName === 'A') return
+
     this.mouse.x = event.touches ? event.touches[0].clientX : event.clientX
     this.mouse.y = event.touches ? event.touches[0].clientY : event.clientY
+
+    if (this.page && this.page.onTouchDown) {
+      this.page.onTouchDown(event)
+    }
 
     if (this.canvas && this.canvas.onTouchDown) {
       this.canvas.onTouchDown(this.mouse)
@@ -210,6 +208,10 @@ class App {
     this.mouse.x = event.touches ? event.touches[0].clientX : event.clientX
     this.mouse.y = event.touches ? event.touches[0].clientY : event.clientY
 
+    if (this.page && this.page.onTouchMove) {
+      this.page.onTouchMove(event)
+    }
+
     if (this.canvas && this.canvas.onTouchMove) {
       this.canvas.onTouchMove(this.mouse)
     }
@@ -221,12 +223,20 @@ class App {
     this.mouse.x = event.changedTouches ? event.changedTouches[0].clientX : event.clientX
     this.mouse.y = event.changedTouches ? event.changedTouches[0].clientY : event.clientY
 
+    if (this.page && this.page.onTouchUp) {
+      this.page.onTouchUp(event)
+    }
+
     if (this.canvas && this.canvas.onTouchUp) {
       this.canvas.onTouchUp(this.mouse)
     }
   }
 
   onWheel (event) {
+    if (this.page && this.page.onWheel) {
+      this.page.onWheel(event)
+    }
+
     if (this.canvas && this.canvas.onWheel) {
       this.canvas.onWheel(event)
     }
@@ -237,10 +247,7 @@ class App {
    */
   addEventListeners () {
     window.addEventListener('popstate', this.onPopState, { passive: true })
-
-    this.onResizeDebounce = debounce(this.onResize, 400)
-
-    window.addEventListener('resize', this.onResizeDebounce, { passive: true })
+    window.addEventListener('resize', this.onResize, { passive: true })
 
     window.addEventListener('mousedown', this.onTouchDown, { passive: true })
     window.addEventListener('mousemove', this.onTouchMove, { passive: true })
@@ -250,7 +257,6 @@ class App {
     window.addEventListener('touchmove', this.onTouchMove, { passive: true })
     window.addEventListener('touchend', this.onTouchUp, { passive: true })
 
-    window.addEventListener('DOMMouseScroll', this.onWheel, { passive: true })
     window.addEventListener('mousewheel', this.onWheel, { passive: true })
     window.addEventListener('wheel', this.onWheel, { passive: true })
 

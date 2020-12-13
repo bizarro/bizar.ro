@@ -1,4 +1,3 @@
-import GSAP from 'gsap'
 import Prefix from 'prefix'
 
 import each from 'lodash/each'
@@ -6,6 +5,7 @@ import each from 'lodash/each'
 import Component from 'classes/Component'
 
 import { getOffset } from 'utils/dom'
+import { lerp } from 'utils/math'
 
 export default class extends Component {
   constructor ({ element, elements }) {
@@ -15,8 +15,6 @@ export default class extends Component {
     })
 
     this.transformPrefix = Prefix('transform')
-
-    this.distance = 0
 
     this.scroll = {
       ease: 0.1,
@@ -46,27 +44,23 @@ export default class extends Component {
     this.isEnabled = true
 
     this.update()
-
-    this.addEventListeners()
   }
 
   disable () {
     this.isEnabled = false
-
-    this.removeEventListeners()
   }
 
-  onDown (event) {
+  onTouchDown (event) {
+    if (!this.isEnabled) return
+
     this.isDown = true
 
     this.scroll.position = this.scroll.current
     this.start = event.touches ? event.touches[0].clientY : event.clientY
   }
 
-  onMove (event) {
-    if (!this.isDown) {
-      return
-    }
+  onTouchMove (event) {
+    if (!this.isDown || !this.isEnabled) return
 
     const y = event.touches ? event.touches[0].clientY : event.clientY
     const distance = (this.start - y) * 2
@@ -74,12 +68,17 @@ export default class extends Component {
     this.scroll.target = this.scroll.position + distance
   }
 
-  onUp (event) {
+  onTouchUp (event) {
+    if (!this.isEnabled) return
+
     this.isDown = false
   }
 
   onWheel (event) {
-    const delta = -event.wheelDeltaY || event.deltaY
+    if (!this.isEnabled) return
+
+    const delta = event.deltaY || -event.wheelDeltaY
+
     let speed = 25
 
     if (delta < 0) {
@@ -94,11 +93,9 @@ export default class extends Component {
   }
 
   update () {
-    if (!this.isEnabled) {
-      return
-    }
+    if (!this.isEnabled) return
 
-    this.scroll.current = GSAP.utils.interpolate(this.scroll.current, this.scroll.target, this.scroll.ease)
+    this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease)
 
     const scrollClamp = Math.round(this.scroll.current % this.heightTotal)
 
@@ -135,8 +132,6 @@ export default class extends Component {
       this.transform(element, element.position)
     })
 
-    this.distance = this.scroll.current - this.scroll.target
-
     this.scroll.last = this.scroll.current
     this.scroll.clamp = scrollClamp
   }
@@ -163,29 +158,5 @@ export default class extends Component {
       target: 0,
       last: 0
     }
-  }
-
-  addEventListeners () {
-    this.element.addEventListener('touchstart', this.onDown, { passive: true })
-    this.element.addEventListener('touchmove', this.onMove, { passive: true })
-    this.element.addEventListener('touchend', this.onUp, { passive: true })
-
-    this.element.addEventListener('DOMMouseScroll', this.onWheel, { passive: true })
-    this.element.addEventListener('mousewheel', this.onWheel, { passive: true })
-    this.element.addEventListener('wheel', this.onWheel, { passive: true })
-  }
-
-  removeEventListeners () {
-    this.element.removeEventListener('touchstart', this.onDown)
-    this.element.removeEventListener('touchmove', this.onMove)
-    this.element.removeEventListener('touchend', this.onUp)
-
-    this.element.removeEventListener('DOMMouseScroll', this.onWheel)
-    this.element.removeEventListener('mousewheel', this.onWheel)
-    this.element.removeEventListener('wheel', this.onWheel)
-  }
-
-  destroy () {
-    this.removeEventListeners()
   }
 }

@@ -3,6 +3,11 @@
   @extend %page;
 
   overflow: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+
+  &--active {
+    @extend %page--active;
+  }
 
   // &:after {
   //   background: #f0f;
@@ -72,6 +77,7 @@
 
 .home__link__wrapper {
   display: inline-block;
+  pointer-events: none;
   position: relative;
 
   .home__item--trolli & {

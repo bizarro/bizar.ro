@@ -3,11 +3,20 @@
   left: 0;
   opacity: 0;
   overflow: hidden;
+  pointer-events: none;
   position: absolute;
   top: 0;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
   visibility: hidden;
   width: 100%;
   z-index: z('content');
+}
+
+%page--active {
+  opacity: 1;
+  pointer-events: auto;
+  transition: none;
+  visibility: visible;
 }
 
 %content {

@@ -1,9 +1,8 @@
-import GSAP from 'gsap'
-
 import each from 'lodash/each'
 
 import Animation from 'classes/Animation'
 
+import { easing } from 'utils/dom'
 import { calculate, split } from 'utils/text'
 
 export default class extends Animation {
@@ -31,65 +30,33 @@ export default class extends Animation {
         lines
       }
     })
+
+    this.onResize()
+    this.animateOut()
   }
 
   animateIn () {
-    if (this.isAnimatingIn) {
-      return
-    }
-
-    this.isAnimatingIn = true
-
-    this.timelineIn = GSAP.timeline({
-      delay: this.delay,
-      paused: true
-    })
-
-    this.timelineIn.set(this.element, {
-      autoAlpha: 1
-    })
+    super.animateIn()
 
     each(this.lines, (line, lineIndex) => {
-      this.timelineIn.fromTo(line, {
-        y: '100%'
-      }, {
-        delay: lineIndex * 0.1,
-        duration: 1.5,
-        ease: 'expo.out',
-        y: '0%'
-      }, 'lines')
+      each(line, word => {
+        word.style.transition = `transform 1.5s ${lineIndex * 0.1}s ${easing}`
+        word.style[this.transformPrefix] = `translateY(0)`
+      })
     })
-
-    this.timelineIn.call(() => {
-      this.isAnimatingIn = false
-    })
-
-    super.animateIn(this.timelineIn)
   }
 
   animateOut () {
-    GSAP.set(this.element, {
-      autoAlpha: 0,
-      overflow: 'hidden'
-    })
-
     super.animateOut()
-  }
 
-  show () {
-    this.animateIn()
-  }
-
-  hide () {
-    GSAP.to(this.element, {
-      autoAlpha: 0,
-      duration: 0.4
+    each(this.lines, line => {
+      each(line, word => {
+        word.style[this.transformPrefix] = `translateY(100%)`
+      })
     })
   }
 
   onResize () {
-    super.onResize()
-
     this.lines = calculate(this.elements.lines)
   }
 }

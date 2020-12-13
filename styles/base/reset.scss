@@ -2,7 +2,7 @@ html {
   background: $color-pine-tree;
   box-sizing: border-box;
   color: $color-iron;
-  font-size: 10px;
+  font-size: calc(100vw / 1920 * 10);
   height: 100%;
   left: 0;
   overflow: hidden;
@@ -13,32 +13,8 @@ html {
   -webkit-font-smoothing: antialiased;
   width: 100%;
 
-  @include media('<=1728px') {
-    font-size: 9px;
-  }
-
-  @include media('<=1536px') {
-    font-size: 8px;
-  }
-
-  @include media('<=1344px') {
-    font-size: 7px;
-  }
-
-  @include media('<=1152px') {
-    font-size: 6px;
-  }
-
-  @include media('<=960px') {
-    font-size: 5px;
-  }
-
-  @include media('<=768px') {
-    font-size: 4px;
-  }
-
-  @include media('<768px') {
-    font-size: 10px;
+  @include media('<=phone') {
+    font-size: calc(100vw / 375 * 10);
   }
 }
 

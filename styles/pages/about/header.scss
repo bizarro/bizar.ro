@@ -10,9 +10,8 @@
 .about__header__title {
   font: 28rem/1 $font-ampersand;
   display: inline-block;
-  opacity: 0;
+  max-height: 94rem;
   text-align: left;
-  visibility: hidden;
 
   @include media('<=phone') {
     font-size: 5.5rem;
@@ -24,6 +23,11 @@
   justify-content: space-between;
   overflow: hidden;
 
+  span {
+    transform: translateY(100%);
+    transition-delay: 1s;
+  }
+
   &:not(:first-child) {
     margin-top: -6rem;
   }
@@ -32,6 +36,28 @@
     &:not(:first-child) {
       margin-top: -1rem;
     }
+  }
+}
+
+.about--active {
+  .about__header__title__text span {
+    transform: translateY(0);
+  }
+
+  .about__header__title__text:nth-child(1) span {
+    transition: transform 1.5s $ease-out-expo;
+  }
+
+  .about__header__title__text:nth-child(2) span {
+    transition: transform 1.5s 0.2s $ease-out-expo;
+  }
+
+  .about__header__title__text:nth-child(3) span {
+    transition: transform 1.5s 0.4s $ease-out-expo;
+  }
+
+  .about__header__title__text:nth-child(4) span {
+    transition: transform 1.5s 0.6s $ease-out-expo;
   }
 }
 

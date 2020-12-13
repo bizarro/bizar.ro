@@ -1,48 +1,21 @@
-import GSAP from 'gsap'
-
 import Animation from 'classes/Animation'
+import { easing } from 'utils/dom'
 
 export default class extends Animation {
   constructor ({ element }) {
-    super({
-      element
-    })
+    super({ element })
   }
 
   animateIn () {
-    if (this.isAnimatingIn || this.isVisible) {
-      return
-    }
+    super.animateIn()
 
-    this.isAnimatingIn = true
-
-    this.timelineIn = GSAP.timeline({
-      delay: this.delay,
-      paused: true
-    })
-
-    this.timelineIn.fromTo(this.element, {
-      autoAlpha: 1,
-      y: '100%'
-    }, {
-      autoAlpha: 1,
-      duration: 1.5,
-      ease: 'expo.out',
-      y: '0%'
-    })
-
-    this.timelineIn.call(() => {
-      this.isAnimatingIn = false
-      this.isVisible = true
-    })
-
-    super.animateIn(this.timelineIn)
+    this.element.style.transition = `transform 1.5s ${easing}`
+    this.element.style[this.transformPrefix] = `translateY(0)`
   }
 
   animateOut () {
-    this.element.style.opacity = 0
-    this.element.style.visibility = 'hidden'
-
     super.animateOut()
+
+    this.element.style[this.transformPrefix] = `translateY(100%)`
   }
 }

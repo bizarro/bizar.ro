@@ -2,6 +2,15 @@
   from { opacity: 1 };
 }
 
+.case__gallery {
+  opacity: 0;
+  transition: opacity 0.4s 1s ease;
+
+  .case--active & {
+    opacity: 1;
+  }
+}
+
 .case__gallery__media {
   &:not(:first-child) {
     margin-top: 10rem;
@@ -83,7 +92,7 @@
   transition: opacity 1s ease;
   width: 100%;
 
-  &--active {
+  .case__gallery__media__placeholder--active & {
     opacity: 1;
   }
 }

@@ -1,11 +1,14 @@
-import GSAP from 'gsap'
-
 import Page from 'components/Page'
 import Scrolling from 'components/Scrolling'
+
+import { delay } from 'utils/math'
 
 export default class extends Page {
   constructor () {
     super({
+      classes: {
+        active: 'home--active'
+      },
       element: '.home',
       elements: {
         list: '.home__list',
@@ -21,29 +24,21 @@ export default class extends Page {
    * Animations.
    */
   show () {
-    const timeline = GSAP.timeline()
+    this.list.enable()
 
-    timeline.call(this.list.enable)
+    this.element.classList.add(this.classes.active)
 
-    timeline.to(this.element, {
-      autoAlpha: 1,
-      duration: 0.33
-    })
-
-    return super.show(timeline)
+    return super.show()
   }
 
-  hide () {
-    const timeline = GSAP.timeline()
+  async hide () {
+    this.list.disable()
 
-    timeline.to(this.element, {
-      autoAlpha: 0,
-      duration: 0.33
-    })
+    this.element.classList.remove(this.classes.active)
 
-    timeline.call(this.list.disable)
+    await delay(400)
 
-    return super.show(timeline)
+    return super.hide()
   }
 
   /**
@@ -72,6 +67,22 @@ export default class extends Page {
     super.onResize()
 
     this.list.onResize()
+  }
+
+  onTouchDown (event) {
+    this.list.onTouchDown(event)
+  }
+
+  onTouchMove (event) {
+    this.list.onTouchMove(event)
+  }
+
+  onTouchUp (event) {
+    this.list.onTouchUp(event)
+  }
+
+  onWheel (event) {
+    this.list.onWheel(event)
   }
 
   /**

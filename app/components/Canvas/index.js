@@ -1,5 +1,4 @@
 import { Renderer, Camera, Transform, Plane, Post, Vec2 } from 'ogl'
-import FontFaceObserver from 'fontfaceobserver'
 
 import fragment from 'shaders/post.glsl'
 
@@ -59,34 +58,30 @@ export default class {
   }
 
   createList () {
-    const font = new FontFaceObserver('Ampersand')
+    this.mediasList = document.querySelector('.home__list')
+    this.mediasElements = document.querySelectorAll('.home__item')
+    this.medias = mapEach(this.mediasElements, (homeItem, index) => {
+      const homeLink = homeItem.querySelector('.home__link')
+      const homeLinkMedia = homeItem.querySelector('.home__link__media')
 
-    font.load().then(_ => {
-      this.mediasList = document.querySelector('.home__list')
-      this.mediasElements = document.querySelectorAll('.home__item')
-      this.medias = mapEach(this.mediasElements, (homeItem, index) => {
-        const homeLink = homeItem.querySelector('.home__link')
-        const homeLinkMedia = homeItem.querySelector('.home__link__media')
+      const id = homeLink.href.replace(`${window.location.origin}/case/`, '')
+      const caseMedia = document.querySelector(`#${id} .case__media`)
 
-        const id = homeLink.href.replace(`${window.location.origin}/case/`, '')
-        const caseMedia = document.querySelector(`#${id} .case__media`)
-
-        let media = new Media({
-          caseMedia,
-          geometry: this.planeGeometry,
-          gl: this.gl,
-          homeItem,
-          homeLink,
-          homeLinkMedia,
-          id,
-          homeList: this.mediasList,
-          scene: this.scene,
-          screen: this.screen,
-          viewport: this.viewport
-        })
-
-        return media
+      let media = new Media({
+        caseMedia,
+        geometry: this.planeGeometry,
+        gl: this.gl,
+        homeItem,
+        homeLink,
+        homeLinkMedia,
+        id,
+        homeList: this.mediasList,
+        scene: this.scene,
+        screen: this.screen,
+        viewport: this.viewport
       })
+
+      return media
     })
   }
 
@@ -94,6 +89,12 @@ export default class {
    * Change.
    */
   onChange (url) {
+    if (url.indexOf('/about') > -1) {
+      this.medias.forEach(media => media.onAboutOpen())
+    } else {
+      this.medias.forEach(media => media.onAboutClose())
+    }
+
     if (url.indexOf('/case') > -1) {
       const id = url.replace('/case/', '')
       const media = this.medias.find(media => media.id === id)
@@ -101,12 +102,6 @@ export default class {
       media.onOpen()
     } else {
       this.medias.forEach(media => media.onClose())
-    }
-
-    if (url.indexOf('/about') > -1) {
-      this.medias.forEach(media => media.onAboutOpen())
-    } else {
-      this.medias.forEach(media => media.onAboutClose())
     }
   }
 

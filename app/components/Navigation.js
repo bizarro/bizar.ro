@@ -1,8 +1,7 @@
-import GSAP from 'gsap'
-
 import each from 'lodash/each'
 
 import Component from 'classes/Component'
+import { random } from 'utils/math'
 
 export default class extends Component {
   constructor ({ canvas }) {
@@ -39,10 +38,10 @@ export default class extends Component {
   }
 
   onEasterEgg () {
-    const random = GSAP.utils.random(0, 360, 0.01)
-    const background = `hsl(${random}deg 19% 9%)`
+    const value = random(0, 360, 0.01)
+    const background = `hsl(${value}deg 19% 9%)`
 
-    GSAP.set(document.documentElement, { background })
+    document.documentElement.style.background = background
 
     this.homeBottom.style.background = `linear-gradient(to bottom, transparent 0%, ${background} 100%)`
     this.homeTop.style.background = `linear-gradient(to bottom, ${background} 0%, transparent 100%)`

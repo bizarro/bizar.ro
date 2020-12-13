@@ -1,15 +1,17 @@
-import GSAP from 'gsap'
-
 import each from 'lodash/each'
 
 import Detection from 'classes/Detection'
 import Page from 'components/Page'
 
+import { delay } from 'utils/math'
+
 export default class extends Page {
   constructor () {
     super({
       classes: {
-        imageActive: 'case__gallery__media__image--active'
+        active: 'cases--active',
+        caseActive: 'case--active',
+        mediaActive: 'case__gallery__media__placeholder--active'
       },
       element: '.cases',
       elements: {
@@ -26,95 +28,53 @@ export default class extends Page {
    * Animations.
    */
   show (url) {
-    this.isAnimating = false
+    this.element.classList.add(this.classes.active)
 
     const id = url.replace('/case/', '')
 
     this.elements.wrapper = Array.from(this.elements.cases).find(item => item.id === id)
+    this.elements.wrapper.classList.add(this.classes.caseActive)
 
-    this.scroll.limit = this.elements.wrapper.clientHeight - window.innerHeight
+    this.scroll.limit = this.elements.wrapper.limit - window.innerHeight
 
-    const timeline = GSAP.timeline()
+    const medias = this.elements.wrapper.querySelectorAll('.case__gallery__media__placeholder')
 
-    timeline.set(this.elements.wrapper, {
-      autoAlpha: 1
+    each(medias, media => {
+      const image = new Image()
+
+      image.className = 'case__gallery__media__image'
+      image.src = media.getAttribute(Detection.isWebPSupported() ? 'data-src-webp' : 'data-src')
+      image.decode().then(_ => {
+        media.classList.add(this.classes.mediaActive)
+        media.appendChild(image)
+      })
     })
 
-    timeline.set(this.element, {
-      autoAlpha: 1,
-    })
-
-    this.showCase(timeline)
-
-    return super.show(timeline)
+    return super.show()
   }
 
-  showCase (timeline) {
-    const title = this.elements.wrapper.querySelector('.case__title__text')
-    const information = this.elements.wrapper.querySelector('.case__information')
+  async hide () {
+    this.scroll.target = 0
 
-    timeline.fromTo(title, {
-      y: '100%'
-    }, {
-      delay: 0.5,
-      duration: 1.5,
-      ease: 'expo.out',
-      stagger: 0.1,
-      y: '0%'
-    }, 'start')
+    this.elements.wrapper.classList.remove(this.classes.caseActive)
 
-    timeline.fromTo(information, {
-      autoAlpha: 0
-    }, {
-      autoAlpha: 1,
-      delay: 0.5,
-      duration: 0.5
-    }, 'start')
+    this.element.classList.remove(this.classes.active)
 
-    const images = this.elements.wrapper.querySelectorAll('img')
+    await delay(1000)
 
-    each(images, image => {
-      if (!image.hasAttribute('src')) {
-        image.classList.add(this.classes.imageActive)
-        image.setAttribute('src', image.getAttribute(Detection.isWebPSupported() ? 'data-src-webp' : 'data-src'))
-      }
-    })
-  }
+    this.elements.wrapper = null
 
-  hide () {
-    this.isAnimating = true
-
-    const timeline = GSAP.timeline()
-
-    timeline.to(this.scroll, {
-      duration: 1,
-      ease: 'expo.inOut',
-      current: 0,
-      target: 0,
-      position: 0,
-      onUpdate: _ => this.transform(this.elements.wrapper, this.scroll.current)
-    }, 'start')
-
-    timeline.to(this.element, {
-      autoAlpha: 0,
-      duration: 1
-    }, 'start')
-
-    timeline.set(this.elements.wrapper, {
-      autoAlpha: 0
-    })
-
-    timeline.call(_ => {
-      this.elements.wrapper = null
-    })
-
-    return super.hide(timeline)
+    return super.hide()
   }
 
   /**
-   * Events.
+   * Events
    */
   onResize () {
     super.onResize()
+
+    each(this.elements.cases, element => {
+      element.limit = element.clientHeight
+    })
   }
 }

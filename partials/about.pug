@@ -47,35 +47,16 @@ section.about
             | #[span +]
             | #[span DEVELOPER]
 
-      .about__gallery
-        .about__gallery__media
-          .about__gallery__media__wrapper
-        .about__gallery__media
-          .about__gallery__media__wrapper
-        .about__gallery__media
-          .about__gallery__media__wrapper
-        .about__gallery__media
-          .about__gallery__media__wrapper
-        .about__gallery__media
-          .about__gallery__media__wrapper
-        .about__gallery__media
-          .about__gallery__media__wrapper
-        .about__gallery__media
-          .about__gallery__media__wrapper
-        .about__gallery__media
-          .about__gallery__media__wrapper
-        .about__gallery__media
-          .about__gallery__media__wrapper
-        .about__gallery__media
-          .about__gallery__media__wrapper
-        .about__gallery__media
-          .about__gallery__media__wrapper
-        .about__gallery__media
-          .about__gallery__media__wrapper
+      .about__gallery(data-src="/about.jpg" data-src-webp="/about.jpg")
+        each _, index in Array(24)
+          .about__gallery__media(class=[1, 2, 8, 9, 11, 12, 13, 15, 16, 19, 21, 23].indexOf(index) > -1 ? "about__gallery__media--transparent" : "" data-index=index)
+            .about__gallery__media__wrapper
+
+        a.about__gallery__link(href="https://www.nationalgallery.org.uk/paintings/ignace-henri-theodore-fantin-latour-a-basket-of-roses") A Basket of Roses
 
       .about__sections
         .about__section
-          h2.about__section__title(data-animation="paragraph") About
+          h2.about__section__title About
 
           .about__section__content
             p.about__section__description(data-animation="paragraph")
@@ -88,7 +69,7 @@ section.about
               | I love having this surname and I try to embrace this adjective as part of my life and also my work.
 
             p.about__section__description(data-animation="paragraph")
-              | I’m working at #[a(href="https://activetheory.net/" rel="noreferrer noopener" target="_blank") Active Theory] as a #[b Senior Interactive Developer]. #[br]
+              | I’m working at #[a(href="https://activetheory.net/" rel="noreferrer noopener" target="_blank") Active Theory] as a Senior Interactive Developer. #[br]
               | I’m also currently the #[a(href="https://awwwards.com/winner-list/Brazil" rel="noreferrer noopener" target="_blank") Most Awarded Brazilian] at #[a(href="https://awwwards.com/" rel="noreferrer noopener" target="_blank") Awwwards] and member of the #[a(href="https://awwwards.com/jury/?year=2020&type=code" target="_blank") Development Jury].
               | In the past I’ve also collaborated with #[a(href="https://antinomy.eu/" rel="noreferrer noopener" target="_blank") Antinomy] and #[a(href="https://unit9.com/" rel="noreferrer noopener" target="_blank") UNIT9].
 
@@ -99,7 +80,7 @@ section.about
               | Discovery Kids, One Plus, GE, Citibank, among others.
 
         .about__section
-          h2.about__section__title(data-animation="paragraph") Awards #[br] & Honors
+          h2.about__section__title Awards #[br] & Honors
 
           .about__section__content
             p.about__section__number 53+
@@ -160,7 +141,7 @@ section.about
               +award("https://thefwa.com/cases/nike-city-fast", "Dec 12, 2017", "FWA", "FWA of The Day", "Nike City Fast")
 
         .about__section
-          h2.about__section__title(data-animation="paragraph") PRESS
+          h2.about__section__title PRESS
 
           .about__section__content
             p.about__section__number 5+

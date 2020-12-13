@@ -1,20 +1,26 @@
-import GSAP from 'gsap'
-
 import each from 'lodash/each'
+
+import Detection from 'classes/Detection'
 
 import Page from 'components/Page'
 
 import { BREAKPOINT_PHONE } from 'utils/breakpoints'
 import { getOffset } from 'utils/dom'
+import { clamp, delay, lerp } from 'utils/math'
 
 export default class extends Page {
   constructor () {
     super({
+      classes: {
+        active: 'about--active',
+        galleryActive: 'about__gallery--active'
+      },
       element: '.about',
       elements: {
         wrapper: '.about__content',
         title: '.about__header__title',
         titles: '.about__header__title__text span',
+        gallery: '.about__gallery',
         sections: '.about__section',
         sectionsTitles: '.about__section__title'
       },
@@ -25,42 +31,42 @@ export default class extends Page {
   }
 
   /**
+   * Create.
+   */
+  create () {
+    super.create()
+
+    const image = new Image()
+
+    image.className = 'about__gallery__image'
+    image.src = this.elements.gallery.getAttribute(Detection.isWebPSupported() ? 'data-src-webp' : 'data-src')
+    image.decode().then(_ => {
+      this.elements.gallery.classList.add(this.classes.galleryActive)
+      this.elements.gallery.appendChild(image)
+    })
+  }
+
+  /**
    * Animations.
    */
   show () {
-    const timeline = GSAP.timeline()
+    this.element.classList.add(this.classes.active)
 
-    timeline.set(this.element, {
-      autoAlpha: 1
-    })
-
-    timeline.set(this.elements.title, {
-      autoAlpha: 1
-    })
-
-    timeline.fromTo(this.elements.titles, {
-      y: '100%'
-    }, {
-      duration: 1.5,
-      ease: 'expo.out',
-      stagger: 0.1,
-      y: '0%'
-    })
-
-    timeline.call(this.onResize)
-
-    return super.show(timeline)
+    return super.show()
   }
 
-  hide () {
-    const timeline = GSAP.timeline()
+  async hide () {
+    this.element.classList.remove(this.classes.active)
 
-    timeline.to(this.element, {
-      autoAlpha: 0,
-      duration: 0.4
-    })
+    await delay(400)
 
-    return super.show(timeline)
+    this.scroll.position = 0
+    this.scroll.current = 0
+    this.scroll.target = 0
+
+    this.transform(this.elements.wrapper, this.scroll.current)
+
+    return super.hide()
   }
 
   /**
@@ -69,19 +75,19 @@ export default class extends Page {
   onResize () {
     super.onResize()
 
-    each(this.elements.sectionsTitles, title => {
-      title.start = getOffset(title.parentNode).top + this.scroll.current
-      title.limit = title.parentNode.clientHeight - title.clientHeight
-      title.y = 0
-    })
-
     if (window.innerWidth > BREAKPOINT_PHONE) {
       each(this.elements.sectionsTitles, title => {
-        title.y = title.position = GSAP.utils.clamp(0, title.limit, this.scroll.current - title.start)
-        title.style.transform = `translateY(${title.y}px)`
+        title.style.transform = ''
+
+        const bounding = getOffset(title, this.scroll.current)
+
+        title.start = bounding.top
+        title.limit = getOffset(title.parentNode).height - bounding.height
       })
     } else {
-      each(this.elements.sectionsTitles, title => title.style.transform = '')
+      each(this.elements.sectionsTitles, title => {
+        title.style.transform = ''
+      })
     }
   }
 
@@ -93,10 +99,9 @@ export default class extends Page {
 
     if (window.innerWidth > BREAKPOINT_PHONE) {
       each(this.elements.sectionsTitles, title => {
-        title.position = GSAP.utils.clamp(0, title.limit, this.scroll.current - title.start)
+        const y = clamp(0, title.limit, this.scroll.current - title.start)
 
-        title.y = GSAP.utils.interpolate(title.y, title.position, 0.75)
-        title.style.transform = `translateY(${title.y}px)`
+        title.style.transform = `translateY(${y}px)`
       })
     }
   }
