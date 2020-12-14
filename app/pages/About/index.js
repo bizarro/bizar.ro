@@ -47,9 +47,11 @@ export default class extends Page {
       this.elements.gallery.appendChild(image)
     })
 
-    const font = new FontFaceObserver('Neue Montreal')
+    const font = new FontFaceObserver('Neue Montreal', 10000)
 
     font.load().then(_ => {
+      this.onResize()
+    }).catch(_ => {
       this.onResize()
     })
   }

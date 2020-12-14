@@ -36,9 +36,11 @@ export default class {
 
     this.onResize()
 
-    const font = new FontFaceObserver('Ampersand')
+    const font = new FontFaceObserver('Ampersand', 10000)
 
     font.load().then(_ => {
+      this.createList()
+    }).catch(_ => {
       this.createList()
     })
   }

@@ -1,5 +1,6 @@
 import AutoBind from 'auto-bind'
 import EventEmitter from 'events'
+import NormalizeWheel from 'normalize-wheel'
 import Prefix from 'prefix'
 
 import Line from 'animations/Line'
@@ -168,13 +169,8 @@ export default class extends EventEmitter {
   onWheel (event) {
     if (!this.isScrollable) return
 
-    const delta = -event.wheelDeltaY || event.deltaY
-
-    let speed = 35
-
-    if (delta < 0) {
-      speed *= -1
-    }
+    const normalized = NormalizeWheel(event)
+    const speed = normalized.pixelY
 
     this.scroll.target += speed
   }

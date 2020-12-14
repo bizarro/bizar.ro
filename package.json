@@ -45,6 +45,7 @@
     "mini-css-extract-plugin": "^1.3.1",
     "node-sass": "^4.12.0",
     "nodelist-foreach-polyfill": "^1.2.0",
+    "normalize-wheel": "^1.0.1",
     "offline-plugin": "^5.0.7",
     "ogl": "0.0.60",
     "postcss-loader": "^4.1.0",

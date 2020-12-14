@@ -1,3 +1,4 @@
+import NormalizeWheel from 'normalize-wheel'
 import Prefix from 'prefix'
 
 import each from 'lodash/each'
@@ -77,13 +78,8 @@ export default class extends Component {
   onWheel (event) {
     if (!this.isEnabled) return
 
-    const delta = event.deltaY || -event.wheelDeltaY
-
-    let speed = 25
-
-    if (delta < 0) {
-      speed *= -1
-    }
+    const normalized = NormalizeWheel(event)
+    const speed = normalized.pixelY * 0.5
 
     this.scroll.target += speed
   }
