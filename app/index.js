@@ -31,7 +31,10 @@ class App {
 
     AutoBind(this)
 
-    this.createCanvas()
+    if (!Detection.isMobile()) {
+      this.createCanvas()
+    }
+
     this.createNavigation()
     this.createCase()
     this.createHome()
@@ -103,7 +106,9 @@ class App {
 
     this.url = url
 
-    this.canvas.onChange(this.url)
+    if (this.canvas) {
+      this.canvas.onChange(this.url)
+    }
 
     await this.page.hide()
 

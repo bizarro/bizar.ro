@@ -1,6 +1,6 @@
 import AutoBind from 'auto-bind'
 import GSAP from 'gsap'
-import { Mesh, Program, Texture } from 'ogl'
+import { Mesh, Program, TextureLoader } from 'ogl'
 
 import Detection from 'classes/Detection'
 
@@ -43,14 +43,13 @@ export default class {
     this.createBounds()
     this.createListeners()
     this.createTween()
-    this.createTexture()
 
     this.onResize()
   }
 
   createMesh () {
-    this.texture = new Texture(this.gl, {
-      generateMipmaps: false
+    const texture = TextureLoader.load(this.gl, {
+      src: this.homeLinkMedia.getAttribute(Detection.isWebPSupported() ? 'data-src-webp' : 'data-src')
     })
 
     const program = new Program(this.gl, {
@@ -61,7 +60,7 @@ export default class {
         uDirection: { value: this.direction === 'left' ? 0.5 : -0.5 },
         uTime: { value: 0 },
         uMultiplier: { value: 1 },
-        tMap: { value: this.texture }
+        tMap: { value: texture }
       },
       transparent: true
     })
@@ -72,14 +71,6 @@ export default class {
     })
 
     this.plane.setParent(this.scene)
-  }
-
-  async createTexture () {
-    await delay(5000)
-
-    const image = new Image()
-    image.src = this.homeLinkMedia.getAttribute(Detection.isWebPSupported() ? 'data-src-webp' : 'data-src')
-    image.onload = _ => this.texture.image = image
   }
 
   createBounds () {

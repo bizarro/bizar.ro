@@ -5,6 +5,10 @@ mixin template({ id, title, category, company, role, technologies, link, label, 
         span.case__title__text=title
 
       figure.case__media
+        img.case__media__image(
+          data-src=`/projects/${id}.jpg`
+          data-src-webp=`/projects/${id}.webp`
+        )
 
     .case__information
       p.case__information__detail

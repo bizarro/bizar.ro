@@ -52,10 +52,12 @@ export default class extends Component {
 
     const canvas = document.documentElement.style.background.replace('rgb(', '').replace(')', '').replace(/ /g, '').split(',')
 
-    this.canvas.background = {
-      r: canvas[0],
-      g: canvas[1],
-      b: canvas[2]
+    if (this.canvas) {
+      this.canvas.background = {
+        r: canvas[0],
+        g: canvas[1],
+        b: canvas[2]
+      }
     }
   }
 

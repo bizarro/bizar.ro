@@ -10,6 +10,13 @@
   width: 100%;
 }
 
+.case__media__image {
+  @extend %cover;
+
+  opacity: 0;
+  transition: opacity 1s $ease-out-expo;
+}
+
 .case__header__content {
   text-align: center;
   margin: auto;
@@ -20,9 +27,11 @@
   font: 15rem/0.8 $font-ampersand;
   overflow: hidden;
   padding: 0 1rem;
+  position: relative;
   text-align: center;
   transform: translateY(50%);
   white-space: nowrap;
+  z-index: 1;
 
   @include media('<=phone') {
     font-size: 5rem;
