@@ -37,13 +37,15 @@ export default class extends Page {
 
     this.scroll.limit = this.elements.wrapper.limit - window.innerHeight
 
-    this.elements.image = this.elements.wrapper.querySelector('.case__media__image')
+    if (Detection.isMobile()) {
+      this.elements.image = this.elements.wrapper.querySelector('.case__media__image')
 
-    if (!this.elements.image.src) {
-      this.elements.image.src = this.elements.image.getAttribute(Detection.isWebPSupported() ? 'data-src-webp' : 'data-src')
-      this.elements.image.onload = _ => this.elements.image.style.opacity = 1
-    } else {
-      this.elements.image.style.opacity = 1
+      if (!this.elements.image.src) {
+        this.elements.image.src = this.elements.image.getAttribute(Detection.isWebPSupported() ? 'data-src-webp' : 'data-src')
+        this.elements.image.onload = _ => this.elements.image.style.opacity = 1
+      } else {
+        this.elements.image.style.opacity = 1
+      }
     }
 
     const medias = this.elements.wrapper.querySelectorAll('.case__gallery__media__placeholder')
@@ -63,7 +65,9 @@ export default class extends Page {
   }
 
   async hide () {
-    this.elements.image.style.opacity = 0
+    if (Detection.isMobile()) {
+      this.elements.image.style.opacity = 0
+    }
 
     this.scroll.target = 0
 
