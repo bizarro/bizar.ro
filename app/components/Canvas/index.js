@@ -4,6 +4,7 @@ import { Renderer, Camera, Transform, Plane, Post, Vec2 } from 'ogl'
 import fragment from 'shaders/post.glsl'
 
 import { mapEach } from 'utils/dom'
+import { delay } from 'utils/math'
 
 import Media from './Media'
 
