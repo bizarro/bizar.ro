@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CnameWebpackPlugin = require('cname-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'dev'
 
@@ -78,7 +79,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
       chunkFilename: '[id].css',
-    })
+    }),
+
+    new HTMLInlineCSSWebpackPlugin()
   ],
 
   module: {
@@ -128,11 +131,21 @@ module.exports = {
       },
 
       {
-        test: /\.(jpe?g|png|gif|svg|woff2?|fnt|webp)$/,
+        test: /\.(jpe?g|png|gif|svg|fnt|webp)$/,
         loader: 'file-loader',
         options: {
           name (file) {
             return '[hash].[ext]'
+          }
+        }
+      },
+
+      {
+        test: /\.(woff2?)$/,
+        loader: 'file-loader',
+        options: {
+          name (file) {
+            return '[name].[ext]'
           }
         }
       },
