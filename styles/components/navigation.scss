@@ -53,13 +53,13 @@
     }
 
     &:nth-child(3) {
-      right: 2rem;
+      right: 1.5rem;
       top: 0.5rem;
     }
 
     &:nth-child(4) {
       bottom: 1rem;
-      left: 2rem;
+      left: 1.5rem;
     }
   }
 }
@@ -98,7 +98,7 @@
   }
 
   @include media('<=phone') {
-    right: 2rem;
-    bottom: 2rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
   }
 }
