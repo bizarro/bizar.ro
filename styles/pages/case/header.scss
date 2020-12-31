@@ -14,7 +14,11 @@
   @extend %cover;
 
   opacity: 0;
-  transition: opacity 1s $ease-out-expo;
+  transition: opacity 1.5s $ease-out-expo;
+
+  .mobile .case--active & {
+    opacity: 1;
+  }
 }
 
 .case__header__content {
@@ -44,6 +48,10 @@
   transform: translateY(100%);
   transition: transform 1.5s 1s $ease-out-expo;
 
+  .mobile & {
+    transition-delay: 0s;
+  }
+
   .case--active & {
     opacity: 1;
     transform: translateY(0);
@@ -60,6 +68,10 @@
   opacity: 0;
   transition: opacity 0.4s 1s ease;
   width: 90%;
+
+  .mobile & {
+    transition-delay: 0s;
+  }
 
   .case--active & {
     opacity: 1;

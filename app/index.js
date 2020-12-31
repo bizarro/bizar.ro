@@ -59,17 +59,6 @@ class App {
     this.addLinksEventsListeners()
 
     this.onResize()
-
-    window.addEventListener('mousemove', this.start)
-    window.addEventListener('touchstart', this.start)
-  }
-
-  start () {
-    if (this.isStarted) return
-
-    this.isStarted = true
-
-    this.update()
   }
 
   createCanvas () {
@@ -253,10 +242,20 @@ class App {
     }
   }
 
+  onInteract () {
+    window.removeEventListener('mousemove', this.onInteract)
+    window.removeEventListener('touchstart', this.onInteract)
+
+    this.update()
+  }
+
   /**
    * Listeners.
    */
   addEventListeners () {
+    window.addEventListener('mousemove', this.onInteract, { passive: true })
+    window.addEventListener('touchstart', this.onInteract, { passive: true })
+
     window.addEventListener('popstate', this.onPopState, { passive: true })
     window.addEventListener('resize', this.onResize, { passive: true })
 

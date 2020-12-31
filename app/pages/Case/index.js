@@ -42,9 +42,6 @@ export default class extends Page {
 
       if (!this.elements.image.src) {
         this.elements.image.src = this.elements.image.getAttribute(Detection.isWebPSupported() ? 'data-src-webp' : 'data-src')
-        this.elements.image.onload = _ => this.elements.image.style.opacity = 1
-      } else {
-        this.elements.image.style.opacity = 1
       }
     }
 
@@ -65,17 +62,13 @@ export default class extends Page {
   }
 
   async hide () {
-    if (Detection.isMobile()) {
-      this.elements.image.style.opacity = 0
-    }
-
     this.scroll.target = 0
 
     this.elements.wrapper.classList.remove(this.classes.caseActive)
 
     this.element.classList.remove(this.classes.active)
 
-    await delay(1000)
+    await delay(Detection.isMobile() ? 400 : 1000)
 
     this.elements.wrapper = null
 

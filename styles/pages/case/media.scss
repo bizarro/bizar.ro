@@ -6,6 +6,10 @@
   opacity: 0;
   transition: opacity 0.4s 1s ease;
 
+  .mobile & {
+    transition-delay: 0s;
+  }
+
   .case--active & {
     opacity: 1;
   }
