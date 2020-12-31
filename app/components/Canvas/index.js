@@ -1,10 +1,10 @@
 import FontFaceObserver from 'fontfaceobserver'
 import { Renderer, Camera, Transform, Plane, Post, Vec2 } from 'ogl'
+import each from 'lodash/each'
 
 import fragment from 'shaders/post.glsl'
 
 import { mapEach } from 'utils/dom'
-import { delay } from 'utils/math'
 
 import Media from './Media'
 
@@ -37,13 +37,17 @@ export default class {
 
     this.onResize()
 
+    this.createList()
+
     const font = new FontFaceObserver('Ampersand', 10000)
 
     font.load().then(_ => {
-      this.createList()
+      this.onResize()
     }).catch(_ => {
-      this.createList()
+      this.onResize()
     })
+
+    this.update()
   }
 
   createCamera () {
@@ -107,9 +111,9 @@ export default class {
    */
   onChange (url) {
     if (url.indexOf('/about') > -1) {
-      this.medias.forEach(media => media.onAboutOpen())
+      each(this.medias, media => media.onAboutOpen())
     } else {
-      this.medias.forEach(media => media.onAboutClose())
+      each(this.medias, media => media.onAboutClose())
     }
 
     if (url.indexOf('/case') > -1) {
@@ -118,7 +122,7 @@ export default class {
 
       media.onOpen()
     } else {
-      this.medias.forEach(media => media.onClose())
+      each(this.medias, media => media.onClose())
     }
   }
 
@@ -173,7 +177,7 @@ export default class {
     this.resolution.value.set(this.gl.canvas.width, this.gl.canvas.height)
 
     if (this.medias) {
-      this.medias.forEach(media => media.onResize({
+      each(this.medias, media => media.onResize({
         screen: this.screen,
         viewport: this.viewport
       }))
@@ -187,7 +191,7 @@ export default class {
     this.gl.clearColor(this.background.r / 255, this.background.g / 255, this.background.b / 255, 1)
 
     if (this.medias) {
-      this.medias.forEach(media => {
+      each(this.medias, media => {
         media.update(scroll)
       })
     }

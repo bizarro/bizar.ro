@@ -1,4 +1,5 @@
 import Prefix from 'prefix'
+import each from 'lodash/each'
 
 export default class {
   constructor ({ element, elements }) {
@@ -25,7 +26,7 @@ export default class {
 
   createObserver () {
     this.observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      each(entries, entry => {
         if (!this.isVisible && entry.isIntersecting) {
           this.animateIn()
         }

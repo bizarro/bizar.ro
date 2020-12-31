@@ -58,9 +58,18 @@ class App {
     this.addEventListeners()
     this.addLinksEventsListeners()
 
-    this.update()
-
     this.onResize()
+
+    window.addEventListener('mousemove', this.start)
+    window.addEventListener('touchstart', this.start)
+  }
+
+  start () {
+    if (this.isStarted) return
+
+    this.isStarted = true
+
+    this.update()
   }
 
   createCanvas () {
@@ -287,4 +296,4 @@ class App {
   }
 }
 
-window.APP = new App()
+new App()
