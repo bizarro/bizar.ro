@@ -84,7 +84,7 @@
 }
 
 .about__section__list {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   white-space: nowrap;
 
   @include media('<=phone') {
@@ -153,11 +153,11 @@
   }
 
   &:nth-child(3) {
-    width: 40rem;
+    width: 44.5rem;
   }
 
   &:nth-child(4) {
-    width: 40rem;
+    width: 35.5rem;
   }
 
   .about__section__list__link--article & {
