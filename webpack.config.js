@@ -14,6 +14,39 @@ const dirAssets = path.join(__dirname, 'assets')
 const dirStyles = path.join(__dirname, 'styles')
 const dirNode = 'node_modules'
 
+const folders = [
+  'index.html',
+  'about/index.html',
+  'case/trolli/index.html',
+  'case/adventure-time/index.html',
+  'case/studio-maertens/index.html',
+  'case/inbound/index.html',
+  'case/redis/index.html',
+  'case/kaleidoz/index.html',
+  'case/erika-moreira/index.html',
+  'case/bruno-arizio/index.html',
+  'case/dominic-berzins/index.html',
+  'case/pagethink/index.html',
+  'case/neoway/index.html',
+  'case/cult/index.html',
+  'case/movida/index.html',
+  'case/lufthansa-2/index.html',
+  'case/tiaa/index.html',
+  'case/lufthansa-1/index.html',
+  'case/corvette/index.html',
+  'case/nike/index.html',
+  'case/airbnb/index.html',
+  'case/discovery-kids/index.html',
+  'case/rock-in-rio/index.html'
+];
+
+const mapFolders = folders.map(filename => {
+  return new HtmlWebpackPlugin({
+    filename,
+    template: path.join(__dirname, 'index.pug')
+  })
+})
+
 module.exports = {
   entry: [
     path.join(dirApp, 'index.js'),
@@ -41,15 +74,7 @@ module.exports = {
 
     }),
 
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: path.join(__dirname, 'index.pug')
-    }),
-
-    new HtmlWebpackPlugin({
-      filename: '404.html',
-      template: path.join(__dirname, '404.pug')
-    }),
+    ...mapFolders,
 
     new CnameWebpackPlugin({
       domain: 'bizar.ro'
