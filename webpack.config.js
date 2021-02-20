@@ -17,6 +17,7 @@ const dirNode = 'node_modules'
 const folders = [
   'index.html',
   'about/index.html',
+  'case/kacper-chlebowicz/index.html',
   'case/trolli/index.html',
   'case/adventure-time/index.html',
   'case/studio-maertens/index.html',
