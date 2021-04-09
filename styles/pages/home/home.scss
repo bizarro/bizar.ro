@@ -80,6 +80,10 @@
   pointer-events: none;
   position: relative;
 
+  .home__item--design-embraced & {
+    transform: translateX(-11.3rem);
+  }
+
   .home__item--kacper-chlebowicz & {
     transform: translateX(4.7rem);
   }

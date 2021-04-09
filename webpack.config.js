@@ -17,6 +17,7 @@ const dirNode = 'node_modules'
 const folders = [
   'index.html',
   'about/index.html',
+  'case/design-embraced/index.html',
   'case/kacper-chlebowicz/index.html',
   'case/trolli/index.html',
   'case/adventure-time/index.html',
@@ -34,6 +35,7 @@ const folders = [
   'case/lufthansa-2/index.html',
   'case/tiaa/index.html',
   'case/lufthansa-1/index.html',
+  'case/shell/index.html',
   'case/corvette/index.html',
   'case/nike/index.html',
   'case/airbnb/index.html',

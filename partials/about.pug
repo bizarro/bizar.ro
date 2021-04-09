@@ -75,7 +75,7 @@ section.about
 
             p.about__section__description(data-animation="paragraph")
               | I’m working at #[a(href="https://activetheory.net/" rel="noreferrer noopener" target="_blank") Active Theory] as a Senior Interactive Developer. #[br]
-              | I’m also currently the #[a(href="https://awwwards.com/winner-list/Brazil" rel="noreferrer noopener" target="_blank") Most Awarded Brazilian] at #[a(href="https://awwwards.com/" rel="noreferrer noopener" target="_blank") Awwwards] and member of the #[a(href="https://awwwards.com/jury/?year=2020&type=code" target="_blank") Development Jury].
+              | I’m also currently the #[a(href="https://www.awwwards.com/winner-list/Brazil" rel="noreferrer noopener" target="_blank") Most Awarded Brazilian] at #[a(href="https://awwwards.com/" rel="noreferrer noopener" target="_blank") Awwwards] and member of the #[a(href="https://www.awwwards.com/jury-member/bizarro" target="_blank") Development Jury].
               | In the past I’ve also collaborated with #[a(href="https://antinomy.eu/" rel="noreferrer noopener" target="_blank") Antinomy] and #[a(href="https://unit9.com/" rel="noreferrer noopener" target="_blank") UNIT9].
 
             p.about__section__description(data-animation="paragraph")
@@ -88,9 +88,15 @@ section.about
           h2.about__section__title Awards #[br] & Honors
 
           .about__section__content
-            p.about__section__number 71+
+            p.about__section__number 73+
 
             ul.about__section__list
+              +award("https://www.awwwards.com/sites/garoa-skincare", "Apr 6, 2021", "Awwwards", "Developer Award", "Garoa Skincare")
+              +award("https://www.awwwards.com/sites/garoa-skincare", "Apr 6, 2021", "Awwwards", "Site of The Day", "Garoa Skincare")
+              +award("https://thefwa.com/cases/sundance-new-frontier", "Apr 3, 2021", "FWA", "FWA of The Day", "Sundance: New Frontier")
+              +award("https://www.awwwards.com/vote-for-site-of-the-month-march-2021-and-win-a-free-profile-in-our-designers-directory.html", "Mar 2020", "Awwwards", "Site of The Month Nominee", "Design Embraced")
+              +award("https://www.awwwards.com/sites/design-embraced-3", "Mar 8, 2021", "Awwwards", "Developer Award", "Design Embraced")
+              +award("https://www.awwwards.com/sites/design-embraced-3", "Mar 8, 2021", "Awwwards", "Site of The Day", "Design Embraced")
               +award("https://www.awwwards.com/sites/kacper-chlebowicz-2021", "Feb 20, 2021", "Awwwards", "Developer Award", "Kacper Chlebowicz")
               +award("https://www.awwwards.com/sites/kacper-chlebowicz-2021", "Feb 20, 2021", "Awwwards", "Site of The Day", "Kacper Chlebowicz")
               +award("https://www.behance.net/gallery/110071971/BIZARROE-Personal-Portfolio-Website", "Jan 14, 2021", "Behance", "UI/UX Feature", "BIZARRØ")
@@ -168,10 +174,14 @@ section.about
           h2.about__section__title PRESS
 
           .about__section__content
-            p.about__section__number 5+
+            p.about__section__number 10+
 
             ul.about__section__list
-              +press("https://tympanus.net/codrops/2021/01/05/creating-an-infinite-auto-scrolling-gallery-using-webgl-with-ogl-and-glsl-shaders/", "Codrops", "Infinite WebGL Gallery")
+              +press("https://www.awwwards.com/academy/course/building-an-immersive-creative-website-from-scratch-without-frameworks", "Awwwards", "Building an immersive creative website from scratch without frameworks")
+              +press("https://www.commarts.com/webpicks/kacper-chlebowicz", "Communication Arts", "Kacper Chlebowicz")
+              +press("https://www.awwwards.com/30-experimental-webgl-websites.html", "Awwwards", "30 Experimental WebGL Websites")
+              +press("https://tympanus.net/codrops/2021/02/23/creating-an-infinite-circular-gallery-using-webgl-with-ogl-and-glsl-shaders/", "Codrops", "Creating an Infinite Circular Gallery using WebGL with OGL and GLSL Shaders")
+              +press("https://tympanus.net/codrops/2021/01/05/creating-an-infinite-auto-scrolling-gallery-using-webgl-with-ogl-and-glsl-shaders/", "Codrops", "Creating an Infinite Auto-Scrolling Gallery using WebGL with OGL and GLSL Shaders")
               +press("https://www.commarts.com/webpicks/studio-m-rtens", "Communication Arts", "Studio Mærtens")
               +press("https://tympanus.net/codrops/2019/12/18/case-study-portfolio-of-bruno-arizio/", "Codrops", "Case Study: Bruno Arizio")
               +press("https://www.awwwards.com/case-study-dominic-berzins-single-page-portfolio-site.html", "Awwwards", "Case Study: Dominic Berzins")
