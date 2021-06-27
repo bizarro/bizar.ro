@@ -80,6 +80,22 @@
   pointer-events: none;
   position: relative;
 
+  .home__item--peggy-gou & {
+    transform: translateX(32.3rem);
+  }
+
+  .home__item--isabel-moranta & {
+    transform: translateX(-2rem);
+  }
+
+  .home__item--floema & {
+    transform: translateX(-0.6rem);
+  }
+
+  .home__item--garoa-skincare & {
+    transform: translateX(-13.2rem);
+  }
+
   .home__item--design-embraced & {
     transform: translateX(-11.3rem);
   }
