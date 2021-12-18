@@ -80,6 +80,14 @@
   pointer-events: none;
   position: relative;
 
+  .home__item--xbox-museum & {
+    transform: translateX(-4.4rem);
+  }
+
+  .home__item--bbdo & {
+    transform: translateX(-0.7rem);
+  }
+
   .home__item--peggy-gou & {
     transform: translateX(32.3rem);
   }

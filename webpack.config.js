@@ -17,6 +17,12 @@ const dirNode = 'node_modules'
 const folders = [
   'index.html',
   'about/index.html',
+  'case/xbox-museum/index.html',
+  'case/bbdo/index.html',
+  'case/peggy-gou/index.html',
+  'case/isabel-moranta/index.html',
+  'case/floema/index.html',
+  'case/garoa-skincare/index.html',
   'case/design-embraced/index.html',
   'case/kacper-chlebowicz/index.html',
   'case/trolli/index.html',
