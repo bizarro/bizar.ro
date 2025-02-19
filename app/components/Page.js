@@ -13,13 +13,13 @@ import { mapEach } from 'utils/dom'
 import { clamp, lerp } from 'utils/math'
 
 export default class extends EventEmitter {
-  constructor ({ classes, element, elements, isScrollable = true }) {
+  constructor({ classes, element, elements, isScrollable = true }) {
     super()
 
     AutoBind(this)
 
     this.classes = {
-      ...classes
+      ...classes,
     }
 
     this.selectors = {
@@ -29,8 +29,8 @@ export default class extends EventEmitter {
         animationsParagraphs: '[data-animation="paragraph"]',
         animationsYs: '[data-animation="y"]',
 
-        ...elements
-      }
+        ...elements,
+      },
     }
 
     this.isScrollable = isScrollable
@@ -38,7 +38,7 @@ export default class extends EventEmitter {
     this.transformPrefix = Prefix('transform')
   }
 
-  create () {
+  create() {
     this.animations = []
 
     this.element = document.querySelector(this.selectors.element)
@@ -66,7 +66,7 @@ export default class extends EventEmitter {
         position: 0,
         current: 0,
         target: 0,
-        limit: 0
+        limit: 0,
       }
     }
 
@@ -76,20 +76,20 @@ export default class extends EventEmitter {
   /**
    * Animations.
    */
-  createAnimations () {
-    this.lines = mapEach(this.elements.animationsLines, element => {
+  createAnimations() {
+    this.lines = mapEach(this.elements.animationsLines, (element) => {
       return new Line({ element })
     })
 
     this.animations.push(...this.lines)
 
-    this.paragraphs = mapEach(this.elements.animationsParagraphs, element => {
+    this.paragraphs = mapEach(this.elements.animationsParagraphs, (element) => {
       return new Paragraph({ element })
     })
 
     this.animations.push(...this.paragraphs)
 
-    this.ys = mapEach(this.elements.animationsYs, element => {
+    this.ys = mapEach(this.elements.animationsYs, (element) => {
       return new Y({ element })
     })
 
@@ -99,7 +99,7 @@ export default class extends EventEmitter {
   /**
    * Animations.
    */
-  show () {
+  show() {
     if (this.isScrollable) {
       this.scroll.position = 0
       this.scroll.current = 0
@@ -111,8 +111,8 @@ export default class extends EventEmitter {
     return Promise.resolve()
   }
 
-  hide () {
-    each(this.animations, animation => {
+  hide() {
+    each(this.animations, (animation) => {
       animation.animateOut()
     })
 
@@ -121,26 +121,26 @@ export default class extends EventEmitter {
     return Promise.resolve()
   }
 
-  transform (element, y) {
+  transform(element, y) {
     element.style[this.transformPrefix] = `translate3d(0, ${-Math.round(y)}px, 0)`
   }
 
   /**
    * Events.
    */
-  onResize () {
+  onResize() {
     if (!this.isScrollable || !this.elements.wrapper) return
 
     this.scroll.limit = this.elements.wrapper.clientHeight - window.innerHeight
 
     this.update()
 
-    each(this.animations, animation => {
+    each(this.animations, (animation) => {
       animation.onResize && animation.onResize()
     })
   }
 
-  onTouchDown (event) {
+  onTouchDown(event) {
     if (!this.isScrollable) return
 
     this.isDown = true
@@ -149,7 +149,7 @@ export default class extends EventEmitter {
     this.start = event.touches ? event.touches[0].clientY : event.clientY
   }
 
-  onTouchMove (event) {
+  onTouchMove(event) {
     if (!this.isDown || !this.isScrollable) {
       return
     }
@@ -160,13 +160,13 @@ export default class extends EventEmitter {
     this.scroll.target = this.scroll.position + distance
   }
 
-  onTouchUp (event) {
+  onTouchUp(event) {
     if (!this.isScrollable) return
 
     this.isDown = false
   }
 
-  onWheel (event) {
+  onWheel(event) {
     if (!this.isScrollable) return
 
     const normalized = NormalizeWheel(event)
@@ -178,7 +178,7 @@ export default class extends EventEmitter {
   /**
    * Frames.
    */
-  update () {
+  update() {
     if (!this.isScrollable || !this.isVisible) return
 
     this.scroll.target = clamp(0, this.scroll.limit, this.scroll.target)

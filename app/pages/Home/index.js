@@ -4,17 +4,17 @@ import Scrolling from 'components/Scrolling'
 import { delay } from 'utils/math'
 
 export default class extends Page {
-  constructor () {
+  constructor() {
     super({
       classes: {
-        active: 'home--active'
+        active: 'home--active',
       },
       element: '.home',
       elements: {
         list: '.home__list',
-        items: '.home__item'
+        items: '.home__item',
       },
-      isScrollable: false
+      isScrollable: false,
     })
 
     this.create()
@@ -23,7 +23,7 @@ export default class extends Page {
   /**
    * Animations.
    */
-  show () {
+  show() {
     this.list.enable()
 
     this.element.classList.add(this.classes.active)
@@ -31,7 +31,7 @@ export default class extends Page {
     return super.show()
   }
 
-  async hide () {
+  async hide() {
     this.list.disable()
 
     this.element.classList.remove(this.classes.active)
@@ -44,51 +44,51 @@ export default class extends Page {
   /**
    * Create.
    */
-  create () {
+  create() {
     super.create()
 
     this.createList()
   }
 
-  createList () {
+  createList() {
     this.list = new Scrolling({
       element: document.body,
       elements: {
         list: this.elements.list,
-        items: this.elements.items
-      }
+        items: this.elements.items,
+      },
     })
   }
 
   /**
    * Events.
    */
-  onResize () {
+  onResize() {
     super.onResize()
 
     this.list.onResize()
   }
 
-  onTouchDown (event) {
+  onTouchDown(event) {
     this.list.onTouchDown(event)
   }
 
-  onTouchMove (event) {
+  onTouchMove(event) {
     this.list.onTouchMove(event)
   }
 
-  onTouchUp (event) {
+  onTouchUp(event) {
     this.list.onTouchUp(event)
   }
 
-  onWheel (event) {
+  onWheel(event) {
     this.list.onWheel(event)
   }
 
   /**
    * Loop.
    */
-  update () {
+  update() {
     super.update()
 
     this.list.update()

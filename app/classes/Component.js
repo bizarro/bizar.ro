@@ -4,7 +4,7 @@ import EventEmitter from 'events'
 import each from 'lodash/each'
 
 export default class extends EventEmitter {
-  constructor ({ classes, element, elements, elementsForceArray }) {
+  constructor({ classes, element, elements, elementsForceArray }) {
     super()
 
     AutoBind(this)
@@ -37,15 +37,11 @@ export default class extends EventEmitter {
     this.addEventListeners()
   }
 
-  addEventListeners () {
+  addEventListeners() {}
 
-  }
+  removeEventListeners() {}
 
-  removeEventListeners () {
-
-  }
-
-  destroy () {
+  destroy() {
     this.removeEventListeners()
   }
 }

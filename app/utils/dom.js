@@ -1,7 +1,9 @@
 import map from 'lodash/map'
 
 export const findAncestor = (element, selector) => {
-  while ((element = element.parentElement) && !((element.matches || element.matchesSelector).call(element, selector))) { return element }
+  while ((element = element.parentElement) && !(element.matches || element.matchesSelector).call(element, selector)) {
+    return element
+  }
 }
 
 export const getOffset = (element, scroll = 0) => {
@@ -12,11 +14,11 @@ export const getOffset = (element, scroll = 0) => {
     height: box.height,
     left: box.left,
     top: box.top + scroll,
-    width: box.width
+    width: box.width,
   }
 }
 
-export function getIndex (node) {
+export function getIndex(node) {
   let index = 0
 
   while ((node = node.previousElementSibling)) {
@@ -26,7 +28,7 @@ export function getIndex (node) {
   return index
 }
 
-export function mapEach (element, callback) {
+export function mapEach(element, callback) {
   if (element instanceof window.HTMLElement) {
     return [callback(element)]
   }

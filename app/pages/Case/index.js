@@ -6,19 +6,19 @@ import Page from 'components/Page'
 import { delay } from 'utils/math'
 
 export default class extends Page {
-  constructor () {
+  constructor() {
     super({
       classes: {
         active: 'cases--active',
         caseActive: 'case--active',
-        mediaActive: 'case__gallery__media__placeholder--active'
+        mediaActive: 'case__gallery__media__placeholder--active',
       },
       element: '.cases',
       elements: {
         wrapper: '#trolli',
-        cases: '.case'
+        cases: '.case',
       },
-      isScrollable: true
+      isScrollable: true,
     })
 
     this.create()
@@ -27,12 +27,12 @@ export default class extends Page {
   /**
    * Animations.
    */
-  show (url) {
+  show(url) {
     this.element.classList.add(this.classes.active)
 
     const id = url.replace('/case/', '').replace('/', '')
 
-    this.elements.wrapper = Array.from(this.elements.cases).find(item => item.id === id)
+    this.elements.wrapper = Array.from(this.elements.cases).find((item) => item.id === id)
     this.elements.wrapper.classList.add(this.classes.caseActive)
 
     this.scroll.limit = this.elements.wrapper.limit - window.innerHeight
@@ -41,18 +41,18 @@ export default class extends Page {
       this.elements.image = this.elements.wrapper.querySelector('.case__media__image')
 
       if (!this.elements.image.src) {
-        this.elements.image.src = this.elements.image.getAttribute(Detection.isWebPSupported() ? 'data-src-webp' : 'data-src')
+        this.elements.image.src = this.elements.image.getAttribute('data-src')
       }
     }
 
     const medias = this.elements.wrapper.querySelectorAll('.case__gallery__media__placeholder')
 
-    each(medias, media => {
+    each(medias, (media) => {
       const image = new Image()
 
       image.className = 'case__gallery__media__image'
-      image.src = media.getAttribute(Detection.isWebPSupported() ? 'data-src-webp' : 'data-src')
-      image.decode().then(_ => {
+      image.src = media.getAttribute('data-src')
+      image.decode().then((_) => {
         media.classList.add(this.classes.mediaActive)
         media.appendChild(image)
       })
@@ -61,7 +61,7 @@ export default class extends Page {
     return super.show()
   }
 
-  async hide () {
+  async hide() {
     this.scroll.target = 0
 
     this.elements.wrapper.classList.remove(this.classes.caseActive)
@@ -78,10 +78,10 @@ export default class extends Page {
   /**
    * Events
    */
-  onResize () {
+  onResize() {
     super.onResize()
 
-    each(this.elements.cases, element => {
+    each(this.elements.cases, (element) => {
       element.limit = element.clientHeight
     })
   }

@@ -6,12 +6,12 @@ import { easing } from 'utils/dom'
 import { calculate, split } from 'utils/text'
 
 export default class extends Animation {
-  constructor ({ element }) {
+  constructor({ element }) {
     const lines = []
     const paragraphs = element.querySelectorAll('h1, h2, p')
 
     if (paragraphs.length !== 0) {
-      each(paragraphs, element => {
+      each(paragraphs, (element) => {
         split({ element })
         split({ element })
 
@@ -27,8 +27,8 @@ export default class extends Animation {
     super({
       element,
       elements: {
-        lines
-      }
+        lines,
+      },
     })
 
     this.onResize()
@@ -38,28 +38,28 @@ export default class extends Animation {
     }
   }
 
-  animateIn () {
+  animateIn() {
     super.animateIn()
 
     each(this.lines, (line, lineIndex) => {
-      each(line, word => {
+      each(line, (word) => {
         word.style.transition = `transform 1.5s ${lineIndex * 0.1}s ${easing}`
         word.style[this.transformPrefix] = `translateY(0)`
       })
     })
   }
 
-  animateOut () {
+  animateOut() {
     super.animateOut()
 
-    each(this.lines, line => {
-      each(line, word => {
+    each(this.lines, (line) => {
+      each(line, (word) => {
         word.style[this.transformPrefix] = `translateY(100%)`
       })
     })
   }
 
-  onResize () {
+  onResize() {
     this.lines = calculate(this.elements.lines)
   }
 }

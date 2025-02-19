@@ -47,7 +47,7 @@ section.about
             | #[span +]
             | #[span DEVELOPER]
 
-      .about__gallery(data-src="/about.jpg" data-src-webp="/about.webp")
+      .about__gallery(data-src="/about.webp")
         each _, index in Array(24)
           .about__gallery__media(class=[1, 2, 8, 9, 11, 12, 13, 15, 16, 19, 21, 23].indexOf(index) > -1 ? "about__gallery__media--transparent" : "" data-index=index)
 
@@ -65,19 +65,13 @@ section.about
 
           .about__section__content
             p.about__section__description(data-animation="paragraph")
-              | I’m Luis Henrique Bizarro, I’m a Creative Developer based in São Paulo, Brazil specialized in
-              | Creative Coding for interactive projects like apps, games, installations and websites using web development
-              | technologies like WebGL, GLSL and JavaScript.
+              | Creative Technologist specialized in crafting cutting-edge real-time 3D&nbsp;experiences using WebGL, Shaders, JavaScript and TypeScript.
 
             p.about__section__description(data-animation="paragraph")
-              | I’m working at #[a(href="https://activetheory.net/" rel="noreferrer noopener" target="_blank") Active Theory] as a Senior Interactive Developer. #[br]
-              | I’m the #[a(href="https://www.awwwards.com/winner-list/Brazil" rel="noreferrer noopener" target="_blank") Most Awarded Developer in Latin America] at #[a(href="https://awwwards.com/" rel="noreferrer noopener" target="_blank") Awwwards] and member of the #[a(href="https://www.awwwards.com/jury-member/bizarro" target="_blank") Development Jury].
-              | In the past I’ve also collaborated with #[a(href="https://antinomy.eu/" rel="noreferrer noopener" target="_blank") Antinomy] and #[a(href="https://unit9.com/" rel="noreferrer noopener" target="_blank") UNIT9].
+              | Over a decade of experience in the industries of creative technology and web development, working with projects across diverse mediums, including websites, games, interactive&nbsp;installations and apps.
 
             p.about__section__description(data-animation="paragraph")
-              | During my career, I have had the opportunity to collaborate in challenging projects for renown
-              | international brands such as Xbox, Nike, Google, Microsoft, Airbnb, Samsung, Lufthansa, Ambush,
-              | Shell, Chevy Corvette, HBO, Cartoon Network, Discovery Kids, One Plus, GE and Citibank.
+              | Collaborations include leading brands and clients such as Airbnb, Apple, Ambush, Peggy&nbsp;Gou, Xbox, Nike, YouTube, Google, Microsoft, Samsung, Anduril, Expa, One&nbsp;Plus, Lufthansa, Corvette, HBO, Shell, Cartoon&nbsp;Network and Discovery&nbsp;Kids.
 
         .about__section
           h2.about__section__title Awards #[br] & Honors

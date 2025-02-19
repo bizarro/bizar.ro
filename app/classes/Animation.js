@@ -2,7 +2,7 @@ import Prefix from 'prefix'
 import each from 'lodash/each'
 
 export default class {
-  constructor ({ element, elements }) {
+  constructor({ element, elements }) {
     const { animationDelay, animationTarget } = element.dataset
 
     this.delay = animationDelay
@@ -24,9 +24,9 @@ export default class {
     }
   }
 
-  createObserver () {
+  createObserver() {
     this.observer = new IntersectionObserver((entries) => {
-      each(entries, entry => {
+      each(entries, (entry) => {
         if (!this.isVisible && entry.isIntersecting) {
           this.animateIn()
         }
@@ -34,11 +34,11 @@ export default class {
     }).observe(this.target)
   }
 
-  animateIn () {
+  animateIn() {
     this.isVisible = true
   }
 
-  animateOut () {
+  animateOut() {
     this.isVisible = false
   }
 }

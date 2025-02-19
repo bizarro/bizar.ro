@@ -1,17 +1,17 @@
 import Animation from 'classes/Animation'
 
 export default class extends Animation {
-  constructor ({ element }) {
+  constructor({ element }) {
     super({ element })
   }
 
-  animateIn () {
+  animateIn() {
     super.animateIn()
 
     this.element.style[this.transformPrefix] = `scaleX(1)`
   }
 
-  animateOut () {
+  animateOut() {
     super.animateOut()
 
     this.element.style[this.transformPrefix] = `scaleX(0)`

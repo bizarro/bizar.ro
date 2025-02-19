@@ -11,11 +11,11 @@ import { getOffset } from 'utils/dom'
 import { clamp, delay } from 'utils/math'
 
 export default class extends Page {
-  constructor () {
+  constructor() {
     super({
       classes: {
         active: 'about--active',
-        galleryActive: 'about__gallery--active'
+        galleryActive: 'about__gallery--active',
       },
       element: '.about',
       elements: {
@@ -24,9 +24,9 @@ export default class extends Page {
         titles: '.about__header__title__text span',
         gallery: '.about__gallery',
         sections: '.about__section',
-        sectionsTitles: '.about__section__title'
+        sectionsTitles: '.about__section__title',
       },
-      isScrollable: true
+      isScrollable: true,
     })
 
     this.create()
@@ -35,37 +35,40 @@ export default class extends Page {
   /**
    * Create.
    */
-  create () {
+  create() {
     super.create()
 
     const image = new Image()
 
     image.className = 'about__gallery__image'
-    image.src = this.elements.gallery.getAttribute(Detection.isWebPSupported() ? 'data-src-webp' : 'data-src')
-    image.decode().then(_ => {
+    image.src = this.elements.gallery.getAttribute('data-src')
+    image.decode().then((_) => {
       this.elements.gallery.classList.add(this.classes.galleryActive)
       this.elements.gallery.appendChild(image)
     })
 
     const font = new FontFaceObserver('Neue Montreal', 10000)
 
-    font.load().then(_ => {
-      this.onResize()
-    }).catch(_ => {
-      this.onResize()
-    })
+    font
+      .load()
+      .then((_) => {
+        this.onResize()
+      })
+      .catch((_) => {
+        this.onResize()
+      })
   }
 
   /**
    * Animations.
    */
-  show () {
+  show() {
     this.element.classList.add(this.classes.active)
 
     return super.show()
   }
 
-  async hide () {
+  async hide() {
     this.element.classList.remove(this.classes.active)
 
     await delay(400)
@@ -82,11 +85,11 @@ export default class extends Page {
   /**
    * Create.
    */
-  onResize () {
+  onResize() {
     super.onResize()
 
     if (window.innerWidth > BREAKPOINT_PHONE) {
-      each(this.elements.sectionsTitles, title => {
+      each(this.elements.sectionsTitles, (title) => {
         title.style.transform = ''
 
         const bounding = getOffset(title, this.scroll.current)
@@ -95,7 +98,7 @@ export default class extends Page {
         title.limit = getOffset(title.parentNode).height - bounding.height
       })
     } else {
-      each(this.elements.sectionsTitles, title => {
+      each(this.elements.sectionsTitles, (title) => {
         title.style.transform = ''
       })
     }
@@ -104,11 +107,11 @@ export default class extends Page {
   /**
    * Loop.
    */
-  update () {
+  update() {
     super.update()
 
     if (window.innerWidth > BREAKPOINT_PHONE) {
-      each(this.elements.sectionsTitles, title => {
+      each(this.elements.sectionsTitles, (title) => {
         const y = clamp(0, title.limit, Math.floor(this.scroll.current - title.start))
 
         title.style.transform = `translateY(${y}px)`

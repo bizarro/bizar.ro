@@ -4,16 +4,16 @@ import Component from 'classes/Component'
 import { random } from 'utils/math'
 
 export default class extends Component {
-  constructor ({ canvas, url }) {
+  constructor({ canvas, url }) {
     super({
       classes: {
-        linksActive: 'navigation__link--active'
+        linksActive: 'navigation__link--active',
       },
       element: '.navigation',
       elements: {
         links: '.navigation__link',
-        easter: '.navigation__easter'
-      }
+        easter: '.navigation__easter',
+      },
     })
 
     this.canvas = canvas
@@ -28,8 +28,8 @@ export default class extends Component {
   /**
    * Events.
    */
-  onChange (url) {
-    each(this.elements.links, link => {
+  onChange(url) {
+    each(this.elements.links, (link) => {
       const value = link.href.replace(window.location.origin, '')
 
       if (url === value) {
@@ -40,7 +40,7 @@ export default class extends Component {
     })
   }
 
-  onEasterEgg () {
+  onEasterEgg() {
     const value = random(0, 360, 0.01)
     const background = `hsl(${value}deg 19% 9%)`
 
@@ -50,13 +50,17 @@ export default class extends Component {
     this.homeTop.style.background = `linear-gradient(to bottom, ${background} 0%, transparent 100%)`
     this.aboutGallery.style.color = background
 
-    const canvas = document.documentElement.style.background.replace('rgb(', '').replace(')', '').replace(/ /g, '').split(',')
+    const canvas = document.documentElement.style.background
+      .replace('rgb(', '')
+      .replace(')', '')
+      .replace(/ /g, '')
+      .split(',')
 
     if (this.canvas) {
       this.canvas.background = {
         r: canvas[0],
         g: canvas[1],
-        b: canvas[2]
+        b: canvas[2],
       }
     }
   }
@@ -64,7 +68,7 @@ export default class extends Component {
   /**
    * Listeners.
    */
-  addEventListeners () {
+  addEventListeners() {
     this.elements.easter.addEventListener('click', this.onEasterEgg)
   }
 }

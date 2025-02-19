@@ -3,7 +3,6 @@ const webpack = require('webpack')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const CnameWebpackPlugin = require('cname-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default
 
@@ -46,148 +45,111 @@ const folders = [
   'case/nike/index.html',
   'case/airbnb/index.html',
   'case/discovery-kids/index.html',
-  'case/rock-in-rio/index.html'
-];
+  'case/rock-in-rio/index.html',
+]
 
-const mapFolders = folders.map(filename => {
+const mapFolders = folders.map((filename) => {
   return new HtmlWebpackPlugin({
     filename,
-    template: path.join(__dirname, 'index.pug')
+    template: path.join(__dirname, 'index.pug'),
   })
 })
 
 module.exports = {
-  entry: [
-    path.join(dirApp, 'index.js'),
-    path.join(dirStyles, 'index.scss')
-  ],
+  entry: [path.join(dirApp, 'index.js'), path.join(dirStyles, 'index.scss')],
 
   output: {
-    filename: '[name].[contenthash].js'
+    filename: '[name].[contenthash].js',
   },
 
   resolve: {
-    modules: [
-      dirApp,
-      dirAssets,
-      dirNode
-    ]
+    modules: [dirApp, dirAssets, dirNode],
   },
 
   plugins: [
     new webpack.DefinePlugin({
-      IS_DEVELOPMENT
-    }),
-
-    new webpack.ProvidePlugin({
-
+      IS_DEVELOPMENT,
     }),
 
     ...mapFolders,
 
-    new CnameWebpackPlugin({
-      domain: 'bizar.ro'
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: './shared',
+          to: '',
+        },
+      ],
     }),
-
-    new CopyWebpackPlugin([
-      {
-        from: './app/service-worker.js',
-        to: ''
-      }
-    ]),
-
-    new CopyWebpackPlugin([
-      {
-        from: './offline',
-        to: 'offline'
-      }
-    ]),
-
-    new CopyWebpackPlugin([
-      {
-        from: './shared',
-        to: ''
-      }
-    ]),
 
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
       chunkFilename: '[id].css',
     }),
 
-    new HTMLInlineCSSWebpackPlugin()
+    new HTMLInlineCSSWebpackPlugin(),
   ],
 
   module: {
     rules: [
       {
         test: /\.pug$/,
-        use: ['pug-loader']
+        use: ['pug-loader'],
       },
 
       {
         test: /\.js$/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
 
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '',
+            },
+          },
           {
             loader: 'css-loader',
             options: {
-              sourceMap: IS_DEVELOPMENT
-            }
+              sourceMap: false,
+            },
           },
           {
             loader: 'postcss-loader',
             options: {
-              sourceMap: IS_DEVELOPMENT
-            }
+              sourceMap: false,
+            },
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: IS_DEVELOPMENT
-            }
-          }
-        ]
+              sourceMap: false,
+            },
+          },
+        ],
       },
 
       {
-        test: /\.(jpe?g|png|gif|svg|fnt|webp)$/,
-        loader: 'file-loader',
-        options: {
-          name (file) {
-            return '[hash].[ext]'
-          }
-        }
-      },
-
-      {
-        test: /\.(woff2?)$/,
-        loader: 'file-loader',
-        options: {
-          name (file) {
-            return '[name].[ext]'
-          }
-        }
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2|webp)(\?.*$|$)/i,
+        type: 'asset',
       },
 
       {
         test: /\.(glsl|frag|vert)$/,
         loader: 'raw-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
 
       {
         test: /\.(glsl|frag|vert)$/,
         loader: 'glslify-loader',
-        exclude: /node_modules/
-      }
-    ]
-  }
+        exclude: /node_modules/,
+      },
+    ],
+  },
 }

@@ -9,11 +9,11 @@ import { mapEach } from 'utils/dom'
 import Media from './Media'
 
 export default class {
-  constructor ({ url }) {
+  constructor({ url }) {
     this.background = {
       r: 21,
       g: 28,
-      b: 19
+      b: 19,
     }
 
     this.url = url
@@ -22,11 +22,11 @@ export default class {
     this.gl = this.renderer.gl
 
     this.resolution = {
-      value: new Vec2()
+      value: new Vec2(),
     }
 
     this.planeGeometry = new Plane(this.gl, {
-      widthSegments: 20
+      widthSegments: 20,
     })
 
     document.body.appendChild(this.gl.canvas)
@@ -41,26 +41,29 @@ export default class {
 
     const font = new FontFaceObserver('Ampersand', 10000)
 
-    font.load().then(_ => {
-      this.onResize()
-    }).catch(_ => {
-      this.onResize()
-    })
+    font
+      .load()
+      .then((_) => {
+        this.onResize()
+      })
+      .catch((_) => {
+        this.onResize()
+      })
 
     this.update()
   }
 
-  createCamera () {
+  createCamera() {
     this.camera = new Camera(this.gl)
     this.camera.fov = 45
     this.camera.position.z = 5
   }
 
-  createScene () {
+  createScene() {
     this.scene = new Transform()
   }
 
-  createPost () {
+  createPost() {
     this.post = new Post(this.gl)
 
     this.pass = this.post.addPass({
@@ -68,10 +71,10 @@ export default class {
       uniforms: {
         uResolution: this.resolution,
       },
-  });
+    })
   }
 
-  createList () {
+  createList() {
     this.mediasList = document.querySelector('.home__list')
     this.mediasElements = document.querySelectorAll('.home__item')
     this.medias = mapEach(this.mediasElements, (homeItem, index) => {
@@ -92,7 +95,7 @@ export default class {
         homeList: this.mediasList,
         scene: this.scene,
         screen: this.screen,
-        viewport: this.viewport
+        viewport: this.viewport,
       })
 
       return media
@@ -100,7 +103,7 @@ export default class {
 
     if (this.url.indexOf('/case/') > -1) {
       const id = this.url.replace('/case/', '').replace('/', '')
-      const media = this.medias.find(media => media.id === id)
+      const media = this.medias.find((media) => media.id === id)
 
       media.onOpen()
     }
@@ -109,58 +112,50 @@ export default class {
   /**
    * Change.
    */
-  onChange (url) {
+  onChange(url) {
     if (url.indexOf('/about') > -1) {
-      each(this.medias, media => media.onAboutOpen())
+      each(this.medias, (media) => media.onAboutOpen())
     } else {
-      each(this.medias, media => media.onAboutClose())
+      each(this.medias, (media) => media.onAboutClose())
     }
 
     if (url.indexOf('/case') > -1) {
       const id = url.replace('/case/', '')
-      const media = this.medias.find(media => media.id === id)
+      const media = this.medias.find((media) => media.id === id)
 
       media.onOpen()
     } else {
-      each(this.medias, media => media.onClose())
+      each(this.medias, (media) => media.onClose())
     }
   }
 
   /**
    * Touch.
    */
-  onTouchDown (event) {
+  onTouchDown(event) {}
 
-  }
+  onTouchMove(event) {}
 
-  onTouchMove (event) {
-
-  }
-
-  onTouchUp (event) {
-
-  }
+  onTouchUp(event) {}
 
   /**
    * Wheel.
    */
-  onWheel (event) {
-
-  }
+  onWheel(event) {}
 
   /**
    * Resize.
    */
-  onResize () {
+  onResize() {
     this.screen = {
       height: window.innerHeight,
-      width: window.innerWidth
+      width: window.innerWidth,
     }
 
     this.renderer.setSize(this.screen.width, this.screen.height)
 
     this.camera.perspective({
-      aspect: this.gl.canvas.width / this.gl.canvas.height
+      aspect: this.gl.canvas.width / this.gl.canvas.height,
     })
 
     const fov = this.camera.fov * (Math.PI / 180)
@@ -169,7 +164,7 @@ export default class {
 
     this.viewport = {
       height,
-      width
+      width,
     }
 
     this.post.resize()
@@ -177,28 +172,30 @@ export default class {
     this.resolution.value.set(this.gl.canvas.width, this.gl.canvas.height)
 
     if (this.medias) {
-      each(this.medias, media => media.onResize({
-        screen: this.screen,
-        viewport: this.viewport
-      }))
+      each(this.medias, (media) =>
+        media.onResize({
+          screen: this.screen,
+          viewport: this.viewport,
+        }),
+      )
     }
   }
 
   /**
    * Update.
    */
-  update (scroll) {
+  update(scroll) {
     this.gl.clearColor(this.background.r / 255, this.background.g / 255, this.background.b / 255, 1)
 
     if (this.medias) {
-      each(this.medias, media => {
+      each(this.medias, (media) => {
         media.update(scroll)
       })
     }
 
     this.post.render({
       scene: this.scene,
-      camera: this.camera
+      camera: this.camera,
     })
   }
 }

@@ -1,6 +1,5 @@
 import 'utils/polyfill'
 import 'utils/scroll'
-import 'utils/sw'
 
 import AutoBind from 'auto-bind'
 import Stats from 'stats.js'
@@ -17,7 +16,7 @@ import Canvas from 'components/Canvas'
 import Navigation from 'components/Navigation'
 
 class App {
-  constructor () {
+  constructor() {
     if (IS_DEVELOPMENT && window.location.search.indexOf('fps') > -1) {
       this.createStats()
     }
@@ -26,7 +25,7 @@ class App {
 
     this.mouse = {
       x: window.innerWidth / 2,
-      y: window.innerHeight / 2
+      y: window.innerHeight / 2,
     }
 
     AutoBind(this)
@@ -43,7 +42,7 @@ class App {
     this.pages = {
       '/': this.home,
       '/about': this.about,
-      '/case': this.case
+      '/case': this.case,
     }
 
     if (this.url.indexOf('/case') > -1) {
@@ -61,41 +60,41 @@ class App {
     this.onResize()
   }
 
-  createCanvas () {
+  createCanvas() {
     this.canvas = new Canvas({
-      url: this.url
+      url: this.url,
     })
   }
 
-  createNavigation () {
+  createNavigation() {
     this.navigation = new Navigation({
       canvas: this.canvas,
-      url: this.url
+      url: this.url,
     })
   }
 
-  createStats () {
+  createStats() {
     this.stats = new Stats()
 
     document.body.appendChild(this.stats.dom)
   }
 
-  createAbout () {
+  createAbout() {
     this.about = new About()
   }
 
-  createHome () {
+  createHome() {
     this.home = new Home()
   }
 
-  createCase () {
+  createCase() {
     this.case = new Case()
   }
 
   /**
    * Change.
    */
-  async onChange ({ push = !IS_DEVELOPMENT, url = null }) {
+  async onChange({ push = !IS_DEVELOPMENT, url = null }) {
     url = url.replace(window.location.origin, '')
 
     if (this.isFetching || this.url === url) return
@@ -130,7 +129,7 @@ class App {
   /**
    * Loop.
    */
-  update () {
+  update() {
     if (this.stats) {
       this.stats.begin()
     }
@@ -153,21 +152,21 @@ class App {
   /**
    * Events.
    */
-  onContextMenu (event) {
+  onContextMenu(event) {
     event.preventDefault()
     event.stopPropagation()
 
     return false
   }
 
-  onPopState () {
+  onPopState() {
     this.onChange({
       url: window.location.pathname,
-      push: false
+      push: false,
     })
   }
 
-  onResize () {
+  onResize() {
     if (this.about) {
       this.about.onResize()
     }
@@ -185,7 +184,7 @@ class App {
     }
   }
 
-  onTouchDown (event) {
+  onTouchDown(event) {
     event.stopPropagation()
 
     if (!Detection.isMobile() && event.target.tagName === 'A') return
@@ -202,7 +201,7 @@ class App {
     }
   }
 
-  onTouchMove (event) {
+  onTouchMove(event) {
     event.stopPropagation()
 
     this.mouse.x = event.touches ? event.touches[0].clientX : event.clientX
@@ -217,7 +216,7 @@ class App {
     }
   }
 
-  onTouchUp (event) {
+  onTouchUp(event) {
     event.stopPropagation()
 
     this.mouse.x = event.changedTouches ? event.changedTouches[0].clientX : event.clientX
@@ -232,7 +231,7 @@ class App {
     }
   }
 
-  onWheel (event) {
+  onWheel(event) {
     if (this.page && this.page.onWheel) {
       this.page.onWheel(event)
     }
@@ -242,7 +241,7 @@ class App {
     }
   }
 
-  onInteract () {
+  onInteract() {
     window.removeEventListener('mousemove', this.onInteract)
     window.removeEventListener('touchstart', this.onInteract)
 
@@ -252,7 +251,7 @@ class App {
   /**
    * Listeners.
    */
-  addEventListeners () {
+  addEventListeners() {
     window.addEventListener('mousemove', this.onInteract, { passive: true })
     window.addEventListener('touchstart', this.onInteract, { passive: true })
 
@@ -273,18 +272,18 @@ class App {
     window.oncontextmenu = this.onContextMenu
   }
 
-  addLinksEventsListeners () {
+  addLinksEventsListeners() {
     const links = document.querySelectorAll('a')
 
-    each(links, link => {
+    each(links, (link) => {
       const isLocal = link.href.indexOf(window.location.origin) > -1
 
       if (isLocal) {
-        link.onclick = event => {
+        link.onclick = (event) => {
           event.preventDefault()
 
           this.onChange({
-            url: link.href
+            url: link.href,
           })
         }
       } else if (link.href.indexOf('mailto') === -1 && link.href.indexOf('tel') === -1) {

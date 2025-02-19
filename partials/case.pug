@@ -6,8 +6,7 @@ mixin template({ id, title, category, company, role, technologies, link, label, 
 
       figure.case__media
         img.case__media__image(
-          data-src=`/projects/${id}.jpg`
-          data-src-webp=`/projects/${id}.webp`
+          data-src=`/projects/${id}.webp`
         )
 
     .case__information
@@ -38,8 +37,7 @@ mixin template({ id, title, category, company, role, technologies, link, label, 
               span
 
             span.case__gallery__media__placeholder(
-              data-src=`/case/${id}/${content.image}.jpg`
-              data-src-webp=`/case/${id}/${content.image}.webp`
+              data-src=`/case/${id}/${content.image}.webp`
               style=`padding-top: ${content.height / content.width * 100}%;`
             )
 

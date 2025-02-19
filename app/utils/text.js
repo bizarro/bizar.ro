@@ -1,16 +1,16 @@
 import each from 'lodash/each'
 
-export function split ({ element, expression = ' ', append = true }) {
+export function split({ element, expression = ' ', append = true }) {
   const words = splitText(element.innerHTML.toString().trim(), expression)
 
   let innerHTML = ''
 
-  each(words, line => {
+  each(words, (line) => {
     if (line.indexOf('<br>') > -1) {
       const lines = line.split('<br>')
 
       each(lines, (line, index) => {
-        innerHTML += (index > 0) ? '<br>' + parseLine(line) : parseLine(line)
+        innerHTML += index > 0 ? '<br>' + parseLine(line) : parseLine(line)
       })
     } else {
       innerHTML += parseLine(line)
@@ -22,7 +22,7 @@ export function split ({ element, expression = ' ', append = true }) {
   const spans = element.querySelectorAll('span')
 
   if (append) {
-    each(spans, span => {
+    each(spans, (span) => {
       const isSingleLetter = span.textContent.length === 1
       const isNotEmpty = span.innerHTML.trim() !== ''
       const isNotAndCharacter = span.textContent !== '&'
@@ -37,7 +37,7 @@ export function split ({ element, expression = ' ', append = true }) {
   return spans
 }
 
-export function calculate (spans) {
+export function calculate(spans) {
   const lines = []
   let words = []
 
@@ -65,7 +65,7 @@ export function calculate (spans) {
   return lines
 }
 
-function splitText (text, expression) {
+function splitText(text, expression) {
   const splits = text.split('<br>')
 
   let words = []
@@ -82,7 +82,7 @@ function splitText (text, expression) {
 
     const innerHTML = []
 
-    each(words, word => {
+    each(words, (word) => {
       if (!isLink && (word.includes('<a') || word.includes('<strong'))) {
         link = ''
 
@@ -114,12 +114,12 @@ function splitText (text, expression) {
   return words
 }
 
-function parseLine (line) {
+function parseLine(line) {
   line = line.trim()
 
   if (line === '' || line === ' ') {
     return line
   } else {
-    return (line === '<br>') ? '<br>' : `<span>${line}</span>` + ((line.length > 1) ? ' ' : '')
+    return line === '<br>' ? '<br>' : `<span>${line}</span>` + (line.length > 1 ? ' ' : '')
   }
 }

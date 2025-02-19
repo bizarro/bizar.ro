@@ -9,10 +9,10 @@ import { getOffset } from 'utils/dom'
 import { lerp } from 'utils/math'
 
 export default class extends Component {
-  constructor ({ element, elements }) {
+  constructor({ element, elements }) {
     super({
       element,
-      elements
+      elements,
     })
 
     this.transformPrefix = Prefix('transform')
@@ -23,10 +23,10 @@ export default class extends Component {
       current: 0,
       target: 0,
       last: 0,
-      clamp: 0
+      clamp: 0,
     }
 
-    each(this.elements.items, element => {
+    each(this.elements.items, (element) => {
       const offset = getOffset(element)
 
       element.extra = 0
@@ -41,17 +41,17 @@ export default class extends Component {
     this.heightTotal = this.elements.list.getBoundingClientRect().height
   }
 
-  enable () {
+  enable() {
     this.isEnabled = true
 
     this.update()
   }
 
-  disable () {
+  disable() {
     this.isEnabled = false
   }
 
-  onTouchDown (event) {
+  onTouchDown(event) {
     if (!this.isEnabled) return
 
     this.isDown = true
@@ -60,7 +60,7 @@ export default class extends Component {
     this.start = event.touches ? event.touches[0].clientY : event.clientY
   }
 
-  onTouchMove (event) {
+  onTouchMove(event) {
     if (!this.isDown || !this.isEnabled) return
 
     const y = event.touches ? event.touches[0].clientY : event.clientY
@@ -69,13 +69,13 @@ export default class extends Component {
     this.scroll.target = this.scroll.position + distance
   }
 
-  onTouchUp (event) {
+  onTouchUp(event) {
     if (!this.isEnabled) return
 
     this.isDown = false
   }
 
-  onWheel (event) {
+  onWheel(event) {
     if (!this.isEnabled) return
 
     const normalized = NormalizeWheel(event)
@@ -84,11 +84,11 @@ export default class extends Component {
     this.scroll.target += speed
   }
 
-  transform (element, y) {
+  transform(element, y) {
     element.style[this.transformPrefix] = `translate3d(0, ${Math.floor(y)}px, 0)`
   }
 
-  update () {
+  update() {
     if (!this.isEnabled) return
 
     this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease)
@@ -132,8 +132,8 @@ export default class extends Component {
     this.scroll.clamp = scrollClamp
   }
 
-  onResize () {
-    each(this.elements.items, element => {
+  onResize() {
+    each(this.elements.items, (element) => {
       this.transform(element, 0)
 
       const offset = getOffset(element)
@@ -152,7 +152,7 @@ export default class extends Component {
       position: 0,
       current: 0,
       target: 0,
-      last: 0
+      last: 0,
     }
   }
 }
